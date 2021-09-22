@@ -1,0 +1,96 @@
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto Slab', serif ;
+
+}
+.container {
+    width: 90%;
+    min-width: 550px;
+    padding: 3%;
+    height: auto;
+    
+}
+.bodyCapacitacion {
+    background-color: #d4d1d1;
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+    border-radius: 25px;
+    margin: 1%;
+    width: 100%;
+    font-weight: lighter;
+
+}
+.mainTitle {
+    height: 135px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+
+}
+.mainTitle h1 {
+    align-self: left;
+
+}
+.tile {
+    font-size: large;
+    justify-content: left;
+    align-self: flex-start;
+    padding-left: 2%;
+    font-weight: lighter;
+}
+.select label {
+    padding: 1%;
+    font-weight: lighter;
+}
+input {
+    border-radius: 20px;
+    height: 30px;
+    width: 100%;
+    padding-left: 3%;
+
+}
+button {
+    border-radius: 20px;
+    height: 30px;
+    width: 30%;
+    background-color: #A8D6FF;
+    color:black;
+    border-color: #A8D6FF;
+    border-style: none;
+    margin: 1%;
+    align-self: flex-end;    
+
+}
+.selectContainer {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.select {
+    width: 30%;
+    padding: 1%;
+    min-width: 32%;
+    
+}
+select {
+    border-radius: 20px;
+    height: 30px;
+    width: 100%;
+    padding-left: 3%;
+
+}
+textarea {
+    border-radius: 20px;
+    width: 100%;
+}
+

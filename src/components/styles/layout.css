@@ -1,0 +1,40 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto Slab';
+
+}
+html {
+    min-height: 100%;
+    position: relative;
+}
+body {
+    margin: 0;
+    margin-bottom: 40px;
+}
+.main {
+    display: flex;
+    flex-direction: column;
+}
+.body{
+    display: flex;
+    flex-direction: row;
+}
+.mainBoard {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.mainTitle {
+    height: 135px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+
+}
+.mainTitle h1 {
+    align-self: left;
+
+}

@@ -1,0 +1,51 @@
+
+.Menu{
+    width: 40%;
+    max-width: 380px;
+    min-width: 330px;
+    margin: 12px;
+    height: 85vh;
+    display: flex;
+    flex-direction: column;
+}
+.SubMenu {
+    display: flex;
+    background: #d4d1d1;
+    border-radius: 35px 35px 35px 35px;
+    margin: 12px;
+    padding: 8px;
+    width: 100%;
+    min-width: 300px;
+    box-shadow: 0px 4px 8px 0 rgba(66, 66, 85, 1);
+    align-items: center;
+    flex-wrap: noWwrap;
+    text-decoration: none;
+    
+}
+.SubMenu h1 {
+    align-content: center;
+}
+.profileMenu {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+
+}
+.profileMenu h1 {
+    font-size: 36px;
+    font-weight: lighter;
+    align-self: center;
+
+}
+.profileIcon {
+    height: 80px;
+    width: 80px;
+    align-self: center;
+}
+
+.icon {
+    height: 30px;
+    width: 30%;
+
+}

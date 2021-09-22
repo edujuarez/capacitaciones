@@ -1,0 +1,37 @@
+.mainHeader {
+    background: #DEDCDC;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 5px;
+    box-sizing: border-box;
+    width: 100%;
+    
+}
+
+.imgLogo {
+    align-self: center;
+}
+
+.title {
+    align-self: center;
+}
+
+.exitContainer {
+    display: flex;
+    align-self: center;
+    padding: 8px;
+}
+
+.iconContainer {
+    align-self: center;
+    width: 41px;
+    height: 41px;
+    
+}
+
+.iconExit {
+    width: 100%;
+    height: 100%;
+}
+
