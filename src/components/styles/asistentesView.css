@@ -1,17 +1,10 @@
 
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto Slab', serif ;
-
-}
-.container {
-    width: 50%;
+.container_asistenteView {
+    width: 70%;
     min-width:600px;
     padding: 1%;
 }
-.body {
+.bodyAsistente_asistenteView {
     background-color: #C4C4C4;
     display: flex;
     flex-direction: column;
@@ -21,27 +14,35 @@
     width: 98%;
     font-weight: lighter;
     padding-top: 5%;
+    font-size: 20px;
 
 }
-.title {
-    font-size: large;
-    justify-content: left;
-    align-self: flex-start;
-    padding-left: 2%;
+.mainTittle_asistenteView {
+    display: flex;
+    justify-content: space-between;
+}
+.mainTittle_asistenteView h1{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    height: 125px;
+    font-size: 36px;
     font-weight: lighter;
+    margin-bottom: 5px;
 }
 .select label {
     padding: 1%;
     font-weight: lighter;
 }
-input {
+.bodyAsistente_asistenteView input {
     border-radius: 20px;
     height: 30px;
     width: 100%;
     padding-left: 3%;
 
 }
-button {
+.bodyAsistente_asistenteView button {
     border-radius: 20px;
     height: 30px;
     width: 30%;
@@ -53,23 +54,14 @@ button {
     align-self: flex-end;    
 
 }
-.selectContainer {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -moz-flex;
-    display: -webkit-flex;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
+
 .campo {
     padding: 1%;
     background-color: white;
     border-radius: 20px;
     height: 30px;
     width: 97%;
-    padding-left: 7%;
+    padding-left: 3%;
     padding-top: 5px;
     margin: 2%;
 }

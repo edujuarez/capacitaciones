@@ -1,51 +1,72 @@
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { useState, Fragment, useEffect } from 'react';
+import { Link } from 'react-router-dom'
+import './styles/asistentesList.css';
+import { AiOutlinePlusCircle } from 'react-icons/ai';
+import { IoEyeOutline } from 'react-icons/io5';
 
-import Home from './Home';
-import './styles/app.css';
-{/*}
+
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;300&display=swap');
 </style> 
 
-function App() {
+function AsistentesList() {
+    const [asistentes, setAsistentes] = useState([]);
+    useEffect(() => {
+        fetch("http://localhost:3006/asistente")
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+            setAsistentes(data);
+        })
+    }, []);
+
     return (
-            <BrowserRouter>
-                <div className='container'>
-                    <div className='title'>
-                        Asistentes
-                    </div>
-                    <div className='body'>
-                        <div className='column'>
-                            <h1>Legajo</h1>
-                            <p>001</p>
-                        </div>
-                        <div className='column'>
-                            <h1>Nombre</h1>
-                            <p>Eduardo Juarez</p>
-                        </div>
-                        <div className='column'>
-                            <h1>Sector</h1>
-                            <p>Soporte Informatico</p>
-                        </div>
-                        <div className='column'>
-                            <h1>Cargo</h1>
-                            <p>HelpDesk</p>
-                        </div>
-                        <div className='column'>
-                            <h1>DNI</h1>
-                            <p>37270547</p>                        
-                        </div>                        
-                    </div>
-                        <div className='button'>                            
-                            <button href="#">
-                                <i>+</i>
-                                Agregar
-                            </button>
-                        </div>      
+        <React.Fragment>
+            <div className='containerAsistente'>
+                <div className='title'>
+                    <h1>Asistentes</h1>
                 </div>
+                <div className='card'>
+                    <h1>Legajo</h1>
+                    <h1>Nombre</h1>
+                    <h1>Sector</h1>
+                    <h1>Cargo</h1>
+                    <h1>DNI</h1>
+
+                </div>
+                {asistentes.map((asistentes) => (
+                    <Link to={`/asistentes/${asistentes.idasistente}`} key={asistentes.idasistente}>
+                        <div className='card' >
+                            <div className='column'>
+                                <p>{asistentes.legajo}</p>
+                            </div>
+                            <div className='column'>
+                                <p>{asistentes.nombre}</p>
+                            </div>
+                            <div className='column'>
+                                <p>{asistentes.sector}</p>
+                            </div>
+                            <div className='column'>
+                                <p>{asistentes.cargo}</p>
+                            </div>
+                            <div className='column'>
+                                <p>{asistentes.dni}</p>                        
+                            </div>                     
+                        </div>
+                        </Link>
+                ))}
+                <div className='buttonContainer'>
+                    <a className='addButton' href='/nuevoasistente'>
+                        <AiOutlinePlusCircle className='addIcon' />
+                        <p>Agregar asistente</p>
+                    </a>
+                </div>
+            </div>
         
-            </BrowserRouter>
-    );
-}
-export default App;{*/}
+        </React.Fragment> 
+        )
+    }
+export default AsistentesList;

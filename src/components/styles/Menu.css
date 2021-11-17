@@ -43,7 +43,12 @@
     width: 80px;
     align-self: center;
 }
+.title h1 {
+    font-size: 36px;
+    font-weight: lighter;
+    align-self: center;
 
+}
 .icon {
     height: 30px;
     width: 30%;

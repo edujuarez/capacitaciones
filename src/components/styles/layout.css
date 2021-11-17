@@ -2,29 +2,32 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Roboto Slab';
+    font-family: 'Roboto Slab', 'serif';
 
 }
 html {
     min-height: 100%;
     position: relative;
 }
-body {
-    margin: 0;
-    margin-bottom: 40px;
-}
 .main {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 .body{
     display: flex;
+    align-content: center;
     flex-direction: row;
+    margin-bottom: 40px;
+    width: 100%;
+    justify-content: center;
 }
 .mainBoard {
     display: flex;
     flex-direction: column;
     width: 100%;
+    max-width: 1200px;
+    align-items: center;
 }
 .mainTitle {
     height: 135px;

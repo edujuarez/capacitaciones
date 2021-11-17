@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './styles/Menu.css';
 import { BsSearch } from 'react-icons/bs';
 import { BsBook } from 'react-icons/bs';
@@ -15,19 +16,19 @@ class Menu extends React.Component {
                     <IoPersonCircleOutline className='profileIcon'/>
                     <h1>Hola, {this.props.user}!</h1>
                 </div>
-                <a className="SubMenu" href="./">
+                <a className="SubMenu" href="/capacitacion">
                     <BsBook className='icon'/>
                     <h1>Capacitaciones</h1>
                 </a>
-                <a className='SubMenu' href="twitter.com">
+                <a className='SubMenu' href="/asistentes">
                     <AiOutlineUser className='icon'/>
                     <h1>Asistentes</h1>
                 </a>
-                <a className='SubMenu' href="./">
+                <a className='SubMenu' href="/certification">
                     <CgNotes className='icon'/>
                     <h1>Certificados</h1>
                 </a>
-                <a className='SubMenu' href="./">
+                <a className='SubMenu' href="/capacitacionview">
                     <BsSearch  className='icon'/>
                     <h1>Buscar</h1>
                 </a>

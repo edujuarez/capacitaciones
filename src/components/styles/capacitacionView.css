@@ -1,18 +1,20 @@
 
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto Slab', serif ;
-
+.container_capacitacionView {
+    width: 90%;
+    min-width: 550px;
+    padding: 3%;
+    height: auto;
 }
-.container {
-    width: 50%;
-    min-width:600px;
-    padding: 1%;
+.mainTittle{
+    display: flex;
+    justify-content: space-between;
+    height: 130px;
+    align-items: center;
+    font-weight: lighter;
+    
 }
-.body {
-    background-color: #C4C4C4;
+.bodyCapacitacionView {
+    background-color: #D4D1D1;
     display: flex;
     flex-direction: column;
     padding: 1%;
@@ -21,18 +23,13 @@
     width: 98%;
     font-weight: lighter;
     padding-top: 5%;
+    font-size: 20px;
 
 }
-.title {
-    font-size: large;
-    justify-content: left;
-    align-self: flex-start;
-    padding-left: 2%;
-    font-weight: lighter;
-}
+
 .select label {
     padding: 1%;
-    font-weight: lighter;
+    width: auto;
 }
 input {
     border-radius: 20px;
@@ -41,7 +38,7 @@ input {
     padding-left: 3%;
 
 }
-button {
+.bodyCapacitacionView button {
     border-radius: 20px;
     height: 30px;
     width: 30%;
@@ -51,7 +48,7 @@ button {
     border-style: none;
     margin: 1%;
     align-self: flex-end;    
-
+    font-size: 20px;
 }
 .selectContainer {
     display: -webkit-box;
@@ -69,11 +66,11 @@ button {
     border-radius: 20px;
     height: 30px;
     width: 97%;
-    padding-left: 10%;
+    padding-left: 4%;
     padding-top: 5px;
     margin: 2%;
 }
-label {
+.bodyCapacitacionView label {
     border-radius: 20px;
     height: 30px;
     width: 100%;
@@ -83,7 +80,7 @@ label {
 .textarea {
     padding: 1%;
     background-color: white;
-    border-radius: 50px;
+    border-radius: 35px;
     height: 100%;
     width: 96%;
     padding: 3%;
@@ -96,5 +93,9 @@ label {
 .invitados .campo {
     padding-left: 3%;
 }
-
+.mainTittle a {
+    display: flex;
+    justify-content: flex-end;
+    align-self: end;
+}
 

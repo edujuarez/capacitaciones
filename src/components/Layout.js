@@ -2,27 +2,25 @@ import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import Menu from './Menu';
-import NuevaCapacitacionForm from './NuevaCapacitacionForm';
-import NuevoAsistente from './NuevoAsistente';
+import NuevaCapacitacionForm from './nuevaCapacitacionForm';
 
-import './styles/home.css'
+import './styles/layout.css'
 
 import { Fragment } from 'react';
 
 function Layout (props) {
-    const children = props.children;
     return (
             <React.Fragment>
                     <div className='main'>
                         <Header />
-                        <div className='body'>
-                            <Menu user="polo"/>
-                            <div className='mainBoard'>
-                                <NuevoAsistente/>
-                                <NuevaCapacitacionForm/>
+                            <div className='body'>          
+                                <Menu user={props.user}/>
+                                <div className='mainBoard'>
+                                    {props.children}
+                                </div>
                             </div>
-                        </div>
                         <Footer />
                     </div>
-        </React.Fragment>)}
+        </React.Fragment>)
+    }
 export default Layout;

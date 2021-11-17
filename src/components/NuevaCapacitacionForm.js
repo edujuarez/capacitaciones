@@ -1,6 +1,6 @@
-import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
-import reactDom from "react-dom";
+import React, { useState} from "react";
+import axios from 'axios';
+
 
 import './styles/nuevaCapacitacionForm.css';
 
@@ -9,71 +9,108 @@ import './styles/nuevaCapacitacionForm.css';
 </style> 
 
 function  NuevaCapacitacionForm(){
+        const [value, setValue] = useState ({
+            nombre : "",
+            temario : "",
+            tipo : "",
+            certificacion : "",
+            fecha : "",
+            plan : "",
+            material : "",
+            observaciones : "",
+            asistentes : ""
+        });
+
+        const handleChange = (e) => {
+            setValue({
+                ...value,
+                [e.target.name]: e.target.value
+            })
+        }
+        
+        const capacitacionURL = "http://localhost:3006/capacitaciones/nuevo"
+        const handleSubmit = (e) => {
+            console.log(`${value.fecha}`)
+            e.preventDefault();
+            axios.post(capacitacionURL, {
+                nombre : `${value.nombre}`,
+                temario : `${value.temario}`,
+                tipo : `${value.tipo}`,
+                certificacion : `${value.certificacion}`,
+                fecha : `${value.fecha}`,
+                plan : `${value.plan}`,
+                material : `${value.material}`,
+                observaciones : `${value.observaciones}`,
+                asistentes : `${value.asistentes}`
+            }).then (() => {
+                alert([`La capacitacion ${value.nombre} fue creada correctamente!`]);
+                
+            })
+        }
+
         return (
-        <div>
             <React.Fragment>
-                <div className='container'>
-                    <div className='title'>
+                <div className='container_nuevaCapacitacion'>
+                    <div className='mainTittle'>
                         <h1>Nueva Capacitacion</h1>
                     </div>
-                    <div className='bodyCapacitacion'>
-                        <label for='name'>Nombre:</label>
-                        <input type='text' id='name' />
+                    <form className='bodyCapacitacion' onSubmit={handleSubmit}>
+                        <label>Nombre:</label>
+                        <input type='text' name='nombre' onChange={handleChange}/>
                         <label>Temario:</label>
-                        <input  type='text'  id='temario' />
+                        <input  type='text' name='temario' onChange={handleChange}/>
                         <div className='selectContainer'>
                             <div className='select'>
                                 <label>Tipo:</label>
-                                <select name='type' id='type' forms='typeform' >
-                                    <option value='Anual'>Anual</option>
-                                    <option value='Otra'>Otro</option>
+                                <select name='tipo' forms='typeform' onChange={handleChange}>
+                                    <option value='Desarrollo'>Desarrollo</option>
+                                    <option value='Preventiva'>Preventiva</option>
+                                    <option value='Correctiva'>Correctiva</option>
                                 </select>
                             </div>                        
                             <div className='select'>
                                 <label>Certificacion:</label>
-                                <select name='certification' id='certification' forms='typeform' >
+                                <select name='certificacion' forms='typeform' onChange={handleChange}>
                                     <option value='Si'>Si</option>
                                     <option value='No'>No</option>
                                 </select>
                             </div>
                             <div className='select'>
                                 <label>Fecha:</label>
-                                <input type='date'/>
+                                <input type='date' name="fecha" onChange={handleChange} />
                             </div>
                             <div className='select'>
                                 <label>Plan:</label>
-                                <select name='plan' id='plan' forms='typeform' >
-                                    <option value='Si'>Si</option>
-                                    <option value='No'>No</option>
+                                <select name='plan' forms='typeform' onChange={handleChange}>
+                                    <option value='Si'>General</option>
+                                    <option value='HyS'>Higiene y Seguridad</option>
+                                    <option value='Otro'>Otro</option>
                                 </select>
                             </div>
                             <div className='select'>
                                 <label>Entrega de material:</label>
-                                <select name='material' id='material' forms='typeform' >
+                                <select name='material' forms='typeform' onChange={handleChange}>
                                     <option value='Si'>Si</option>
                                     <option value='No'>No</option>
                                 </select> 
                             </div>
-                        </div>                    
-
+                        </div>
                         <label>Observaciones:</label>
-                        <textarea name='Observations' cols="40" rows="5"/>
+                        <textarea name='observaciones' cols="40" rows="5" onChange={handleChange}/>
                         <div className='select'>
-                            <label>Invitados</label>
-                            <select name='guest' id='guest' forms='typeform' >
+                            <label>Asistentes</label>
+                            <select name='asistentes' forms='typeform' onChange={handleChange}>
                                 <option value='ejemplo'>ejemplo</option>
                                 <option value='ejemplo2'>ejemplo2</option>
                                 <option value='Etc'> etc</option>
                             </select>
                         </div>
-                        <button type='submit' href='#'>Guardar</button>
-                    </div>
-                    
+                        <button type="submit" onClick={handleSubmit}>Guardar</button>     
+                    </form>
+                   
                 </div>
         
         </React.Fragment>
-          
-        </div>
     );
 }
 

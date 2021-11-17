@@ -1,5 +1,5 @@
 
-.container_nuevoAsistente {
+.container_AsistenteEdit {
     width: 50%;
     min-width: 600px;
     padding: 3%;
@@ -7,7 +7,7 @@
     flex-direction: column;
 }
 
-.bodyAsistente {
+.bodyAsistenteEdit {
     background-color: #d4d1d1;
     display: flex;
     flex-direction: row;
@@ -21,11 +21,12 @@
     font-size: 20px;
     
 }
-.tittle {
-    justify-content: flex-start;
-    align-items: flex-end;
+.tittle_AsistenteEdit {
+    display: flex;
+    justify-content: space-between;
+    
 }
-.tittle h1{
+.tittle_AsistenteEdit h1{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -35,7 +36,7 @@
     font-weight: lighter;
     margin-bottom: 5px;
 }
-.bodyAsistente label {
+.bodyAsistenteEdit label {
     display: flex;
     flex-direction: column;
     padding: 1%;
@@ -45,7 +46,7 @@
     justify-content: center;
 
 }
-.bodyAsistente input {
+.bodyAsistenteEdit input {
     width: 70%;
     margin: 7px;
     border-style: none;

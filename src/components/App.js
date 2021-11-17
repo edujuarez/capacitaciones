@@ -2,13 +2,30 @@ import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 
 import Layout from './Layout';
 
+import NuevaCapacitacionForm from './nuevaCapacitacionForm';
+import NuevoAsistente from './NuevoAsistente';
+import AsistentesList from './AsistentesList';
+import CapacitacionView from './CapacitacionView';
+import Capacitacion from './Capacitacion';
+import AsistenteView from './AsistenteView';
+import AsistenteEdit from './AsistenteEdit';
+
 function App() {
+  const user = 'Kuki';
+  const view = "";
   return (
     <BrowserRouter>
-      <Layout user='polo'>
+      <Layout user={user}>
         <Switch>
-            <Route exact path='/' component="jelouu"/>
-
+            <Route exact path="/home" component={Capacitacion}/>
+            <Route exact path="/nuevacapacitacion" component={NuevaCapacitacionForm} />
+            <Route exact path="/nuevoasistente" component={NuevoAsistente} />
+            <Route exact path="/asistentes" component={AsistentesList} />
+            <Route exact path="/capacitacionview" component={CapacitacionView} />
+            <Route exact path="/capacitacion" component={Capacitacion} />
+            <Route exact path="/capacitaciones/:idcapacitacion" component={CapacitacionView} />
+            <Route exact path='/asistentes/:idasistente' component={AsistenteView}/>
+            <Route exact path='/asistentes/:idasistente/edit' component={AsistenteEdit}/>
         </Switch>
       </Layout>
     </BrowserRouter>
