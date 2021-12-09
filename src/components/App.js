@@ -29,7 +29,6 @@ function App() {
             <Route exact path="/nuevacapacitacion" component={NuevaCapacitacionForm} />
             <Route exact path="/nuevoasistente" component={NuevoAsistente} />
             <Route exact path="/asistentes" component={AsistentesList} />
-            <Route exact path="/capacitacionview" component={CapacitacionView} />
             <Route exact path="/capacitacion" component={Capacitacion} />
             <Route exact path="/capacitaciones/:idcapacitacion" component={CapacitacionView} />
             <Route exact path='/asistentes/:idasistente' component={AsistenteView}/>
