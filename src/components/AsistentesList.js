@@ -3,7 +3,8 @@ import { useState, Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import './styles/asistentesList.css';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
-import { IoEyeOutline } from 'react-icons/io5';
+import { IoEyeOutline,  } from 'react-icons/io5';
+import { AiOutlineDelete } from 'react-icons/ai'
 
 
 
@@ -38,6 +39,7 @@ function AsistentesList() {
 
                 </div>
                 {asistentes.map((asistentes) => (
+               
                     <Link to={`/asistentes/${asistentes.idasistente}`} key={asistentes.idasistente}>
                         <div className='card' >
                             <div className='column'>
@@ -54,9 +56,10 @@ function AsistentesList() {
                             </div>
                             <div className='column'>
                                 <p>{asistentes.dni}</p>                        
-                            </div>                     
+                            </div>              
                         </div>
                         </Link>
+                      
                 ))}
                 <div className='buttonContainer'>
                     <a className='addButton' href='/nuevoasistente'>

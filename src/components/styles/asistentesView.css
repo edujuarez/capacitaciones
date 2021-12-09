@@ -117,4 +117,8 @@ label {
     margin: 1%;
     align-self: flex-end; 
 }
+.buttonsAsistentes {
+    display: flex;
+    justify-content: space-around;
+}
 

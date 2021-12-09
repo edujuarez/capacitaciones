@@ -1,3 +1,4 @@
+import  axios  from 'axios';
 import React from 'react';
 import { useState, useEffect, Fragment } from "react";
 import { useParams } from "react-router-dom";
@@ -17,10 +18,25 @@ function NuevoAsistente () {
             return res.json();
         })
         .then(data => {
-            console.log(data);
             setAsistente(data);
         })
     }, []);
+
+        const deleteSubmit = (asistenteID) => {
+            let deleteURL = `http://localhost:3006/asistente/${asistenteID}/delete`
+            axios.delete(deleteURL)
+            .then(response => {
+                if(response.data != null) {
+                    alert("El asistente fue borrado correctamente!");
+                    location.href = '/asistentes'
+                }
+            })
+        };
+    
+    
+    const editAsistente = () => {
+
+    }
     
         return (
             <React.Fragment>
@@ -45,9 +61,12 @@ function NuevoAsistente () {
                         <p className='campo' name='sector' >{asistente.sector}</p>
                         <label>Fecha de Ingreso:</label>
                         <p className='campo' name='fechaingreso' >{asistente.fechaingreso}</p>
-                        <a type="submit" href={`/asistentes/${idasistente}/edit`}> Editar</a>
+                        <section className='buttonsAsistentes'>
+                            <button onClick={editAsistente}>Editar</button>
+                            <button onClick={() => {deleteSubmit(asistente.idasistente)}}>Eliminar</button>
+                        </section>
                     </form>
-                ))}
+                ))} 
                 </div>
                   
             </React.Fragment>

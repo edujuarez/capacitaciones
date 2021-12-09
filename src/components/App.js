@@ -9,13 +9,21 @@ import CapacitacionView from './CapacitacionView';
 import Capacitacion from './Capacitacion';
 import AsistenteView from './AsistenteView';
 import AsistenteEdit from './AsistenteEdit';
+import Login from './Login';
 
 function App() {
   const user = 'Kuki';
   const view = "";
   return (
+    <>
     <BrowserRouter>
+    <Route exact path='/login' component={Login} />
+    </BrowserRouter>
+    
+    <BrowserRouter>
+      
       <Layout user={user}>
+        
         <Switch>
             <Route exact path="/home" component={Capacitacion}/>
             <Route exact path="/nuevacapacitacion" component={NuevaCapacitacionForm} />
@@ -26,9 +34,11 @@ function App() {
             <Route exact path="/capacitaciones/:idcapacitacion" component={CapacitacionView} />
             <Route exact path='/asistentes/:idasistente' component={AsistenteView}/>
             <Route exact path='/asistentes/:idasistente/edit' component={AsistenteEdit}/>
+            
         </Switch>
       </Layout>
     </BrowserRouter>
+    </>
   );
 }
 

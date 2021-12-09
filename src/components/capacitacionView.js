@@ -28,11 +28,11 @@ function CapacitacionView() {
         <React.Fragment>
         <div className='container_capacitacionView'>
             <div className='mainTittle'>
-                <h1>Ficha Capacitación </h1>
+                <h1> Detalle</h1>
                 <h1><a type='submit' href='/capacitacion'>Volver</a></h1>
             </div>
             {capacitacion.map((capacitacion) => (
-                <div className='bodyCapacitacionView' >
+                <div className='bodyCapacitacionView'  key={capacitacion.idcapacitacion}>
                     <label>Nombre de capacitacion:</label>
                     <p className='campo'name='nombre'>{capacitacion.nombre}</p>
                     <label>Temario:</label>

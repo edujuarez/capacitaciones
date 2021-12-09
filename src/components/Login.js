@@ -1,11 +1,13 @@
 import React from 'react';
- 
+import login from './styles/login.css'
+
 class Login extends React.Component {
     render() {
         return (
-            <div>
+            <div className="loginBackground">
                 <h1>
-                    Base Capacitaciones
+                    Base Capacitaciones holu
+                    
                 </h1>
             </div>
 
