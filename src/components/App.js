@@ -2,7 +2,7 @@ import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 
 import Layout from './Layout';
 
-import NuevaCapacitacionForm from './nuevaCapacitacionForm';
+import NuevaCapacitacionForm from './NuevaCapacitacionForm';
 import NuevoAsistente from './NuevoAsistente';
 import AsistentesList from './AsistentesList';
 import CapacitacionView from './CapacitacionView';

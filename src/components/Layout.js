@@ -2,7 +2,6 @@ import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import Menu from './Menu';
-import NuevaCapacitacionForm from './nuevaCapacitacionForm';
 
 import './styles/layout.css'
 
