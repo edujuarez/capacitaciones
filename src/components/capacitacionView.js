@@ -14,7 +14,7 @@ function CapacitacionView() {
 
     const  [capacitacion, setCapacitacion ] = useState([]);
     useEffect(() => {
-        let url = `https://capacitacionesiselin.herokuapp.com/${idcapacitacion}`;
+        let url = `https://capacitacionesiselin.herokuapp.com/capacitaciones/${idcapacitacion}`;
         fetch(url)
         .then(res => {
             return res.json();
