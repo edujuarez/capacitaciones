@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect, Fragment } from "react";
 import './styles/capacitacionView.css';
 import { useParams } from "react-router-dom";
+import { axios } from 'axios';
 
 
 <style>
@@ -24,6 +25,17 @@ function CapacitacionView() {
             setCapacitacion(data);
         })
     }, []);
+
+    const deleteSubmit = (capacitacionID) => {
+       /* let deleteURL = `https://capacitacionesiselin.herokuapp.com/capacitaciones/${capacitacionID}/delete`
+        axios.delete(deleteURL)
+        .then(response => {
+            if(response.data != null) {
+                alert("La capacitacion fue borrada correctamente!");
+                location.href = '/capacitaciones'
+            }
+        })*/
+    };
     return (
         <React.Fragment>
         <div className='container_capacitacionView'>
@@ -72,7 +84,9 @@ function CapacitacionView() {
                         <p className='campo'>Chofer 3</p>
                         <p className='campo'>Chofer 4</p>
                     </div>
-                    <button type='submit' href='/capacitacion'>Editar</button>    
+                    <button type='submit' href='/capacitacion'>Editar</button>
+                    <button onClick={() => {deleteSubmit(capacitacion.capacitacionid)}}>Eliminar</button>
+
                         
                 
         

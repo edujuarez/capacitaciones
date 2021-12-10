@@ -28,7 +28,7 @@ function NuevoAsistente () {
             .then(response => {
                 if(response.data != null) {
                     alert("El asistente fue borrado correctamente!");
-                    location.href = '/asistentes'
+                    location.href = '/asistente'
                 }
             })
         };
