@@ -28,7 +28,7 @@ function  NuevaCapacitacionForm(){
             })
         }
         
-        const capacitacionURL = "http://localhost:3006/capacitaciones/nuevo"
+        const capacitacionURL = "https://capacitacionesiselin.herokuapp.com/nuevo"
         const handleSubmit = (e) => {
             console.log(`${value.fecha}`)
             e.preventDefault();

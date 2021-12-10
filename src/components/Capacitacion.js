@@ -10,7 +10,7 @@ function Capacitacion() {
 
     const  [capacitaciones, setCapacitaciones ] = useState([]);
     useEffect(() => {
-        let url = "http://localhost:3006/capacitaciones";
+        let url = "https://capacitacionesiselin.herokuapp.com/capacitaciones";
         fetch(url)
         .then(res => {
             return res.json();

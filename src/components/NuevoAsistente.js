@@ -23,7 +23,7 @@ function NuevoAsistente () {
             [e.target.name]: e.target.value
         })
     }
-    const baseURL = "http://localhost:3006/asistente/nuevo"
+    const baseURL = "https://capacitacionesiselin.herokuapp.com/nuevo"
     const handleSubmit = (e) => {
         e.preventDefault();
 

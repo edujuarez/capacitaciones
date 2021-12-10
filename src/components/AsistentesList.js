@@ -15,7 +15,7 @@ import { AiOutlineDelete } from 'react-icons/ai'
 function AsistentesList() {
     const [asistentes, setAsistentes] = useState([]);
     useEffect(() => {
-        fetch("http://localhost:3006/asistente")
+        fetch("https://capacitacionesiselin.herokuapp.com/asistente")
         .then(res => {
             return res.json();
         })

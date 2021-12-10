@@ -12,7 +12,7 @@ function NuevoAsistente () {
 
     const  [asistente, setAsistente ] = useState([]);
     useEffect(() => {
-        let url = `http://localhost:3006/asistente/${idasistente}`;
+        let url = `https://capacitacionesiselin.herokuapp.com/${idasistente}`;
         fetch(url)
         .then(res => {
             return res.json();
@@ -23,7 +23,7 @@ function NuevoAsistente () {
     }, []);
 
         const deleteSubmit = (asistenteID) => {
-            let deleteURL = `http://localhost:3006/asistente/${asistenteID}/delete`
+            let deleteURL = `https://capacitacionesiselin.herokuapp.com/${asistenteID}/delete`
             axios.delete(deleteURL)
             .then(response => {
                 if(response.data != null) {
