@@ -12,7 +12,7 @@ import AsistenteEdit from './AsistenteEdit';
 import Login from './Login';
 
 function App() {
-  const user = 'Kuki';
+  const user = 'Usuario';
   const view = "";
   return (
     <>
