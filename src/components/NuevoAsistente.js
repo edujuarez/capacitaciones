@@ -2,7 +2,6 @@ import React, { useState }from 'react';
 import axios from 'axios';
 
 import './styles/nuevoAsistente.css';
-import { BsReverseBackspaceReverse } from 'react-icons/bs';
 
 
 function NuevoAsistente () {
@@ -23,7 +22,7 @@ function NuevoAsistente () {
             [e.target.name]: e.target.value
         })
     }
-    const baseURL = "https://capacitacionesiselin.herokuapp.com/nuevo"
+    const baseURL = "https://capacitacionesiselin.herokuapp.com/asistente/nuevo"
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -38,8 +37,6 @@ function NuevoAsistente () {
         }).then (() => {
             alert([`El asistente ${value.nombre} fue guardado correctamente!`]);
             location.href = '/asistentes'
-
-            
         })
     }
     
