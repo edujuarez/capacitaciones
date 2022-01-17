@@ -22,7 +22,7 @@ function Capacitacion() {
 
         return (
         <React.Fragment>
-            <div className='container'>
+            <div className='mainContainer'>
                 {capacitaciones && <h1 className='mainTittle'>Proximas Capacitaciones</h1>}
                     {capacitaciones.map((capacitaciones) => (
                         <Link to={`/capacitaciones/${capacitaciones.idcapacitacion}`} key={ capacitaciones.idcapacitacion}>

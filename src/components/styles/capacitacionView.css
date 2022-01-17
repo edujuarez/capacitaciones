@@ -98,4 +98,8 @@ input {
     justify-content: flex-end;
     align-self: end;
 }
+.buttonsCapacitaciones {
+    display: flex;
+    justify-content: space-around;
+}
 

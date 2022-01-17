@@ -9,23 +9,21 @@ import './styles/asistenteEdit.css';
 
 
 function AsistenteEdit () {
-        const params = useParams();
-        let idasistente = params.idasistente;
+    const params = useParams();
+    let idasistente = params.idasistente;
 
-        const  [asistente, setAsistente ] = useState([]);
-        useEffect(() => {
-            let url = `http://localhost:3006/asistente/${idasistente}`;
-            fetch(url)
-            .then(res => {
-                return res.json();
-            })
-            .then(data => {
-                console.log(data.nombre);
-                console.log(data.nombre)
-                setAsistente(data);
-            })
-        }, []);
-        console.log(`${asistente.nombre}`)
+    const  [asistente, setAsistente ] = useState([]);
+    useEffect(() => {
+        let url = `https://capacitacionesiselin.herokuapp.com/asistente/${idasistente}`;
+        fetch(url)
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+            setAsistente(data);
+        })
+    }, []);
+
       const [value, setValue] = useState({ 
         nombre : "",
         legajo : "",
@@ -35,15 +33,18 @@ function AsistenteEdit () {
         sector : "",
         fechaingreso : ""
     });
+
+    const [newValueChange, setNewImageUrl] = useState(null);
+
+
     
-    const handleChange = (e) => {
-        setValue({
-            ...value,
-            [e.target.name]: e.target.value
-        })
+    const handleEditChange = (e) => {
+        e.preventDefault();
+        setNewValueChange(e.target.value)
+        console.log(e.target.value);
     }
 
-    const baseURL = `http://localhost:3006/asistente/${idasistente}/edit`
+    const baseURL = `https://capacitacionesiselin.herokuapp.com/asistente/${idasistente}/edit`
     const handleUpdateSubmit = (e) => {
         e.preventDefault();
         axios.put(baseURL,{
@@ -71,19 +72,19 @@ function AsistenteEdit () {
                     {asistente.map((asistente) => (
                     <form className='bodyAsistenteEdit' onSubmit={handleUpdateSubmit} key={asistente.idasistente}>
                         <label>Nombre:</label>
-                        <input  type='text'  name='nombre' value={asistente.nombre} onChange={handleChange}/>
+                        <input  type='text'  name='nombre'  onChange={handleEditChange}/>
                         <label>Legajo:</label>
-                        <input  type='text'  name='legajo'  onChange={handleChange}/>
+                        <input  type='text'  name='legajo' value={asistente.legajo} onChange={handleEditChange}/>
                         <label>Tipo de documento:</label>
-                        <input  type='text'  name='tipodoc'  onChange={handleChange}/>
+                        <input  type='text'  name='tipodoc' value={asistente.tipodoc} onChange={handleEditChange}/>
                         <label>DNI:</label>
-                        <input  type='text'  name='dni'   onChange={handleChange}/>
+                        <input  type='text'  name='dni' value={asistente.dni}  onChange={handleEditChange}/>
                         <label>Cargo:</label>
-                        <input  type='text'  name='cargo'   onChange={handleChange}/>
+                        <input  type='text'  name='cargo' value={asistente.cargo}  onChange={handleEditChange}/>
                         <label>Sector:</label>
-                        <input  type='text'  name='sector'   onChange={handleChange}/>
+                        <input  type='text'  name='sector' value={asistente.sector}  onChange={handleEditChange}/>
                         <label>Fecha de Ingreso:</label>
-                        <input  type='date'  name='fechaingreso'  onChange={handleChange}/>
+                        <input  type='date'  name='fechaingreso'  onChange={handleEditChange}/>
                         <button type="submit" onClick={handleUpdateSubmit}> Guardar</button>
                     </form>
                 ))}

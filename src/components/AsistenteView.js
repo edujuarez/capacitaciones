@@ -1,7 +1,8 @@
 import  axios  from 'axios';
 import React from 'react';
 import { useState, useEffect, Fragment } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+
 
 import './styles/asistentesView.css';
 
@@ -62,7 +63,8 @@ function NuevoAsistente () {
                         <label>Fecha de Ingreso:</label>
                         <p className='campo' name='fechaingreso' >{asistente.fechaingreso}</p>
                         <section className='buttonsAsistentes'>
-                            <button onClick={editAsistente}>Editar</button>
+                        <Link to={`/asistentes/${asistente.idasistente}/edit`}>
+                            <button>Editar</button> </Link>
                             <button onClick={() => {deleteSubmit(asistente.idasistente)}}>Eliminar</button>
                         </section>
                     </form>

@@ -1,5 +1,6 @@
-import React, { useState} from "react";
+import React, { useState, useEffect} from "react";
 import axios from 'axios';
+import Multiselect from 'multiselect-react-dropdown';
 
 
 import './styles/nuevaCapacitacionForm.css';
@@ -9,6 +10,17 @@ import './styles/nuevaCapacitacionForm.css';
 </style> 
 
 function  NuevaCapacitacionForm(){
+        
+        const [asistentes, setAsistentes] = useState([]);
+            useEffect(() => {
+                fetch("https://capacitacionesiselin.herokuapp.com/asistente")
+                .then(res => {
+                    return res.json();
+                })
+                .then(data => {
+                    setAsistentes(data);
+                })
+        }, []);
         const [value, setValue] = useState ({
             nombre : "",
             temario : "",
@@ -27,7 +39,6 @@ function  NuevaCapacitacionForm(){
                 [e.target.name]: e.target.value
             })
         }
-        
         const capacitacionURL = "https://capacitacionesiselin.herokuapp.com/capacitaciones/nuevo"
         const handleSubmit = (e) => {
             console.log(`${value.fecha}`)
@@ -41,12 +52,15 @@ function  NuevaCapacitacionForm(){
                 plan : `${value.plan}`,
                 material : `${value.material}`,
                 observaciones : `${value.observaciones}`,
-                asistentes : `${value.asistentes}`
+                asistentes : asistentesOptions
             }).then (() => {
                 alert([`La capacitacion ${value.nombre} fue creada correctamente!`]);
                 
             })
         }
+        const asistentesOptions = asistentes.map((asistentes) => (
+         asistentes.nombre
+        ))
 
         return (
             <React.Fragment>
@@ -97,13 +111,17 @@ function  NuevaCapacitacionForm(){
                         </div>
                         <label>Observaciones:</label>
                         <textarea name='observaciones' cols="40" rows="5" onChange={handleChange}/>
-                        <div className='select'>
+                        <div className="multiselect">
                             <label>Asistentes</label>
-                            <select name='asistentes' forms='typeform' onChange={handleChange}>
-                                <option value='ejemplo'>ejemplo</option>
-                                <option value='ejemplo2'>ejemplo2</option>
-                                <option value='Etc'> etc</option>
-                            </select>
+                            <Multiselect
+                                options={asistentesOptions} // Options to display in the dropdown
+                                onSelect={(e) => {console.log(e)}} // Function will trigger on select event
+                                onRemove={(e) => {console.log(e)}} // Function will trigger on remove event
+                                displayValue="name" // Property name to display in the dropdown options
+                                isObject={false}
+                                name='asistentes'
+                                
+                            />
                         </div>
                         <button type="submit" onClick={handleSubmit}>Guardar</button>     
                     </form>

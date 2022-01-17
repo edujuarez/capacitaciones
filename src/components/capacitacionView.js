@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect, Fragment } from "react";
 import './styles/capacitacionView.css';
 import { useParams } from "react-router-dom";
-import { axios } from 'axios';
+import axios from 'axios';
 
 
 <style>
@@ -27,14 +27,14 @@ function CapacitacionView() {
     }, []);
 
     const deleteSubmit = (capacitacionID) => {
-       /* let deleteURL = `https://capacitacionesiselin.herokuapp.com/capacitaciones/${capacitacionID}/delete`
+       let deleteURL = `https://capacitacionesiselin.herokuapp.com/capacitaciones/${capacitacionID}/delete`
         axios.delete(deleteURL)
         .then(response => {
             if(response.data != null) {
                 alert("La capacitacion fue borrada correctamente!");
                 location.href = '/capacitaciones'
             }
-        })*/
+        })
     };
     return (
         <React.Fragment>
@@ -72,21 +72,22 @@ function CapacitacionView() {
                         </div>
                     </div>                    
 
-                    <label>Observaciones:</label>
+                    <label>Observaciones: numero{idcapacitacion}</label>
                     <div className='textarea'>
                         <p >{capacitacion.observaciones}</p>
                     </div>
                     <label>Invitados</label>
                     <div className='invitados'>
                             {/*aqui va un .map*/}
-                        <p className='campo'>Chofer 1</p>
+                        <p className='campo'></p>
                         <p className='campo'>Chofer 2</p>
                         <p className='campo'>Chofer 3</p>
                         <p className='campo'>Chofer 4</p>
                     </div>
-                    <button type='submit' href='/capacitacion'>Editar</button>
-                    <button onClick={() => {deleteSubmit(capacitacion.capacitacionid)}}>Eliminar</button>
-
+                    <div className="buttonsCapacitaciones">
+                        <button type='submit' href='/capacitacion'>Editar</button>
+                        <button onClick={() => {deleteSubmit(idcapacitacion)}}>Eliminar</button>
+                    </div>
                         
                 
         
