@@ -24,11 +24,11 @@ class Menu extends React.Component {
                     <AiOutlineUser className='icon'/>
                     <h1>Asistentes</h1>
                 </a>
-                <a className='SubMenu' href="/certification">
+                <a className='SubMenu' href="/informes">
                     <CgNotes className='icon'/>
-                    <h1>Certificados</h1>
+                    <h1>Informes</h1>
                 </a>
-                <a className='SubMenu' href="/capacitacionview">
+                <a className='SubMenu' href="/Search">
                     <BsSearch  className='icon'/>
                     <h1>Buscar</h1>
                 </a>

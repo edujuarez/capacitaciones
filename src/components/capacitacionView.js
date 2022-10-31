@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect, Fragment } from "react";
 import './styles/capacitacionView.css';
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from 'axios';
 
 
@@ -13,6 +13,7 @@ function CapacitacionView() {
     const params = useParams();
     let idcapacitacion = params.idcapacitacion;
 
+    //Trae datos de la capacitacion solicitada
     const  [capacitacion, setCapacitacion ] = useState([]);
     useEffect(() => {
         let url = `https://capacitacionesiselin.herokuapp.com/capacitaciones/${idcapacitacion}`;
@@ -21,35 +22,50 @@ function CapacitacionView() {
             return res.json();
         })
         .then(data => {
-            console.log(data);
             setCapacitacion(data);
         })
     }, []);
 
-    const deleteSubmit = (capacitacionID) => {
-       let deleteURL = `https://capacitacionesiselin.herokuapp.com/capacitaciones/${capacitacionID}/delete`
-        axios.delete(deleteURL)
-        .then(response => {
-            if(response.data != null) {
-                alert("La capacitación fue borrada correctamente!");
-                location.href = '/capacitacion'
-            }
-        })
+    //Elimina capacitacion
+    const deleteCapacitacion = (idcapacitacion) => {
+       let deleteURL = `https://capacitacionesiselin.herokuapp.com/deletecapacitacion`
+       const requestOptions = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: idcapacitacion})
     };
+    console.log(requestOptions.body)
+    fetch(deleteURL, requestOptions)
+    .then((res) => {
+        alert("Capacitacion eliminada");
+        window.location.href = "/capacitacion";
+    })
+};
+ 
+    //Trae las asistencias que matchean con la capacitacion
+    const  [asistentesList, setAsistentesList ] = useState([]);
+    useEffect(() => {
+        let urlAsistentesList = `https://capacitacionesiselin.herokuapp.com/addasistentes/${idcapacitacion}`;
+        fetch(urlAsistentesList)
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+            setAsistentesList(data);
+        })
+    }, []);
 
-    const listaDeAsistentes = (asistentes) => {
-        let url = ``
-    }
+
     return (
         <React.Fragment>
         <div className='container_capacitacionView'>
             <div className='mainTittle'>
-                <h1> Detalle</h1>
+                <h1> Detalle de capacitación</h1>
                 <h1><a type='submit' href='/capacitacion'>Volver</a></h1>
             </div>
             {capacitacion.map((capacitacion) => (
                 <div className='bodyCapacitacionView'  key={capacitacion.idcapacitacion}>
-                    <label>Nombre de capacitacion:</label>
+                    <label>Nombre de capacitación:</label >
                     <p className='campo'name='nombre'>{capacitacion.nombre}</p>
                     <label>Temario:</label>
                     <p className='campo' >{capacitacion.temario}</p>
@@ -57,9 +73,13 @@ function CapacitacionView() {
                         <div className='select'>
                             <label>Tipo:</label>
                             <p className='campo'>{capacitacion.tipo}</p>
+                        </div>
+                        <div className='select'>
+                            <label>Categoria:</label>
+                            <p className='campo'>{capacitacion.categoria}</p>
                         </div>                        
                         <div className='select'>
-                            <label>Certificacion:</label>
+                            <label>Certificación:</label>
                             <p className='campo'>{capacitacion.certificacion}</p>
                         </div>
                         <div className='select'>
@@ -74,25 +94,33 @@ function CapacitacionView() {
                             <label>Entrega de material:</label>
                             <p className='campo'>{capacitacion.material}</p>
                         </div>
+                        <div className='select'>
+                                <label>Duración:</label>
+                                <p className="campo">{capacitacion.duracion} hs</p> 
+                        </div>
+                        <div className='select'>
+                            <label>Modalidad:</label>
+                            <p className='campo'>{capacitacion.modalidad}</p>
+                        </div>
                     </div>                    
 
                     <label>Observaciones:</label>
                     <div className='textarea'>
                         <p >{capacitacion.observaciones}</p>
                     </div>
-                    <label>Invitados</label>
+                    <label>Invitados:</label>
                     <div className='invitados'>
-                        {/*asistentes.map((asistentes) => (
-                        <p className='campo'>{capacitacion.asistente}</p>
-                        ))*/}
+                        {asistentesList.map((asistentes) => (
+                        <p className='asistente' key={asistentes.invitadoID}>{asistentes.nombre}</p>
+                        ))}
                     </div>
                     <div className="buttonsCapacitaciones">
-                        <button type='submit' href='/capacitacion'>Editar</button>
-                        <button onClick={() => {deleteSubmit(idcapacitacion)}}>Eliminar</button>
+                        <a type="button" href={'/addAsistentes/'+(idcapacitacion)} className="button">Agregar invitados</a>
+                        <a type="button" href={'/certification/'+(idcapacitacion)} className="button">Registro de capacitación</a>
+                        <button onClick={() =>{deleteCapacitacion(idcapacitacion)}}  className="button">Eliminar</button>
+
                     </div>
                         
-                
-        
                 </div> 
             ))}     
    </div>

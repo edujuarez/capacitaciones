@@ -19,6 +19,14 @@
 
 
 }
+.title {
+    display: flex;
+    align-items: center;
+    
+}
+.title input {
+    min-width: 130px;
+}
 
 .bodyAsistentesList label {
     padding: 1%;

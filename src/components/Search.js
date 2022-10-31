@@ -1,0 +1,160 @@
+import React from "react";
+import './styles/search.css'
+import { useState, Fragment, useEffect } from 'react';
+
+
+function Search() {
+    //carga los asistentes al cuadro de busqueda
+    const [busqueda, setBusqueda] = useState([]);
+    const [searchTerms, setSearchTerms] = useState("");
+    const [nuevoPuntaje, setNuevoPuntaje] = useState("");
+    const [nuevaAsistencia, setNuevaAsistencia] = useState("");
+    const [nuevoPorcentaje, setNuevoPorcentaje] = useState("");
+
+    useEffect(() => {
+        fetch("https://capacitacionesiselin.herokuapp.com/asistentes")
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+            setBusqueda(data);
+        })
+    }, []);
+
+    const  [capacitaciones, setCapacitaciones ] = useState([]);
+    useEffect(() => {
+        let url = "https://capacitacionesiselin.herokuapp.com/capacitaciones";
+        fetch(url)
+        .then(res => {
+            return res.json();
+        })
+        .then(capacitaciones => {
+            setCapacitaciones(capacitaciones);
+        })
+    }, []);
+
+    //Elimina asistente de la lista
+    const deleteAsistente = (id) => {
+        let deleteURL = "https://capacitacionesiselin.herokuapp.com/deleteasistente"
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: id})
+        };
+        console.log(requestOptions.body)
+        fetch(deleteURL, requestOptions)
+        .then((res) => {
+            alert("Asistente eliminado");
+            window.location.href = "/search";
+        })
+    };
+
+    //edita los valores de puntaje
+    const updateNuevoPuntaje = (id) => {
+        let updateURL = "https://capacitacionesiselin.herokuapp.com/updatepuntaje";
+        
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: id, puntaje: nuevoPuntaje, asistencia: nuevaAsistencia, porcentaje: nuevoPorcentaje })
+        };
+        console.log(requestOptions.body)
+        fetch(updateURL, requestOptions)
+        .then((res) => {
+            alert("Asistente modificado");
+            window.location.href = "/search";
+        })
+    };    
+    
+    return (
+        <div className="containerSearch">
+            <div className="tittleSection">
+                <div className="tittle">
+                    <h1>Buscar capacitación</h1>
+                    <input className="inputSearch"
+                        type="text"
+                        placeholder="Ingrese capacitación o asistente"
+                        onChange={(e)=> {
+                            setSearchTerms(e.target.value);
+                        }}
+                    />
+                </div>          
+            </div>
+            <div className='card'>
+                <h1>Capacitación</h1>
+                <h1>Asistente</h1>
+                <h1>Asistió</h1>
+                <h1>Nota</h1>
+                <h1>Operaciones</h1>
+            </div>
+            {busqueda.filter((val) => {
+                if(searchTerms == "") {
+                    return val
+                } else if (val.nombre.toLowerCase().includes(searchTerms.toLowerCase()) || val.nombreCapacitacion.toLowerCase().includes(searchTerms.toLowerCase()))   
+                {
+                    return val
+                }
+            }).map((val) => {
+            return (                   
+                <div key={val.id}>
+                    <div className='card' >
+                        <div className='column'>
+                            <p>{val.nombreCapacitacion}</p>
+                        </div>
+                        <div className='column'>
+                            <p>{val.nombre}</p>
+                        </div>
+                        <div className='column'>
+                            <select defaultValue={val.asistencia}
+                                onChange={(e)=>{ setNuevaAsistencia(e.target.value)}}>
+                                <option value="1">Si</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                        <div className='column'>
+                            <select 
+                                defaultValue={val.puntaje} 
+                                onChange={(e) =>{ setNuevoPuntaje(e.target.value)}}>
+                                    <option value="Seleccionar">Seleccionar</option>
+                                    <option value="No aplica">No aplica</option>
+                                    <option value="Aprobado">Aprobado</option>
+                                    <option value="Desaprobado">Desaprobado</option>
+                            </select>
+                            <p>Porcentaje de aprobación</p>
+                            <input 
+                                type="number" 
+                                onChange={(e) => {setNuevoPorcentaje(e.target.value)}} 
+                                defaultValue={val.porcentaje}>  
+                            </input>
+                        </div>
+                        <div className='column containerButtonsOperaciones'>
+                            <button 
+                                onClick={() =>{updateNuevoPuntaje(val.id)}} 
+                                className="buttonOperaciones"
+                                >
+                                Guardar
+                            </button>             
+                            <button 
+                                onClick={() =>{deleteAsistente(val.id)}} 
+                                className="buttonOperaciones"
+                                >
+                                Eliminar
+                            </button>
+                            <button 
+                                onClick={()=> {window.location.href = `/capacitaciones/`+(val.capacitacionID)}} 
+                                className="buttonOperaciones"
+                                >
+                                Detalles
+                            </button>
+
+                        </div>
+            
+                    </div>
+                </div>
+                    
+            )})}
+        </div>
+        );
+}
+
+export default Search;

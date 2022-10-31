@@ -60,7 +60,16 @@ input {
     flex-wrap: wrap;
     justify-content: space-around;
 }
-
+.campo {
+    padding: 1%;
+    background-color: white;
+    border-radius: 20px;
+    height: 30px;
+    width: 97%;
+    padding-left: 4%;
+    padding-top: 5px;
+    margin: 2%;
+}
 .bodyCapacitacionView label {
     border-radius: 20px;
     height: 30px;
@@ -77,23 +86,13 @@ input {
     padding: 3%;
     margin: 3%;  
 }
-
 .invitados {
     display: flex;
-    flex-wrap: wrap;
-    align-content: center;
-    
+    flex-direction: row;
 }
-.asistente {
-    padding: 1%;
-    background-color: white;
-    border-radius: 20px;
-    height: 100%;
-    width: 30%;
-    align-content: center;
-    margin: 1%;
+.invitados .campo {
+    padding-left: 3%;
 }
-
 .mainTittle a {
     display: flex;
     justify-content: flex-end;
@@ -104,16 +103,3 @@ input {
     justify-content: space-around;
 }
 
-.button {
-    border-radius: 20px;
-    height: 30px;
-    width: 30%;
-    background-color: #A8D6FF;
-    color: black;
-    border-color: #A8D6FF;
-    border-style: none;
-    margin: 1%;
-    align-self: flex-end;
-    font-size: 20px;
-    text-align: center;
-}

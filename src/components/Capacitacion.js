@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom'
 import './styles/Capacitacion.css';
 import { IoEyeOutline } from 'react-icons/io5';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
-
+import moment from 'moment';
 
 function Capacitacion() {
-
+    moment.locale('es')
     const  [capacitaciones, setCapacitaciones ] = useState([]);
     useEffect(() => {
         let url = "https://capacitacionesiselin.herokuapp.com/capacitaciones";
@@ -16,6 +16,10 @@ function Capacitacion() {
             return res.json();
         })
         .then(data => {
+                data.map((elem) => {
+                  return elem.fecha = new Date(elem.fecha)
+                })
+                data.sort(function (a, b) { return a.fecha - b.fecha })
             setCapacitaciones(data);
         })
     }, []);
@@ -24,12 +28,12 @@ function Capacitacion() {
         <React.Fragment>
             <div className='mainContainer'>
                 {capacitaciones && <h1 className='mainTittle'>Proximas Capacitaciones</h1>}
-                    
-                    {capacitaciones.map((capacitaciones) => (
+
+                     {capacitaciones.map((capacitaciones) => (
                           <Link to={`/capacitaciones/${capacitaciones.idcapacitacion}`} key={ capacitaciones.idcapacitacion}>
                             <div className='card'>
                                     <div className='dateContainer'>
-                                        <p> { capacitaciones.fecha } </p>
+                                        <p> {moment(capacitaciones.fecha).format('L')} </p>
                                     </div>
                                     <div className='nameContainer'>
                                         <p> { capacitaciones.nombre } </p>
@@ -40,7 +44,8 @@ function Capacitacion() {
                             </div>
                         </Link>
                        
-                     ))}
+                     ))
+                     }
                     
                 <div className='buttonContainer'>
                     <a className='addButton' href='/nuevaCapacitacion'>

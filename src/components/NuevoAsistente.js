@@ -13,7 +13,7 @@ function NuevoAsistente () {
         dni : "",
         cargo : "",
         sector : "",
-        fechaingreso : ""
+        fechaingreso : new Date()
     });
     
     const handleChange = (e) => {

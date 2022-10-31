@@ -49,6 +49,7 @@
     padding-left: 3%;
     margin: 7px;
     border-style: none;
+    max-width: 100%;
 
 }
 .bodyCapacitacion button {
@@ -77,6 +78,7 @@
 .select {
     width: 30%;
     padding: 1%;
+    margin: 7px;
     
 }
 .multiselect {

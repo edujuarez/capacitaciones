@@ -120,5 +120,19 @@ label {
 .buttonsAsistentes {
     display: flex;
     justify-content: space-around;
+    width: 100%;
 }
+.buttonLink{
+    border-radius: 20px;
+    height: 30px;
+    width: 30%;
+    background-color: #A8D6FF;
+    color:black;
+    border-color: #A8D6FF;
+    border-style: none;
+    margin: 1%;
 
+}
+.buttonLink button {
+    align-items: center;
+}

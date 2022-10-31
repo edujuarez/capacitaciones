@@ -10,6 +10,11 @@ import Capacitacion from './Capacitacion';
 import AsistenteView from './AsistenteView';
 import AsistenteEdit from './AsistenteEdit';
 import Login from './Login';
+import AddAsistentes from './AddAsistentes';
+import Search from './Search';
+import certification from './certification';
+import PuntajeEdit from './PuntajeEdit';
+import Informes from './Informes';
 
 function App() {
   const user = 'Usuario';
@@ -33,7 +38,11 @@ function App() {
             <Route exact path="/capacitaciones/:idcapacitacion" component={CapacitacionView} />
             <Route exact path='/asistentes/:idasistente' component={AsistenteView}/>
             <Route exact path='/asistentes/:idasistente/edit' component={AsistenteEdit}/>
-            
+            <Route exact path="/addasistentes/:idcapacitacion" component={AddAsistentes}/>
+            <Route exact path="/search" component={Search}/>
+            <Route exact path="/certification/:idcapacitacion" component={certification}/>
+            <Route exact path="/informes" component={Informes}/>
+            <Route exact path="/asistencia/:idasistencia" component={PuntajeEdit}/>
         </Switch>
       </Layout>
     </BrowserRouter>

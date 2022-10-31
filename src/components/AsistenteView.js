@@ -49,7 +49,7 @@ function NuevoAsistente () {
                     {asistente.map((asistente) => (
                     <form className='bodyAsistente_asistenteView' key={asistente.idasistente}>
                         <label>Nombre:</label>
-                        <p className='campo'className='campo'  name='nombre' >{asistente.nombre}</p>
+                        <p className='campo' name='nombre' >{asistente.nombre}</p>
                         <label>Legajo:</label>
                         <p className='campo' name='legajo' >{asistente.legajo}</p>
                         <label>Tipo de documento:</label>
@@ -63,8 +63,8 @@ function NuevoAsistente () {
                         <label>Fecha de Ingreso:</label>
                         <p className='campo' name='fechaingreso' >{asistente.fechaingreso}</p>
                         <section className='buttonsAsistentes'>
-                        <Link to={`/asistentes/${asistente.idasistente}/edit`}>
-                            <button>Editar</button> </Link>
+                        <Link  className='buttonLink' to={`/asistentes/${asistente.idasistente}/edit`}>
+                            <button className=''>Editar</button> </Link>
                             <button onClick={() => {deleteSubmit(asistente.idasistente)}}>Eliminar</button>
                         </section>
                     </form>
