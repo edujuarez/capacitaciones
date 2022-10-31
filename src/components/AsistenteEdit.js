@@ -72,7 +72,7 @@ function AsistenteEdit () {
                     {asistente.map((asistente) => (
                     <form className='bodyAsistenteEdit' onSubmit={handleUpdateSubmit} key={asistente.idasistente}>
                         <label>Nombre:</label>
-                        <input  type='text'  name='nombre'  onChange={handleEditChange}/>
+                        <input  type='text'  name='nombre' value={asistente.nombre} onChange={handleEditChange}/>
                         <label>Legajo:</label>
                         <input  type='text'  name='legajo' value={asistente.legajo} onChange={handleEditChange}/>
                         <label>Tipo de documento:</label>

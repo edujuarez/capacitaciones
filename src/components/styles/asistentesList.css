@@ -1,6 +1,6 @@
 
 .containerAsistente {
-    width: 85%;
+    width: 90%;
     min-width: 600px;
     padding: 3%;
     display: flex;
@@ -36,6 +36,7 @@
     padding: 2%;
     font-weight: lighter;
     justify-content: center;
+    font-size: medium;
     
 }
 
@@ -62,7 +63,7 @@
     align-items: center!important;
     justify-content: space-around!important;
     height: 125px;
-    font-size: 36px;
+    font-size: 30px;
     font-weight: lighter;
     margin-bottom: 5px;
 }

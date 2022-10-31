@@ -10,7 +10,9 @@ import './styles/nuevaCapacitacionForm.css';
 </style> 
 
 function  NuevaCapacitacionForm(){
-        
+    
+        const [selectedItems, setItems] = useState("");
+
         const [asistentes, setAsistentes] = useState([]);
             useEffect(() => {
                 fetch("https://capacitacionesiselin.herokuapp.com/asistente")
@@ -40,8 +42,8 @@ function  NuevaCapacitacionForm(){
             })
         }
         const capacitacionURL = "https://capacitacionesiselin.herokuapp.com/capacitaciones/nuevo"
+        const asistentesURL = "https://capacitacionesiselin.herokuapp.com/cronograma/nuevo"
         const handleSubmit = (e) => {
-            console.log(`${value.fecha}`)
             e.preventDefault();
             axios.post(capacitacionURL, {
                 nombre : `${value.nombre}`,
@@ -52,17 +54,33 @@ function  NuevaCapacitacionForm(){
                 plan : `${value.plan}`,
                 material : `${value.material}`,
                 observaciones : `${value.observaciones}`,
-                asistentes : asistentesOptions
+                asistentes : selectedItems
             }).then (() => {
                 alert([`La capacitacion ${value.nombre} fue creada correctamente!`]);
                 
             })
+            /*axios.post(asistentesURL, {
+                nombre : `${value.nombre}`,
+                idnombre : `${value.temario}`,
+                asistentes.map((asistentes) => (
+                    idasistente = asistentes.legajo
+                   ))
+                
+                
+                idasistente : `${value.tipo}`,
+            })*/
         }
         const asistentesOptions = asistentes.map((asistentes) => (
-         asistentes.nombre
+         asistentes.legajo + " - " + asistentes.nombre
         ))
 
-        return (
+        function onSelect(e) {
+            setItems(...selectedItems, e)
+            console.log(selectedItems)
+        }
+
+        
+       return (
             <React.Fragment>
                 <div className='container_nuevaCapacitacion'>
                     <div className='mainTittle'>
@@ -76,7 +94,8 @@ function  NuevaCapacitacionForm(){
                         <div className='selectContainer'>
                             <div className='select'>
                                 <label>Tipo:</label>
-                                <select name='tipo' forms='typeform' onChange={handleChange}>
+                                <select name='tipo' forms='typeform' onChange={handleChange} >
+                                    <option value='Seleccionar'>Seleccionar</option>
                                     <option value='Desarrollo'>Desarrollo</option>
                                     <option value='Preventiva'>Preventiva</option>
                                     <option value='Correctiva'>Correctiva</option>
@@ -84,7 +103,8 @@ function  NuevaCapacitacionForm(){
                             </div>                        
                             <div className='select'>
                                 <label>Certificacion:</label>
-                                <select name='certificacion' forms='typeform' onChange={handleChange}>
+                                <select name='certificacion' forms='typeform' onChange={handleChange} >
+                                    <option value='Seleccionar'>Seleccionar</option>
                                     <option value='Si'>Si</option>
                                     <option value='No'>No</option>
                                 </select>
@@ -95,7 +115,8 @@ function  NuevaCapacitacionForm(){
                             </div>
                             <div className='select'>
                                 <label>Plan:</label>
-                                <select name='plan' forms='typeform' onChange={handleChange}>
+                                <select name='plan' forms='typeform' onChange={handleChange} >
+                                    <option value='Seleccionar'>Seleccionar</option>
                                     <option value='Si'>General</option>
                                     <option value='HyS'>Higiene y Seguridad</option>
                                     <option value='Otro'>Otro</option>
@@ -103,7 +124,8 @@ function  NuevaCapacitacionForm(){
                             </div>
                             <div className='select'>
                                 <label>Entrega de material:</label>
-                                <select name='material' forms='typeform' onChange={handleChange}>
+                                <select name='material' forms='typeform' onChange={handleChange} >
+                                    <option value='Seleccionar'>Seleccionar</option>
                                     <option value='Si'>Si</option>
                                     <option value='No'>No</option>
                                 </select> 
@@ -114,15 +136,15 @@ function  NuevaCapacitacionForm(){
                         <div className="multiselect">
                             <label>Asistentes</label>
                             <Multiselect
+                                name="selectedAsistentes"
                                 options={asistentesOptions} // Options to display in the dropdown
-                                onSelect={(e) => {console.log(e)}} // Function will trigger on select event
+                                onSelect={(e) => {onSelect(e)}} // Function will trigger on select event
                                 onRemove={(e) => {console.log(e)}} // Function will trigger on remove event
                                 displayValue="name" // Property name to display in the dropdown options
                                 isObject={false}
-                                name='asistentes'
-                                
                             />
                         </div>
+
                         <button type="submit" onClick={handleSubmit}>Guardar</button>     
                     </form>
                    

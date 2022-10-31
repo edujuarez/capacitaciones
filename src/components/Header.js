@@ -12,7 +12,7 @@ class Header extends React.Component {
                     <img src={logo} alt="Logo" />
                 </div>
                 <div className='title'>
-                    <h1>Capacitaciones Iselin</h1>
+                    <h1>Capacitaciones Iselín</h1>
                 </div>
                 <a href="#" className='exitContainer'>
                     <div>

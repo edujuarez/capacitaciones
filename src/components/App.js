@@ -5,7 +5,7 @@ import Layout from './Layout';
 import NuevaCapacitacionForm from './NuevaCapacitacionForm';
 import NuevoAsistente from './NuevoAsistente';
 import AsistentesList from './AsistentesList';
-import CapacitacionView from './CapacitacionView';
+import CapacitacionView from './capacitacionView';
 import Capacitacion from './Capacitacion';
 import AsistenteView from './AsistenteView';
 import AsistenteEdit from './AsistenteEdit';

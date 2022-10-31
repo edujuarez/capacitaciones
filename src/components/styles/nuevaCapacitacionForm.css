@@ -80,15 +80,14 @@
     
 }
 .multiselect {
-    width: 30%;
     padding: 1%;
     min-width: 320px;
-    width: 400px;
+    width: 100%;
     height: 100%;
     
 }
 .multiselect select {
-    width: 50%;
+    width: 100%;
     padding: 1%;
     min-width: 320px;
     width: 400px;

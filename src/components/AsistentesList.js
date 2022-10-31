@@ -3,8 +3,7 @@ import { useState, Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import './styles/asistentesList.css';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
-import { IoEyeOutline,  } from 'react-icons/io5';
-import { AiOutlineDelete } from 'react-icons/ai'
+
 
 
 

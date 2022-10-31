@@ -24,8 +24,9 @@ function Capacitacion() {
         <React.Fragment>
             <div className='mainContainer'>
                 {capacitaciones && <h1 className='mainTittle'>Proximas Capacitaciones</h1>}
+                    
                     {capacitaciones.map((capacitaciones) => (
-                        <Link to={`/capacitaciones/${capacitaciones.idcapacitacion}`} key={ capacitaciones.idcapacitacion}>
+                          <Link to={`/capacitaciones/${capacitaciones.idcapacitacion}`} key={ capacitaciones.idcapacitacion}>
                             <div className='card'>
                                     <div className='dateContainer'>
                                         <p> { capacitaciones.fecha } </p>
@@ -38,7 +39,8 @@ function Capacitacion() {
                                     </div>
                             </div>
                         </Link>
-                ))}
+                       
+                     ))}
                     
                 <div className='buttonContainer'>
                     <a className='addButton' href='/nuevaCapacitacion'>
