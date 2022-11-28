@@ -13,7 +13,7 @@ function NuevoAsistente () {
 
     const  [asistente, setAsistente ] = useState([]);
     useEffect(() => {
-        let url = `https://capacitacionesiselin.herokuapp.com/asistente/${idasistente}`;
+        let url = `https://servercapacitaciones-production.up.railway.app/asistente/${idasistente}`;
         fetch(url)
         .then(res => {
             return res.json();
@@ -24,7 +24,7 @@ function NuevoAsistente () {
     }, []);
 
         const deleteSubmit = (asistenteID) => {
-            let deleteURL = `https://capacitacionesiselin.herokuapp.com/asistente/${asistenteID}/delete`
+            let deleteURL = `https://servercapacitaciones-production.up.railway.app/asistente/${asistenteID}/delete`
             axios.delete(deleteURL)
             .then(response => {
                 if(response.data != null) {

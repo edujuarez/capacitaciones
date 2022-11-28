@@ -30,7 +30,7 @@ function AddAsistentes(){
             'temario' : "",
             'tipo' : ""
 }]);
-    let url = `https://capacitacionesiselin.herokuapp.com/capacitaciones/${idcapacitacion}`;
+    let url = `https://servercapacitaciones-production.up.railway.app/capacitaciones/${idcapacitacion}`;
     useEffect(() => {
         fetch(url)
         .then(res => {
@@ -47,7 +47,7 @@ function AddAsistentes(){
     const [selectedValues, setSelectedValues] = useState([]);
 
     useEffect(() => {
-        fetch(`https://capacitacionesiselin.herokuapp.com/addasistentes/${idcapacitacion}`)
+        fetch(`https://servercapacitaciones-production.up.railway.app/addasistentes/${idcapacitacion}`)
         .then(res => {
             return res.json();
         })
@@ -62,7 +62,7 @@ function AddAsistentes(){
     const [asistentes, setAsistentes] = useState([]);
 
     useEffect(() => {
-        fetch("https://capacitacionesiselin.herokuapp.com/asistente")
+        fetch("https://servercapacitaciones-production.up.railway.app/asistente")
         .then(res => {
             return res.json();
         })
@@ -96,7 +96,7 @@ function AddAsistentes(){
         console.log(removedItems)
     }
     
-    const addAsistentesURL = "https://capacitacionesiselin.herokuapp.com/addasistentes"
+    const addAsistentesURL = "https://servercapacitaciones-production.up.railway.app/addasistentes"
     const handleSubmit = (e) => {
         e.preventDefault();
         axios.post(addAsistentesURL, selectedItems).then (() => {

@@ -10,7 +10,7 @@ function Capacitacion() {
     moment.locale('es')
     const  [capacitaciones, setCapacitaciones ] = useState([]);
     useEffect(() => {
-        let url = "https://capacitacionesiselin.herokuapp.com/capacitaciones";
+        let url = "https://servercapacitaciones-production.up.railway.app/capacitaciones";
         fetch(url)
         .then(res => {
             return res.json();

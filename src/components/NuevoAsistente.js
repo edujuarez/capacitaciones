@@ -22,7 +22,7 @@ function NuevoAsistente () {
             [e.target.name]: e.target.value
         })
     }
-    const baseURL = "https://capacitacionesiselin.herokuapp.com/asistente/nuevo"
+    const baseURL = "https://servercapacitaciones-production.up.railway.app/asistente/nuevo"
     const handleSubmit = (e) => {
         e.preventDefault();
 

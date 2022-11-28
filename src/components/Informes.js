@@ -4,37 +4,33 @@ import { useState, Fragment, useEffect, useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
 import { BsSearch } from 'react-icons/bs';
 import moment from 'moment';
+import 'moment/locale/es';
+
 
 
 function Informes() {
-    moment().locale('es')
+    moment.locale('es')
     //Inicializo states de busqueda
     const [busqueda, setBusqueda] = useState([]);
     const [searchTerms, setSearchTerms] = useState("");
 
-    //fetcheamos los asistentes y capacitaciones
+    //fetcheamos TODOS los asistentes y capacitaciones y ordenamos por fecha
     useEffect(() => {
-        fetch("https://capacitacionesiselin.herokuapp.com/asistentes")
+        fetch("https://servercapacitaciones-production.up.railway.app/asistentes")
         .then(res => {
             return res.json();
         })
         .then(data => {
             data.map((elem) => {
-              return elem.fecha = new Date(elem.fecha)
+              return elem.fecha = moment(elem.fecha).format('L')
             })
             data.sort(function (a, b) { return a.fecha - b.fecha })
             setBusqueda(data);
     }, [])});
-    const ordenar = () => {
-        busqueda.map((elem) => {
-            return elem.fecha - new Date(elem.fecha)
-        })
-        busqueda.sort(function( a, b) { return a.fecha - b.fecha})
-    }
-
+    
     const  [capacitaciones, setCapacitaciones ] = useState([]);
     useEffect(() => {
-        let url = "https://capacitacionesiselin.herokuapp.com/capacitaciones";
+        let url = "https://servercapacitaciones-production.up.railway.app/capacitaciones";
         fetch(url)
         .then(res => {
             return res.json();
@@ -56,7 +52,7 @@ function Informes() {
                 if(date == ""){
                     return setFechaDesde("")
                 }
-                console.log("HASTA " + date)
+                console.log("HASTA " + moment(date).format('L'))
                 let newDate = new Date(`${date}T00:00:00`)
 
                 return  setFechaHasta(newDate.toLocaleDateString())
@@ -67,7 +63,7 @@ function Informes() {
             if(date == ""){
                 return setFechaDesde("")
             }
-            console.log("DESDE " + date)
+            console.log("DESDE " + moment(date).format('L'))
             let newDate2 = new Date(`${date}T00:00:00`)
 
             return setFechaDesde (newDate2.toLocaleDateString())
@@ -76,11 +72,12 @@ function Informes() {
         const handleSearch = () => {
             console.log(fechaDesde)
             if (fechaDesde !== "" && fechaHasta !== "" ){
-                console.log("if adentro")
+                console.log("if adentro " + fechaDesde)
                 busqueda.filter(
                     function (a)
                     {
-                        return console.log((a.fecha) > fechaDesde && (a.fecha) < fechaHasta)
+                        result = a.some(moment(a.fecha).format('L') == moment(fechaDesde).format('L'))
+                        return console.log(result)
                     });
             }
             else{
@@ -124,21 +121,22 @@ function Informes() {
                         </div>
                         <button className='buttonSearch' type="" onClick={handleSearch}>
                             <BsSearch /> Buscar
-                        </button>                 
+                        </button>
                 </div>
                    
                 <section ref={componentRef}>
                     <div className='tittleSection'>
                         <h1>Informe de capacitaciones</h1>
                     </div>
-                    <table >
+                    <table border="2">
                         <thead>
                             <tr>
                                 <th>Fecha</th>
                                 <th>Capacitación</th>
                                 <th>Apellido y nombre</th>
                                 <th>Asistió</th>
-                                <th>Nota</th> 
+                                <th>Nota</th>
+                                <th>Porcentaje</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -157,6 +155,7 @@ function Informes() {
                                         <td>{val.nombre}</td>
                                         <td>{val.asistencia=="1" ? "Si": "No"}</td>
                                         <td>{val.puntaje}</td>
+                                        <td>{val.porcentaje}%</td>
                                     </tr>
                                     
                                 )})}             

@@ -16,7 +16,7 @@ function CapacitacionView() {
     //Trae datos de la capacitacion solicitada
     const  [capacitacion, setCapacitacion ] = useState([]);
     useEffect(() => {
-        let url = `https://capacitacionesiselin.herokuapp.com/capacitaciones/${idcapacitacion}`;
+        let url = `https://servercapacitaciones-production.up.railway.app/capacitaciones/${idcapacitacion}`;
         fetch(url)
         .then(res => {
             return res.json();
@@ -28,7 +28,7 @@ function CapacitacionView() {
 
     //Elimina capacitacion
     const deleteCapacitacion = (idcapacitacion) => {
-       let deleteURL = `https://capacitacionesiselin.herokuapp.com/deletecapacitacion`
+       let deleteURL = `https://servercapacitaciones-production.up.railway.app/deletecapacitacion`
        const requestOptions = {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -45,7 +45,7 @@ function CapacitacionView() {
     //Trae las asistencias que matchean con la capacitacion
     const  [asistentesList, setAsistentesList ] = useState([]);
     useEffect(() => {
-        let urlAsistentesList = `https://capacitacionesiselin.herokuapp.com/addasistentes/${idcapacitacion}`;
+        let urlAsistentesList = `https://servercapacitaciones-production.up.railway.app/addasistentes/${idcapacitacion}`;
         fetch(urlAsistentesList)
         .then(res => {
             return res.json();

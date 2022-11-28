@@ -16,7 +16,7 @@ function  NuevaCapacitacionForm(){
         moment().format('L');
         const [asistentes, setAsistentes] = useState([]);
             useEffect(() => {
-                fetch("https://capacitacionesiselin.herokuapp.com/asistente")
+                fetch("https://servercapacitaciones-production.up.railway.app/asistente")
                 .then(res => {
                     return res.json();
                 })
@@ -40,7 +40,7 @@ function  NuevaCapacitacionForm(){
 
         const  [capacitaciones, setCapacitaciones ] = useState([]);
         useEffect(() => {
-            let url = "https://capacitacionesiselin.herokuapp.com/capacitaciones";
+            let url = "https://servercapacitaciones-production.up.railway.app/capacitaciones";
             fetch(url)
             .then(res => {
                 return res.json();
@@ -56,7 +56,7 @@ function  NuevaCapacitacionForm(){
                 [e.target.name]: e.target.value
             })
         }
-        const capacitacionURL = "https://capacitacionesiselin.herokuapp.com/capacitaciones/nuevo"
+        const capacitacionURL = "https://servercapacitaciones-production.up.railway.app/capacitaciones/nuevo"
         const handleSubmit = (e) => {
             e.preventDefault();
             axios.post(capacitacionURL, {

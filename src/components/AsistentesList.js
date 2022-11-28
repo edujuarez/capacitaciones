@@ -16,7 +16,7 @@ function AsistentesList() {
     const [searchTerms, setSearchTerms] = useState("");
 
     useEffect(() => {
-        fetch("https://capacitacionesiselin.herokuapp.com/asistente")
+        fetch("https://servercapacitaciones-production.up.railway.app/asistente")
         .then(res => {
             return res.json();
         })

@@ -31,7 +31,7 @@ function AsistenteEdit () {
         })}
 
     useEffect(() => {
-        let url = `https://capacitacionesiselin.herokuapp.com/asistente/${idasistente}`;
+        let url = `https://servercapacitaciones-production.up.railway.app/asistente/${idasistente}`;
         fetch(url)
         .then(res => res.json())        
         .then(data => setAsistente(data))
@@ -40,7 +40,7 @@ function AsistenteEdit () {
     
     const updateAsistente = (idasistente) => {
         e.preventDefault();
-        let updateURL = `https://capacitacionesiselin.herokuapp.com/asistente/${idasistente}/edit`;
+        let updateURL = `https://servercapacitaciones-production.up.railway.app/asistente/${idasistente}/edit`;
         const requestOptions = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
@@ -58,7 +58,7 @@ function AsistenteEdit () {
         fetch(updateURL, requestOptions)
         .then((res) => {
             alert("Asistente modificado correctamente");
-            window.location.href = `https://capacitacionesiselin.herokuapp.com/asistente/${idasistente}`;
+            window.location.href = `https://servercapacitaciones-production.up.railway.app/asistente/${idasistente}`;
         })
     }
 

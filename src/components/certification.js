@@ -13,7 +13,7 @@ function Certification() {
     const  [valores, setValores ] = useState([
     ]);
     useEffect(() => {
-        let urlValores = `https://capacitacionesiselin.herokuapp.com/addasistentes/${idcapacitacion}`;
+        let urlValores = `https://servercapacitaciones-production.up.railway.app/addasistentes/${idcapacitacion}`;
         fetch(urlValores)
         .then(res => {
             return res.json();
@@ -25,7 +25,7 @@ function Certification() {
         //Trae datos de la capacitacion solicitada
         const  [datosCapacitacion, setdatosCapacitacion ] = useState([]);
         useEffect(() => {
-            let url = `https://capacitacionesiselin.herokuapp.com/capacitaciones/${idcapacitacion}`;
+            let url = `https://servercapacitaciones-production.up.railway.app/capacitaciones/${idcapacitacion}`;
             fetch(url)
             .then(res => {
                 return res.json();

@@ -12,7 +12,7 @@ function Search() {
     const [nuevoPorcentaje, setNuevoPorcentaje] = useState("");
 
     useEffect(() => {
-        fetch("https://capacitacionesiselin.herokuapp.com/asistentes")
+        fetch("https://servercapacitaciones-production.up.railway.app/asistentes")
         .then(res => {
             return res.json();
         })
@@ -23,7 +23,7 @@ function Search() {
 
     const  [capacitaciones, setCapacitaciones ] = useState([]);
     useEffect(() => {
-        let url = "https://capacitacionesiselin.herokuapp.com/capacitaciones";
+        let url = "https://servercapacitaciones-production.up.railway.app/capacitaciones";
         fetch(url)
         .then(res => {
             return res.json();
@@ -35,7 +35,7 @@ function Search() {
 
     //Elimina asistente de la lista
     const deleteAsistente = (id) => {
-        let deleteURL = "https://capacitacionesiselin.herokuapp.com/deleteasistente"
+        let deleteURL = "https://servercapacitaciones-production.up.railway.app/deleteasistente"
         const requestOptions = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
@@ -51,7 +51,7 @@ function Search() {
 
     //edita los valores de puntaje
     const updateNuevoPuntaje = (id) => {
-        let updateURL = "https://capacitacionesiselin.herokuapp.com/updatepuntaje";
+        let updateURL = "https://servercapacitaciones-production.up.railway.app/updatepuntaje";
         
         const requestOptions = {
             method: 'PUT',
@@ -61,6 +61,7 @@ function Search() {
         console.log(requestOptions.body)
         fetch(updateURL, requestOptions)
         .then((res) => {
+            console.log(requestOptions)
             alert("Asistente modificado");
             window.location.href = "/search";
         })
