@@ -108,6 +108,7 @@ function Search() {
                         <div className='column'>
                             <select defaultValue={val.asistencia}
                                 onChange={(e)=>{ setNuevaAsistencia(e.target.value)}}>
+                                <option value="">Seleccionar</option>
                                 <option value="1">Si</option>
                                 <option value="0">No</option>
                             </select>

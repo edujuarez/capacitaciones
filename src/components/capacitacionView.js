@@ -3,7 +3,8 @@ import { useState, useEffect, Fragment } from "react";
 import './styles/capacitacionView.css';
 import { Link, useParams } from "react-router-dom";
 import axios from 'axios';
-
+import moment from 'moment';
+import 'moment/locale/es';
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;300&display=swap');
@@ -84,7 +85,7 @@ function CapacitacionView() {
                         </div>
                         <div className='select'>
                             <label>Fecha:</label>
-                            <p className='campo'>{ capacitacion.fecha }</p>
+                            <p className='campo'>{moment(capacitacion.fecha).format('L') }</p>
                         </div>
                         <div className='select'>
                             <label>Plan:</label>
@@ -97,6 +98,10 @@ function CapacitacionView() {
                         <div className='select'>
                                 <label>Duración:</label>
                                 <p className="campo">{capacitacion.duracion} hs</p> 
+                        </div>
+                        <div className='select'>
+                                <label>ID:</label>
+                                <p className="campo">{capacitacion.idinterno}</p> 
                         </div>
                         <div className='select'>
                             <label>Modalidad:</label>

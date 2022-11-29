@@ -15,6 +15,7 @@ import Search from './Search';
 import certification from './certification';
 import PuntajeEdit from './PuntajeEdit';
 import Informes from './Informes';
+import Historial from './Historial';
 
 function App() {
   const user = 'Usuario';
@@ -43,6 +44,7 @@ function App() {
             <Route exact path="/certification/:idcapacitacion" component={certification}/>
             <Route exact path="/informes" component={Informes}/>
             <Route exact path="/asistencia/:idasistencia" component={PuntajeEdit}/>
+            <Route exact path="/historial" component={Historial} />
         </Switch>
       </Layout>
     </BrowserRouter>

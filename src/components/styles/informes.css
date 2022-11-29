@@ -37,11 +37,14 @@ section table {
     display: column;
     width: 100%;
 }
-
-table {
-    
+.searchBox {
+    display: flex;
+    width: 100%;
 }
-
+.searchBox .tittleInformes {
+min-width: 300px;
+padding: 10px;
+}
 tr {
     text-align: justify;
     padding: 5px;

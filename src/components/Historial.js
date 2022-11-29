@@ -1,5 +1,5 @@
 import { React } from 'react';
-import './styles/informes.css';
+import './styles/historial.css';
 import { useState, Fragment, useEffect, useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
 import { BsSearch } from 'react-icons/bs';
@@ -8,7 +8,7 @@ import 'moment/locale/es';
 
 
 
-function Informes() {
+function Historial() {
     moment.locale('es')
     //Inicializo states de busqueda
     const [busqueda, setBusqueda] = useState([]);
@@ -68,7 +68,6 @@ function Informes() {
 
             return setFechaDesde (newDate2.toLocaleDateString())
         } 
-        
         const handleSearch = () => {
             console.log(fechaDesde)
             if (fechaDesde !== "" && fechaHasta !== "" ){
@@ -92,11 +91,11 @@ function Informes() {
             <div className='containerInformes'>
                 <div className='tittleSectionInformes'>
                     <div className='tittleInformes'>
-                        <h1>Generar informe de asistencia</h1>
+                        <h1>Buscar historial de capacitaciones</h1>
                         <input
                             className='inputInformes'
                             type="text"
-                            placeholder="Ingrese asistente a buscar"
+                            placeholder="Ingrese capacitación a buscar"
                             onChange={(e) => {
                                 setSearchTerms(e.target.value)
                             }}
@@ -122,7 +121,6 @@ function Informes() {
                                 />                               
                         </div>
                 </div>
-                    
                         <button className='buttonSearch' type="" onClick={handleSearch}>
                             <BsSearch /> Buscar
                         </button>
@@ -135,8 +133,9 @@ function Informes() {
                     <table border="1">
                         <thead>
                             <tr>
-                                <th>Legajo</th>
-                                <th>Apellido y nombre</th>
+                                <th>Id</th>
+                                <th>Fecha</th>
+                                <th>Capacitación</th>
                                 <th>Asistió</th>
                                 <th>Nota</th>
                                 <th>Porcentaje</th>
@@ -153,8 +152,9 @@ function Informes() {
                             }).map((val) => {
                                 return (
                                     <tr key={val.id}>
-                                        <td>{val.legajo}</td>
-                                        <td>{val.nombre}</td>
+                                        <td>{val.idinterno}</td>
+                                        <td>{val.fecha/*moment(val.fecha).format('L')*/} </td>
+                                        <td>{val.nombreCapacitacion}</td>
                                         <td>{val.asistencia=="1" ? "Si": "No"}</td>
                                         <td>{val.puntaje}</td>
                                         <td>{val.porcentaje}%</td>
@@ -177,4 +177,4 @@ function Informes() {
 
     )
 }
-export default Informes;
+export default Historial;
