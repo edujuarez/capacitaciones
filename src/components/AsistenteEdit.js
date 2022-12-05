@@ -13,46 +13,38 @@ function AsistenteEdit () {
     const params = useParams();
     let idasistente = params.idasistente;
 
-    const [name, setName] = useState([]);
-    const [asistente, setAsistente ] = useState([]);
-    const [value, setValue] = useState({
+    const [asistente, setAsistente ] = useState({
         nombre : "",
         legajo : "",
         tipodoc : "",
         dni : "",
         cargo : "",
         sector : "",
-        fecha : new Date()
+        fechaingreso: new Date()
     })
-    const handleChange = (e) => {
-        setValue({
-            ...value,
-            [e.target.name]: e.target.value
-        })}
+    const handleChange = (event) => {
+        // Obtener el valor del campo de formulario en el que se produjo el cambio
+        const value = event.target.value;
+    
+        // Modificar el valor de la variable asistente mediante la función setAsistente
+        setAsistente(value);
+      };
 
     useEffect(() => {
         let url = `https://servercapacitaciones-production.up.railway.app/asistente/${idasistente}`;
         fetch(url)
         .then(res => res.json())        
-        .then(data => setAsistente(data))
+        .then(data => setAsistente(data[0]))
     }, []);
 
-    
+    console.log(asistente)
     const updateAsistente = (idasistente) => {
         e.preventDefault();
         let updateURL = `https://servercapacitaciones-production.up.railway.app/asistente/${idasistente}/edit`;
         const requestOptions = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                nombre : `${value.nombre}`,
-                legajo : `${value.legajo}`,
-                tipodoc : `${value.tipodoc}`,
-                dni : `${value.dni}`,
-                cargo : `${value.cargo}`,
-                sector : `${value.sector}`,
-                fecha : new Date (`${value.fecha}`)
-            })
+            body: JSON.stringify(asistente[0])
         };
         console.log(requestOptions.body)
         fetch(updateURL, requestOptions)
@@ -71,37 +63,35 @@ function AsistenteEdit () {
                         <h1>Editar Asistente </h1>
                         <h1><a type='submit' href='/asistentes'>Volver</a> </h1>
                     </div>
-                    {asistente.map((asistente) => (
-                    <form className='bodyAsistenteEdit' key={asistente.idasistente} type='submit'>
+                    <form className='bodyAsistenteEdit'  type='submit'>
                         
                         <label>Nombre:</label>
                         <input  
                             type='text'  
                             name='nombre'
-                            defaultValue={asistente.nombre}
-                            placeholder={asistente.nombre} 
+                            value={asistente.nombre}
                             onChange={handleChange}
                         />
                         
                         <label>Legajo:</label>
-                        <input  type='text'  name='legajo' defaultValue={asistente.legajo} onChange={handleChange}/>
+                        <input  type='text'  name='legajo' value={asistente.legajo} onChange={handleChange}/>
                         <label>Tipo de documento:</label>
-                        <input  type='text'  name='tipodoc' defaultValue={asistente.tipodoc} onChange={handleChange}/>
+                        <input  type='text'  name='tipodoc' value={asistente.tipodoc} onChange={handleChange}/>
                         <label>DNI:</label>
-                        <input  type='text'  name='dni' defaultValue={asistente.dni}  onChange={handleChange}/>
+                        <input  type='text'  name='dni' value={asistente.dni}  onChange={handleChange}/>
                         <label>Cargo:</label>
-                        <input  type='text'  name='cargo' defaultValue={asistente.cargo}  onChange={handleChange}/>
+                        <input  type='text'  name='cargo' value={asistente.cargo}  onChange={handleChange}/>
                         <label>Sector:</label>
-                        <input  type='text'  name='sector' defaultValue={asistente.sector}  onChange={handleChange}/>
+                        <input  type='text'  name='sector' value={asistente.sector}  onChange={handleChange}/>
                         <label>Fecha de Ingreso:</label>
-                        <input  type='date'  name='fechaingreso' defaultValue={asistente.fecha}/>
+                        <input  type='date'  name='fechaingreso' value={asistente.fechaingreso} onChange={handleChange}/>
                         <button
                             onClick={(e)=> {updateAsistente(asistente.idasistente)}}
                             > 
                             Guardar
                         </button>
                     </form>
-                ))}
+
                 </div>
             </React.Fragment>
         )}

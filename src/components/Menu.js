@@ -26,11 +26,11 @@ class Menu extends React.Component {
                 </a>
                 <a className='SubMenu' href="/informes">
                     <CgNotes className='icon'/>
-                    <h1>Informes</h1>
+                    <h1>Informe de capacitación</h1>
                 </a>
                 <a className='SubMenu' href="/historial">
                     <CgNotes className='icon'/>
-                    <h1>Historial</h1>
+                    <h1>Historial por empleado</h1>
                 </a>
                 <a className='SubMenu' href="/Search">
                     <BsSearch  className='icon'/>

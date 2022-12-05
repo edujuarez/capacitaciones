@@ -35,9 +35,7 @@ function  NuevaCapacitacionForm(){
             material : "",
             observaciones : "",
             modalidad: "",
-            eliminado : 0,
-            idinterno: 0
-
+            eliminado : 0
         });
 
         const  [capacitaciones, setCapacitaciones ] = useState([]);
@@ -73,9 +71,8 @@ function  NuevaCapacitacionForm(){
                 observaciones : `${value.observaciones}`,
                 duracion : `${value.duracion}`,
                 modalidad: `${value.modalidad}`,
-                eliminado : 0,
-                idinterno: `${value.idinterno}`
-            }).then (() => {                
+                eliminado : 0
+                }).then (() => {                
                 alert([`La capacitacion ${value.nombre} fue creada correctamente!`]);
                 window.location.href = "/capacitacion";
                 
@@ -106,7 +103,7 @@ function  NuevaCapacitacionForm(){
                             </div>
                             <div className='select'>
                                 <label>Categoria:</label>
-                                <select name='categoria' forms='typeform' onChange={handleChange} placeholder="Seleccionar" defaultValue="Programada">
+                                <select name='categoria' forms='typeform' onChange={handleChange} placeholder="Seleccionar" defaultValue="Seleccionar">
                                     <option value="Seleccionar">Seleccionar</option>
                                     <option value='Programada'>Programada</option>
                                     <option value='Emergente'>Emergente</option>
@@ -146,12 +143,8 @@ function  NuevaCapacitacionForm(){
                                 <input name='duracion' forms='typeform' type="number" step="0.5" min="0" onChange={handleChange} placeholder="hs" />
                             </div>
                             <div className='select'>
-                                <label>ID:</label>
-                                <input name='idinterno' forms='typeform' type="number" onChange={handleChange} placeholder="Id interno" />
-                            </div>
-                            <div className='select'>
                                 <label>Modalidad:</label>
-                                <select name='modalidad' forms='typeform' onChange={handleChange} placeholder="Seleccionar" defaultValue="Virtual">
+                                <select name='modalidad' forms='typeform' onChange={handleChange} placeholder="Seleccionar" defaultValue="Seleccionar">
                                     <option value="Seleccionar">Seleccionar</option>
                                     <option value='Virtual'>Virtual</option>
                                     <option value='Presencial'>Presencial</option>

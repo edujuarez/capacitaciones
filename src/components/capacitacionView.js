@@ -100,10 +100,6 @@ function CapacitacionView() {
                                 <p className="campo">{capacitacion.duracion} hs</p> 
                         </div>
                         <div className='select'>
-                                <label>ID:</label>
-                                <p className="campo">{capacitacion.idinterno}</p> 
-                        </div>
-                        <div className='select'>
                             <label>Modalidad:</label>
                             <p className='campo'>{capacitacion.modalidad}</p>
                         </div>

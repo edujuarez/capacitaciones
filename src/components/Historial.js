@@ -37,6 +37,7 @@ function Historial() {
         })
         .then(capacitaciones => {
             setCapacitaciones(capacitaciones);
+            console.log(capacitaciones)
         })
     }, []);
 
@@ -95,7 +96,7 @@ function Historial() {
                         <input
                             className='inputInformes'
                             type="text"
-                            placeholder="Ingrese capacitación a buscar"
+                            placeholder="Ingrese asistente a buscar"
                             onChange={(e) => {
                                 setSearchTerms(e.target.value)
                             }}
@@ -133,7 +134,6 @@ function Historial() {
                     <table border="1">
                         <thead>
                             <tr>
-                                <th>Id</th>
                                 <th>Fecha</th>
                                 <th>Capacitación</th>
                                 <th>Asistió</th>
@@ -145,14 +145,13 @@ function Historial() {
                             {busqueda.filter((val) => {
                                 if(searchTerms == "") {
                                     return val
-                                } else if (val.nombre.toLowerCase().includes(searchTerms.toLowerCase()) || val.nombreCapacitacion.toLowerCase().includes(searchTerms.toLowerCase()))   
+                                } else if (val.nombre.toLowerCase().includes(searchTerms.toLowerCase()))   
                                 {
                                     return val 
                                 }
                             }).map((val) => {
                                 return (
                                     <tr key={val.id}>
-                                        <td>{val.idinterno}</td>
                                         <td>{val.fecha/*moment(val.fecha).format('L')*/} </td>
                                         <td>{val.nombreCapacitacion}</td>
                                         <td>{val.asistencia=="1" ? "Si": "No"}</td>

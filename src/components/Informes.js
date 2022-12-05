@@ -14,19 +14,20 @@ function Informes() {
     const [busqueda, setBusqueda] = useState([]);
     const [searchTerms, setSearchTerms] = useState("");
 
-    //fetcheamos TODOS los asistentes y capacitaciones y ordenamos por fecha
-    useEffect(() => {
-        fetch("https://servercapacitaciones-production.up.railway.app/asistentes")
-        .then(res => {
-            return res.json();
-        })
-        .then(data => {
-            data.map((elem) => {
-              return elem.fecha = moment(elem.fecha).format('L')
-            })
-            data.sort(function (a, b) { return a.fecha - b.fecha })
-            setBusqueda(data);
-    }, [])});
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
+    const [filteredData, setFilteredData] = useState([]);
+  
+    function handleStartDateChange(event) {
+        const formatDate = moment(event.target.value).format('L')
+      setStartDate(formatDate);
+    }
+  
+    function handleEndDateChange(event) {
+        const formatDate = moment(event.target.value).format('L')
+      setEndDate(formatDate);    
+    }
+
     
     const  [capacitaciones, setCapacitaciones ] = useState([]);
     useEffect(() => {
@@ -35,7 +36,7 @@ function Informes() {
         .then(res => {
             return res.json();
         })
-        .then(capacitaciones => {
+        .then(data => {
             setCapacitaciones(capacitaciones);
         })
     }, []);
@@ -46,31 +47,18 @@ function Informes() {
             content: () => componentRef.current,
         });
 
-        //date format
-        let [fechaHasta, setFechaHasta] = useState("");
-        function formatDateHasta(date) {
-                if(date == ""){
-                    return setFechaDesde("")
-                }
-                console.log("HASTA " + moment(date).format('L'))
-                let newDate = new Date(`${date}T00:00:00`)
 
-                return  setFechaHasta(newDate.toLocaleDateString())
-              }
-
-        let [fechaDesde, setFechaDesde] = useState("");
-        function formatDateDesde(date) {
-            if(date == ""){
-                return setFechaDesde("")
-            }
-            console.log("DESDE " + moment(date).format('L'))
-            let newDate2 = new Date(`${date}T00:00:00`)
-
-            return setFechaDesde (newDate2.toLocaleDateString())
-        } 
-        
+        function handleFilterClick() {
+            console.log('desde ' + startDate + ' hasta ' + endDate )
+            let filteredData = capacitaciones.filter(item => {
+              const itemDate = moment(item.fecha).format('L');
+              return itemDate >= startDate && itemDate <= endDate;
+            })
+            setFilteredData(filteredData);
+          }
+        console.log(filteredData)
         const handleSearch = () => {
-            console.log(fechaDesde)
+            /*console.log(fechaDesde)
             if (fechaDesde !== "" && fechaHasta !== "" ){
                 console.log("if adentro " + fechaDesde)
                 busqueda.filter(
@@ -85,9 +73,9 @@ function Informes() {
 
                 alert("Faltan datos de busqueda")
             }
-            console.log(busqueda)
+            console.log(busqueda)*/
         }
-    return(
+    return (
         <Fragment>
             <div className='containerInformes'>
                 <div className='tittleSectionInformes'>
@@ -96,7 +84,7 @@ function Informes() {
                         <input
                             className='inputInformes'
                             type="text"
-                            placeholder="Ingrese asistente a buscar"
+                            placeholder="Ingrese nombre de capacitación"
                             onChange={(e) => {
                                 setSearchTerms(e.target.value)
                             }}
@@ -109,7 +97,7 @@ function Informes() {
                             <input 
                                 className='inputInformes'
                                 type="date"
-                                onChange={(e)=> {formatDateDesde(e.target.value)}}                            
+                                onChange={handleStartDateChange}                            
                                 />
                         </div>                    
                         <div className='tittleInformes'>
@@ -117,25 +105,28 @@ function Informes() {
                             <input
                                 className='inputInformes'
                                 type="date"
-                                onChange={(e)=> {formatDateHasta(e.target.value)}}
+                                onChange={handleEndDateChange}
                                 
                                 />                               
                         </div>
                 </div>
                     
-                        <button className='buttonSearch' type="" onClick={handleSearch}>
+                        <button className='buttonSearch' type="" onClick={handleFilterClick}>
                             <BsSearch /> Buscar
                         </button>
+                
                 
                    
                 <section ref={componentRef}>
                     <div className='tittleSection'>
                         <h1>Informe de capacitaciones</h1>
                     </div>
+                    {filteredData.length > 0 ? (
                     <table border="1">
                         <thead>
                             <tr>
                                 <th>Legajo</th>
+                                <th>Nombre capacitación</th>
                                 <th>Apellido y nombre</th>
                                 <th>Asistió</th>
                                 <th>Nota</th>
@@ -143,26 +134,21 @@ function Informes() {
                             </tr>
                         </thead>
                         <tbody>
-                            {busqueda.filter((val) => {
-                                if(searchTerms == "") {
-                                    return val
-                                } else if (val.nombre.toLowerCase().includes(searchTerms.toLowerCase()) || val.nombreCapacitacion.toLowerCase().includes(searchTerms.toLowerCase()))   
-                                {
-                                    return val 
-                                }
-                            }).map((val) => {
-                                return (
+                            {filteredData.map(val => (
                                     <tr key={val.id}>
-                                        <td>{val.legajo}</td>
-                                        <td>{val.nombre}</td>
-                                        <td>{val.asistencia=="1" ? "Si": "No"}</td>
-                                        <td>{val.puntaje}</td>
-                                        <td>{val.porcentaje}%</td>
-                                    </tr>
-                                    
-                                )})}             
+                                    <td>{val.fecha}</td>
+                                    <td>{val.nombreCapacitacion}</td>
+                                    <td>{val.nombre}</td>
+                                    <td>{val.asistencia=="1" ? "Si": "No"}</td>
+                                    <td>{val.puntaje}</td>
+                                    <td>{val.porcentaje}%</td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
+                    ) : (
+                            <p>No se encontraron coincidencias</p>
+                            )}              
                 </section>
                 
                 <div className="buttonSection">
