@@ -1,0 +1,14 @@
+img {
+    width: 150px;
+    height: 100px;
+}
+
+.primerTitulo {
+    display: column;
+    text-align: center;
+    background-color: rgba(228,103,19,1);
+    color: white;
+}
+.segundoTitulo {
+text-align: center;
+}

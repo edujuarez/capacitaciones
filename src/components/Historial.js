@@ -5,14 +5,19 @@ import { useReactToPrint } from 'react-to-print';
 import { BsSearch } from 'react-icons/bs';
 import moment from 'moment';
 import 'moment/locale/es';
+import logoIselin from '../images/iselin.jpg';
 
 
 
 function Historial() {
     moment.locale('es')
     //Inicializo states de busqueda
-    const [busqueda, setBusqueda] = useState([]);
-    const [searchTerms, setSearchTerms] = useState("");
+    const [asistentes, setAsistentes] = useState([]);
+    const [historial, setHistorial] = useState([]);
+    const [selected, setSelected] = useState([]);
+    const [nombre, setNombre] = useState("");
+    const [legajo, setLegajo] = useState("");
+
 
     //fetcheamos TODOS los asistentes y capacitaciones y ordenamos por fecha
     useEffect(() => {
@@ -21,12 +26,22 @@ function Historial() {
             return res.json();
         })
         .then(data => {
-            data.map((elem) => {
-              return elem.fecha = moment(elem.fecha).format('L')
-            })
-            data.sort(function (a, b) { return a.fecha - b.fecha })
-            setBusqueda(data);
-    }, [])});
+            setAsistentes(data);
+            console.log(asistentes)
+    })}, []);
+
+
+    //fetcheamos todos las  asistencias
+    useEffect(() => {
+        fetch(`https://servercapacitaciones-production.up.railway.app/asistencia`)
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+            setHistorial(data);
+            console.log(historial)
+        })
+    }, []);
     
     const  [capacitaciones, setCapacitaciones ] = useState([]);
     useEffect(() => {
@@ -37,15 +52,32 @@ function Historial() {
         })
         .then(capacitaciones => {
             setCapacitaciones(capacitaciones);
-            console.log(capacitaciones)
         })
     }, []);
 
-        //configura el boton de imprimir para guardar PDF
+        //configura el boton de imprimir para guardar PDF, imprime el componente referente
         const componentRef = useRef();
         const handlePrint = useReactToPrint({
             content: () => componentRef.current,
         });
+
+        //filtra solo la capacitacion que tiene ID a la seleccionada en el select
+        
+        /*
+        function formulario (id){
+            setHistorial(capacitaciones.filter(capacitaciones => capacitaciones.idcapacitacion == id))
+            console.log("lo cargado en historial " + capacitaciones)
+
+        }
+
+        */
+       const formulario = (id) =>
+       {
+        setSelected(historial.filter(asistentes => asistentes.invitadoID == id))
+        
+        }
+
+
 
         //date format
         let [fechaHasta, setFechaHasta] = useState("");
@@ -72,20 +104,15 @@ function Historial() {
         const handleSearch = () => {
             console.log(fechaDesde)
             if (fechaDesde !== "" && fechaHasta !== "" ){
-                console.log("if adentro " + fechaDesde)
-                busqueda.filter(
-                    function (a)
-                    {
-                        result = a.some(moment(a.fecha).format('L') == moment(fechaDesde).format('L'))
-                        return console.log(result)
-                    });
+                /*console.log("if adentro " + moment(fechaDesde).format('L') + " " + moment(fechaHasta).format('L'))
+                setSelected(historial.filter(asistentes => (moment(asistentes.fecha).format('L') > fechaDesde || moment(asistentes.fecha).format('L') < fechaHasta)))
+                console.log(selected)*/
             }
             else{
                 console.log("if afuera")
 
                 alert("Faltan datos de busqueda")
             }
-            console.log(busqueda)
         }
     return(
         <Fragment>
@@ -93,14 +120,19 @@ function Historial() {
                 <div className='tittleSectionInformes'>
                     <div className='tittleInformes'>
                         <h1>Buscar historial de capacitaciones</h1>
-                        <input
+                        <select name="select"
                             className='inputInformes'
                             type="text"
                             placeholder="Ingrese asistente a buscar"
-                            onChange={(e) => {
-                                setSearchTerms(e.target.value)
-                            }}
-                        />
+                            onChange={(e) => {formulario(e.target.value)}}
+                            >                     
+                            <option>Ingrese nombre de personal </option>
+                            {
+                                asistentes.map((asistentes, index) => (
+                                    <option key={index} value={asistentes.invitadoID}>{asistentes.nombre}</option>
+                                ))
+                            }
+                        </select>
                     </div>
                 </div>
                 <div className='searchBox'>
@@ -109,7 +141,7 @@ function Historial() {
                             <input 
                                 className='inputInformes'
                                 type="date"
-                                onChange={(e)=> {formatDateDesde(e.target.value)}}                            
+                                onChange={(e)=> {setFechaDesde(e.target.value)}}                            
                                 />
                         </div>                    
                         <div className='tittleInformes'>
@@ -117,52 +149,81 @@ function Historial() {
                             <input
                                 className='inputInformes'
                                 type="date"
-                                onChange={(e)=> {formatDateHasta(e.target.value)}}
+                                onChange={(e)=> {setFechaHasta(e.target.value)}}
                                 
                                 />                               
                         </div>
-                </div>
                         <button className='buttonSearch' type="" onClick={handleSearch}>
                             <BsSearch /> Buscar
                         </button>
-                
-                   
+                </div>
+    
                 <section ref={componentRef}>
-                    <div className='tittleSection'>
-                        <h1>Informe de capacitaciones</h1>
-                    </div>
-                    <table border="1">
+                {selected.length > 0 ? (
+<>
+                    <table border="1" bordercolor="white">
                         <thead>
+                            <tr className='primerTitulo'>
+                                <th>SGI</th>
+                                <th>CÓDIGO</th>
+                                <th>TÍTULO</th>
+                                <th>PROCESO</th>
+                                <th>REV</th>
+                            </tr>
+                            <tr className='segundoTitulo'>
+                                <th><img src={logoIselin}></img></th>
+                                <th>RG-RH 06-12</th>
+                                <th>HISTORIAL DE CAPACITACIONES</th>
+                                <th>GESTIÓN DEL RECURSO HUMANO</th>
+                                <th>0</th>
+                            </tr>
+                            <tr className='segundoTitulo'>
+                                <th>Apellido y nombre:</th>
+                                <th>{nombre}</th>
+                                <th></th>
+                                <th>Legajo:{legajo}</th>
+                                <th></th>
+                            </tr>
                             <tr>
-                                <th>Fecha</th>
-                                <th>Capacitación</th>
-                                <th>Asistió</th>
-                                <th>Nota</th>
-                                <th>Porcentaje</th>
+                                <th>Fecha desde:</th>
+                                <th>{fechaDesde ? moment(fechaDesde).format('L') : "" }</th>
+                                <th>Fecha hasta:</th>
+                                <th>{fechaHasta ? moment(fechaHasta).format('L') : ""}</th>
+                                <th></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {busqueda.filter((val) => {
-                                if(searchTerms == "") {
-                                    return val
-                                } else if (val.nombre.toLowerCase().includes(searchTerms.toLowerCase()))   
-                                {
-                                    return val 
-                                }
-                            }).map((val) => {
+                        </table>
+                        <table border="1">
+                            <thead >
+                                <tr >
+                                    <th>ID</th>
+                                    <th>Fecha</th>
+                                    <th>Asistió</th>
+                                    <th>Nombre capacitación</th>
+                                    <th>Evaluación</th>
+                                    <th>% de aprobación</th>
+                                </tr>
+                            </thead>
+                       
+                        <tbody >
+                        {selected.map((val) => {
                                 return (
-                                    <tr key={val.id}>
-                                        <td>{val.fecha/*moment(val.fecha).format('L')*/} </td>
-                                        <td>{val.nombreCapacitacion}</td>
+                                    <tr key={val.invitadoID}>
+                                        <td>{val.capacitacionID}</td>
+                                        <td>{val.fecha }</td>
                                         <td>{val.asistencia=="1" ? "Si": "No"}</td>
+                                        <td>{val.nombreCapacitacion}</td>
                                         <td>{val.puntaje}</td>
-                                        <td>{val.porcentaje}%</td>
+                                        <td>{val.porcentaje ? val.porcentaje + " %" : "Sin cargar" }</td>
                                     </tr>
-                                    
-                                )})}             
+                            )})}                
                         </tbody>
                     </table>
-                </section>
+                    </>
+                ) : (
+                    <p>No se encontraron coincidencias</p>
+                    )}</section>
+                
                 
                 <div className="buttonSection">
                     <button 

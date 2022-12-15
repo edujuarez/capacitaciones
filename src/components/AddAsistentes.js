@@ -2,7 +2,8 @@ import React, { useState, useEffect} from "react";
 import axios from 'axios';
 import Multiselect from 'multiselect-react-dropdown';
 import { useParams } from "react-router-dom";
-import { moment } from "moment/moment";
+import moment from 'moment';
+import 'moment/locale/es';
 
 import './styles/addAsistentes.css'
 import { IoCompassSharp } from "react-icons/io5";
@@ -45,6 +46,8 @@ function AddAsistentes(){
 
     //traigo asistentes cargados anteriormente
     const [selectedValues, setSelectedValues] = useState([]);
+    const [editedItems, setEditedItems] = useState([]);
+
 
     useEffect(() => {
         fetch(`https://servercapacitaciones-production.up.railway.app/addasistentes/${idcapacitacion}`)
@@ -75,27 +78,28 @@ function AddAsistentes(){
         //asistentes.legajo + ' - ' + asistentes.nombre
         {
         'capacitacionID' : idcapacitacion,
-        'nombre' : asistentes.legajo + " - " + asistentes.nombre,
+        'nombre' : asistentes.nombre,
+        'nombreview' : asistentes.legajo + " - " + asistentes.nombre,
         'invitadoID' : asistentes.legajo,
         'asistencia' : true,
         'sector' : asistentes.sector,
-        'puntaje' : "Muy buena",
+        'puntaje' : "Sin cargar",
         'eliminado' : 0,
         'nombreCapacitacion' : (JSON.stringify((capacitaciones[0].nombre))).slice(1).slice(0,-1),
-        'fecha' : capacitaciones[0].fecha
+        'fecha' : moment(capacitaciones[0].fecha).format('L')
         }))
-    
+
     const [selectedItems, setSelectedItems] = useState('');
     function onSelect(e) {
         setSelectedItems(e)
-        console.log("elementos agregados " + (JSON.stringify((capacitaciones[0].fecha))))
+        console.log("elementos agregados " + (moment(capacitaciones[0].fecha).format('L')))
     }
     const [removedItems, setRemovedItems] = useState('');
     function onRemove(e) {
         setRemovedItems(e)
         console.log(removedItems)
     }
-    
+
     const addAsistentesURL = "https://servercapacitaciones-production.up.railway.app/addasistentes"
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -124,7 +128,7 @@ function AddAsistentes(){
                     </div>
                     <div>
                         <p>Asistentes</p>
-                        
+
                         <Multiselect
                             options={asistentesOptions} // Options to display in the dropdown
                             onSelect={onSelect}
@@ -132,16 +136,16 @@ function AddAsistentes(){
                             placeholder="Buscar..." // Property name to display in the dropdown options
                             isObject={true}
                             selectedValues={selectedValues}
-                            displayValue="nombre"
+                            displayValue="nombreview"
                             showArrow
                         />    
                     </div>
                     <button type="submit" onClick={handleSubmit}>Terminar</button>     
                 </form>
-                
+
             </div>
 
         </React.Fragment>
     );
 }
-export default AddAsistentes;
+export default AddAsistentes
