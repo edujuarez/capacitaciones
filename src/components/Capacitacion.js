@@ -5,6 +5,8 @@ import './styles/Capacitacion.css';
 import { IoEyeOutline } from 'react-icons/io5';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import moment from 'moment';
+import 'moment/locale/es';
+
 
 function Capacitacion() {
     moment.locale('es')
