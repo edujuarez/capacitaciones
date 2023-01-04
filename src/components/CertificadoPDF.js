@@ -1,27 +1,9 @@
 import React from "react";
 import './styles/certification.css'
 import {Document, Page, View, Text } from "@react-pdf/renderer";
+import logoIselin from '../images/iselin.jpg';
 
 function CertificadoPDF() {
-
-    const valores = {
-        legajo: "151",
-        nombre: 'Kukito Juarez',
-        sector: 'Helpdesk'
-
-    };
-    const datosCapacitacion = {
-        nombre: 'prueba',
-        fecha: '10/10/10',
-        duracion: '1'+'hs',
-        id: '254',
-        tipo: 'Desarrollo / preventiva/correctiva',
-        modalidad: 'programada/emergente',
-        plan: 'gral /hys',
-        certificado: 'si/no',
-        material: 'si/no',
-        observaciones: 'bla bla bla bla bla bla'
-    }
 
 return (
     <Document>
@@ -34,7 +16,7 @@ return (
 			<View class="stl_view">
 				<View class="stl_05 stl_06">
                 <View class="stl_01" style={{left: "5.84em", top: "6.9057em"}}><span class="stl_07 stl_08 stl_09" style={{wordspacing:'0.0049em'}}></span>Nombre de la capacitación: {datosCapacitacion.nombre}</View>
-                        <View class="stl_01" style={{left:'5.84em', top:'8.2657em'}}><span class="stl_07 stl_08 stl_09">Fecha: {datosCapacitacion.moment(fecha).format('L')}</span></View>
+                        <View class="stl_01" style={{left:'5.84em', top:'8.2657em'}}><span class="stl_07 stl_08 stl_09">Fecha: {datosCapacitacion.fecha}</span></View>
                         <View class="stl_01" style={{left:'21.8687em', top:'8.3117em'}}><span class="stl_10 stl_08 stl_11">Duración: {datosCapacitacion.duracion}</span></View>
                         <View class="stl_01" style={{left:'33.5527em', top:'8.3117em'}}><span class="stl_10 stl_08 stl_12" style={{wordspacing:'0.0045em;'}}>ID Capacitación: {datosCapacitacion.id}</span></View>
                         <View class="stl_01" style={{left:'5.82em', top:'10.4782em'}}><span class="stl_13 stl_08 stl_14" style={{wordspacing:'-0.002em;'}}>Campos a completar únicamente por Recursos Humanos</span></View>

@@ -30,7 +30,7 @@ function  NuevaCapacitacionForm(){
             tipo : "",
             categoria: "",
             certificacion : "",
-            fecha : "",
+            fecha : new Date,
             plan : "",
             material : "",
             observaciones : "",
@@ -65,7 +65,7 @@ function  NuevaCapacitacionForm(){
                 tipo : `${value.tipo}`,
                 categoria: `${value.categoria}`,
                 certificacion : `${value.certificacion}`,
-                fecha :`${value.fecha}`,
+                fecha :`${value.fecha} 05:00:00`,
                 plan : `${value.plan}`,
                 material : `${value.material}`,
                 observaciones : `${value.observaciones}`,
@@ -73,7 +73,7 @@ function  NuevaCapacitacionForm(){
                 modalidad: `${value.modalidad}`,
                 eliminado : 0
                 }).then (() => {                
-                alert([`La capacitacion ${value.nombre} fue creada correctamente!`]);
+                alert([`La capacitacion ${value.nombre} fue creada correctamente! Fecha ${moment(value.fecha).format('L')}`]);
                 window.location.href = "/capacitacion";
                 
             });

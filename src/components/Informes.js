@@ -84,8 +84,10 @@ function Informes() {
         
         //llenamos el array select con los asistentes segun capacitacionID
        const formulario = (id) =>
-        { 
+        {
+            
          setSelected(asistentes.filter(asistentes => asistentes.capacitacionID == id))
+         
          }
          console.log(fecha)
 
@@ -188,7 +190,7 @@ function Informes() {
                         </tbody>
                     </table></>
                     ) : (
-                            <p>No se encontraron coincidencias</p>
+                            <p>No se encontraron asistentes cargados</p>
                     )}              
                 </section>
                 

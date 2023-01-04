@@ -9,7 +9,6 @@ import 'moment/locale/es';
 
 
 function Capacitacion() {
-    moment.locale('es')
     const  [capacitaciones, setCapacitaciones ] = useState([]);
     useEffect(() => {
         let url = "https://servercapacitaciones-production.up.railway.app/capacitaciones";
@@ -17,14 +16,16 @@ function Capacitacion() {
         .then(res => {
             return res.json();
         })
-        .then(data => {
+        .then(data => {/*
                 data.map((elem) => {
-                  return elem.fecha = new Date(elem.fecha)
-                })
+                    elem.fecha = (elem.fecha).toString() +'+02:00'
+                  return elem.fecha
+                })*/
                 data.sort(function (a, b) { return a.fecha - b.fecha })
             setCapacitaciones(data);
         })
     }, []);
+    console.log(capacitaciones)
 
         return (
         <React.Fragment>

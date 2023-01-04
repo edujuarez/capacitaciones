@@ -29,9 +29,9 @@ function CapacitacionView() {
 
     //Elimina capacitacion
     const deleteCapacitacion = (idcapacitacion) => {
-       let deleteURL = `https://servercapacitaciones-production.up.railway.app/deletecapacitacion`
+       let deleteURL = `https://servercapacitaciones-production.up.railway.app/capacitaciones/${idcapacitacion}/delete`
        const requestOptions = {
-        method: 'PUT',
+        method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: idcapacitacion})
     };
