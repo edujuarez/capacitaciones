@@ -3,7 +3,8 @@ import { useState, useEffect, Fragment } from "react";
 
 import {axios} from 'axios';
 import { useParams } from "react-router-dom";
-
+import moment from 'moment';
+import 'moment/locale/es';
 
 import './styles/asistenteEdit.css';
 import e from 'cors';
@@ -64,7 +65,6 @@ function AsistenteEdit () {
                         <h1><a type='submit' href='/asistentes'>Volver</a> </h1>
                     </div>
                     <form className='bodyAsistenteEdit'  type='submit'>
-                        
                         <label>Nombre:</label>
                         <input  
                             type='text'  
@@ -72,7 +72,6 @@ function AsistenteEdit () {
                             value={asistente.nombre}
                             onChange={handleChange}
                         />
-                        
                         <label>Legajo:</label>
                         <input  type='text'  name='legajo' value={asistente.legajo} onChange={handleChange}/>
                         <label>Tipo de documento:</label>
@@ -84,7 +83,7 @@ function AsistenteEdit () {
                         <label>Sector:</label>
                         <input  type='text'  name='sector' value={asistente.sector}  onChange={handleChange}/>
                         <label>Fecha de Ingreso:</label>
-                        <input  type='date'  name='fechaingreso' value={asistente.fechaingreso} onChange={handleChange}/>
+                        <input  type='date'  name='fechaingreso' value={moment(asistente.fechaingreso).format('L')} onChange={handleChange}/>
                         <button
                             onClick={(e)=> {updateAsistente(asistente.idasistente)}}
                             > 
