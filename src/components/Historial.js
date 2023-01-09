@@ -15,8 +15,6 @@ function Historial() {
     const [asistentes, setAsistentes] = useState([]);
     const [historial, setHistorial] = useState([]);
     const [selected, setSelected] = useState([]);
-    const [nombre, setNombre] = useState("");
-    const [legajo, setLegajo] = useState("");
 
 
     //fetcheamos TODOS los asistentes y capacitaciones y ordenamos por fecha
@@ -27,7 +25,6 @@ function Historial() {
         })
         .then(data => {
             setAsistentes(data);
-            console.log(asistentes)
     })}, []);
 
 
@@ -39,7 +36,6 @@ function Historial() {
         })
         .then(data => {
             setHistorial(data);
-            console.log(historial)
         })
     }, []);
     
@@ -125,7 +121,7 @@ function Historial() {
                             placeholder="Ingrese asistente a buscar"
                             onChange={(e) => {formulario(e.target.value)}}
                             >                     
-                            <option>Ingrese nombre de personal </option>
+                            <option>Ingrese nombre de personal</option>
                             {
                                 asistentes.map((asistentes, index) => (
                                     <option key={index} value={asistentes.invitadoID}>{asistentes.nombre}</option>
