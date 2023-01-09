@@ -73,8 +73,7 @@ function Historial() {
         */
        const formulario = (id) =>
        {
-        setSelected(historial.filter(asistentes => asistentes.invitadoID == id))
-        
+        setSelected(historial.filter(asistentes => asistentes.invitadoID == id))        
         }
 
 
@@ -160,7 +159,7 @@ function Historial() {
     
                 <section ref={componentRef}>
                 {selected.length > 0 ? (
-<>
+                <>
                     <table border="1" bordercolor="white">
                         <thead>
                             <tr className='primerTitulo'>
@@ -179,9 +178,8 @@ function Historial() {
                             </tr>
                             <tr className='segundoTitulo'>
                                 <th>Apellido y nombre:</th>
-                                <th>{nombre}</th>
-                                <th></th>
-                                <th>Legajo:{legajo}</th>
+                                <th colspan="2">{selected[0].nombre}</th>
+                                <th>Legajo: {selected[0].invitadoID}</th>
                                 <th></th>
                             </tr>
                             <tr>
@@ -219,7 +217,7 @@ function Historial() {
                             )})}                
                         </tbody>
                     </table>
-                    </>
+                </>
                 ) : (
                     <p>No se encontraron coincidencias</p>
                     )}</section>

@@ -89,7 +89,7 @@ function Informes() {
          setSelected(asistentes.filter(asistentes => asistentes.capacitacionID == id))
          
          }
-         console.log(fecha)
+         console.log(asistentes)
 
         const handleSearch = () => {
             /*console.log(fechaDesde)
@@ -151,14 +151,12 @@ function Informes() {
                                 <th>0</th>
                             </tr>
                             <tr className=''>
-                                <th>Nombre de la capacitacion: </th>
-                                <th>{nombre}</th>
-                                <th></th>
-                                <th>ID: {legajo}</th>
-                                <th></th>
+                                <th>Nombre de la capacitacion:</th>
+                                <th colSpan="2">{selected[0].nombreCapacitacion}</th>
+                                <th colSpan="2">ID: {selected[0].capacitacionID}</th>
                             </tr>
                             <tr>
-                                <th>Fecha: {fecha}</th>
+                                <th>Fecha: {selected[0].fecha}</th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -184,7 +182,7 @@ function Informes() {
                                     <td>{val.nombre}</td>
                                     <td>{val.asistencia=="1" ? "Si": "No"}</td>
                                     <td>{val.puntaje}</td>
-                                    <td>{val.porcentaje} %</td>
+                                    <td>{val.porcentaje ? "Sin cargar": val.porcentaje} %</td>
                                 </tr>
                             ))}
                         </tbody>
