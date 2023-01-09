@@ -46,8 +46,6 @@ function AddAsistentes(){
 
     //traigo asistentes cargados anteriormente
     const [selectedValues, setSelectedValues] = useState([]);
-    const [editedItems, setEditedItems] = useState([]);
-
 
     useEffect(() => {
         fetch(`https://servercapacitaciones-production.up.railway.app/addasistentes/${idcapacitacion}`)
@@ -103,14 +101,14 @@ function AddAsistentes(){
     const addAsistentesURL = "https://servercapacitaciones-production.up.railway.app/addasistentes"
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(selectedItems)
         axios.post(addAsistentesURL, selectedItems).then (() => {
             console.log(selectedItems)
             alert([`Los asistentes fueron cargados correctamente!`]);
-            window.location.href = "/capacitacion";
+            window.location.href = `/capacitaciones/${idcapacitacion}`;
         });
     }
-    //asistentesOptions.nombrecapacitacion = capacitacion.nombre
-    //const nombreCapacitacion = capacitaciones[0].nombre
+
     return (
         <React.Fragment>
             <div className='container_nuevaCapacitacion'>

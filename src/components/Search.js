@@ -10,6 +10,8 @@ function Search() {
     const [nuevoPuntaje, setNuevoPuntaje] = useState("");
     const [nuevaAsistencia, setNuevaAsistencia] = useState("");
     const [nuevoPorcentaje, setNuevoPorcentaje] = useState("");
+    const [nuevoIndex, setNuevoIndex] = useState("");
+
 
     useEffect(() => {
         fetch("https://servercapacitaciones-production.up.railway.app/asistentes")
@@ -20,6 +22,7 @@ function Search() {
             setBusqueda(data);
         })
     }, []);
+    console.log(busqueda)
 
     const  [capacitaciones, setCapacitaciones ] = useState([]);
     useEffect(() => {
@@ -32,6 +35,7 @@ function Search() {
             setCapacitaciones(capacitaciones);
         })
     }, []);
+
 
     //Elimina asistente de la lista
     const deleteAsistente = (id) => {
@@ -50,20 +54,28 @@ function Search() {
     };
 
     //edita los valores de puntaje
-    const updateNuevoPuntaje = (id) => {
+    const updateNuevoPuntaje = (id, index) => {
         let updateURL = "https://servercapacitaciones-production.up.railway.app/updatepuntaje";
-        
-        const requestOptions = {
+            busqueda.filter(busqueda => busqueda.id == id)
+             {
+                  { if (busqueda.asistencia == "")
+                    {
+                    return nuevaAsistencia= "0";
+                    } 
+                 }
+            }
+            setNuevoIndex (index)
+            const requestOptions = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id: id, puntaje: nuevoPuntaje, asistencia: nuevaAsistencia, porcentaje: nuevoPorcentaje })
+            body: JSON.stringify({ id: id, puntaje: nuevoPuntaje == "" ? busqueda[index].puntaje : nuevoPuntaje, asistencia: nuevaAsistencia == "" ? busqueda[index].asistencia : nuevaAsistencia, porcentaje: nuevoPorcentaje /*== "" ? busqueda[index].porcentaje : nuevoPorcentaje*/})
         };
         console.log(requestOptions.body)
         fetch(updateURL, requestOptions)
         .then((res) => {
             console.log(requestOptions)
-            alert("Asistente modificado");
-            window.location.href = "/search";
+            alert("Asistente " + busqueda[index].nombre + " modificado");
+            //window.location.href = "/search";
         })
     };    
     
@@ -95,7 +107,7 @@ function Search() {
                 {
                     return val
                 }
-            }).map((val) => {
+            }).map((val, index) => {
             return (                   
                 <div key={val.id}>
                     <div className='card' >
@@ -117,7 +129,7 @@ function Search() {
                             <select 
                                 defaultValue={val.puntaje} 
                                 onChange={(e) =>{ setNuevoPuntaje(e.target.value)}}>
-                                    <option value="Seleccionar">Seleccionar</option>
+                                    <option value="Sin Cargar">Sin Cargar</option>
                                     <option value="No aplica">No aplica</option>
                                     <option value="Aprobado">Aprobado</option>
                                     <option value="Desaprobado">Desaprobado</option>
@@ -131,7 +143,7 @@ function Search() {
                         </div>
                         <div className='column containerButtonsOperaciones'>
                             <button 
-                                onClick={() =>{updateNuevoPuntaje(val.id)}} 
+                                onClick={() =>{updateNuevoPuntaje(val.id, index)}} 
                                 className="buttonOperaciones"
                                 >
                                 Guardar

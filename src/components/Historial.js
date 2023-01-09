@@ -86,7 +86,7 @@ function Historial() {
                     return setFechaDesde("")
                 }
                 console.log("HASTA " + moment(date).format('L'))
-                let newDate = new Date(`${date}T00:00:00`)
+                let newDate = new Date(`${date}T05:00:00`)
 
                 return  setFechaHasta(newDate.toLocaleDateString())
               }
@@ -97,7 +97,7 @@ function Historial() {
                 return setFechaDesde("")
             }
             console.log("DESDE " + moment(date).format('L'))
-            let newDate2 = new Date(`${date}T00:00:00`)
+            let newDate2 = new Date(`${date}T05:00:00`)
 
             return setFechaDesde (newDate2.toLocaleDateString())
         } 
