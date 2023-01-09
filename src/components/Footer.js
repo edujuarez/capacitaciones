@@ -7,7 +7,7 @@ class Footer extends React.Component {
         return (
             <div className='mainFooter'>
                <p>Made with ❤ by <a href="https://linkedin.com/in/eduardo--juarez/" target='blank'>@edukj_</a></p>
-                <p> ***Version Beta 2.0.5*** Informes e historial listos con filtros de busqueda ***</p>
+                <p> ***Version Beta 2.1.1*** Informes e historial***</p>
             </div>
         )
     }

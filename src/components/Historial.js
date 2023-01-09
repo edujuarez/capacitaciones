@@ -174,7 +174,7 @@ function Historial() {
                             </tr>
                             <tr className='segundoTitulo'>
                                 <th>Apellido y nombre:</th>
-                                <th colspan="2">{selected[0].nombre}</th>
+                                <th colSpan="2">{selected[0].nombre}</th>
                                 <th>Legajo: {selected[0].invitadoID}</th>
                                 <th></th>
                             </tr>
