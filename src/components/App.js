@@ -12,7 +12,7 @@ import AsistenteEdit from './AsistenteEdit';
 import Login from './Login';
 import AddAsistentes from './AddAsistentes';
 import Search from './Search';
-import certification from './certification';
+import Certification from './Certification';
 import PuntajeEdit from './PuntajeEdit';
 import Informes from './Informes';
 import Historial from './Historial';
@@ -41,10 +41,10 @@ function App() {
             <Route exact path='/asistentes/:idasistente/edit' component={AsistenteEdit}/>
             <Route exact path="/addasistentes/:idcapacitacion" component={AddAsistentes}/>
             <Route exact path="/search" component={Search}/>
-            <Route exact path="/certification/:idcapacitacion" component={certification}/>
             <Route exact path="/informes" component={Informes}/>
             <Route exact path="/asistencia/:idasistencia" component={PuntajeEdit}/>
             <Route exact path="/historial" component={Historial} />
+            <Route exact path="/certification/:idcapacitacion" component={Certification} />
         </Switch>
       </Layout>
     </BrowserRouter>

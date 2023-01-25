@@ -45,89 +45,81 @@ function Certification() {
         });
     return (
         <Fragment>
-            <div className="stl_ stl_02" ref={componentRef}>
-
-                <div className="stl_view">
-                    
+            <section ref={componentRef}>                    
                 {datosCapacitacion.map((datosCapacitacion) => (
-
-                    <div className="stl_05 stl_06">
-                    <div className="stl_01" style={{left: "5.84em", top: "6.9057em"}}><span className="stl_07 stl_08 stl_09" style={{wordspacing:'0.0049em'}}></span>Nombre de la capacitación: {datosCapacitacion.nombre}</div>
-                            <div className="stl_01" style={{left:'5.84em', top:'8.2657em'}}><span className="stl_07 stl_08 stl_09">Fecha: {moment(datosCapacitacion.fecha).format('L')}</span></div>
-                            <div className="stl_01" style={{left:'21.8687em', top:'8.3117em'}}><span className="stl_10 stl_08 stl_11">Duración: {datosCapacitacion.duracion}hs</span></div>
-                            <div className="stl_01" style={{left:'33.5527em', top:'8.3117em'}}><span className="stl_10 stl_08 stl_12" style={{wordspacing:'0.0045em'}}>ID Capacitación: {datosCapacitacion.idcapacitacion}</span></div>
-                            <div className="stl_01" style={{left:'5.82em', top:'10.4782em'}}><span className="stl_13 stl_08 stl_14" style={{wordspacing:'-0.002em'}}>Campos a completar únicamente por Recursos Humanos</span></div>
-                            <div className="stl_01" style={{left:'5.82em', top:'11.6382em'}}><span className="stl_13 stl_08 stl_15">Tipo: {datosCapacitacion.tipo}</span></div>
-                            <div className="stl_01" style={{left:'21.88em', top:'11.6382em'}}><span className="stl_13 stl_08 stl_16">Modalidad: {datosCapacitacion.tipo}</span></div>
-                            <div className="stl_01" style={{left:'39.89em', top:'11.6382em'}}><span className="stl_13 stl_08 stl_17">Plan: {datosCapacitacion.plan}</span></div>
-                
-                            <table>
+                    <div>
+                        <table border="1" bordercolor="white">
+                        <thead>
+                            <tr className='primerTitulo'>
+                                <th>SGI</th>
+                                <th>CÓDIGO</th>
+                                <th>TÍTULO</th>
+                                <th>PROCESO</th>
+                                <th>REV</th>
+                            </tr>
+                            <tr className='segundoTitulo'>
+                                <th><img src={logoIselin}></img></th>
+                                <th>R-GRH 06-1</th>
+                                <th>REGISTRO DE CAPACITACIONES</th>
+                                <th>GESTIÓN DEL RECURSO HUMANO</th>
+                                <th>1</th>
+                            </tr>
+                            <tr className=''>
+                                <th colSpan="2">Nombre de la capacitación:</th>
+                                <th colSpan="3">{datosCapacitacion.nombre}</th>
+                            </tr>
+                            <tr>
+                                <th>Fecha: {moment(datosCapacitacion.fecha).format('L')}</th>
+                                <th></th>
+                                <th>Duración: {datosCapacitacion.duracion}hs</th>
+                                <th>ID Capacitación: {datosCapacitacion.idcapacitacion}</th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <th colSpan="4">Campos a completar únicamente por Recursos Humanos</th>
+                            </tr>
+                            <tr>
+                                <th colSpan="2">Tipo: {datosCapacitacion.tipo}</th>
+                                <th>Modalidad: {datosCapacitacion.modalidad}</th>
+                                <th>Plan: {datosCapacitacion.plan}</th>
+                            </tr>
+                        </thead>
+                    </table>
+                            <table border="1">
                                 <thead>
                                     <tr>
-                                        <th>
-                                            <div className="stl_01 numero" style={{ top:'14.4057em'}}><span className="stl_26 stl_08 stl_27">Nº</span></div> 
-                                        </th>
-                                        <th>
-                                            <div className="stl_01 legajo" style={{ top:'14.4057em'}}><span className="stl_26 stl_08 stl_30">Legajo</span></div>
-                                        </th>
-                                        <th>
-                                            <div className="stl_01 nombre" style={{ top:'14.4057em'}}><span className="stl_26 stl_08 stl_14" style={{wordspacing:'0.0021em'}}> Nombre y Apellido</span></div>
-
-                                        </th>
-                                        <th>
-                                            <div className="stl_01 sector" style={{ top:'14.4057em'}}><span className="stl_26 stl_08 stl_31">Sector</span></div>
-                                        </th>
-                                        <th>
-                                            <div className="stl_01" style={{left:'42.89em', top:'14.4057em'}}><span className="stl_26 stl_08 stl_32">Firma</span></div>
-                                        </th>
+                                        <th>Nº</th>
+                                        <th>Legajo</th>
+                                        <th>Nombre y Apellido</th>
+                                        <th>Sector</th>
+                                        <th>Firma</th>
                                     </tr>   
                                 </thead>
-                                {valores.map((valores, index) => (
-                                <tbody>
-                                    
+                            {valores.map((valores, index) => (
+                                <tbody className='segundoTitulo'>
                                     <tr key={index}>
-                                        
-                                        <td >
-                                            <div className="stl_01 numero" style={{top:16+(2*index)+"em"}}><span className="stl_26 stl_08 stl_29" >{index+1} </span></div>
-
-                                        </td>
-                                        <td>
-                                            <div className="stl_01 legajo" style={{top:16+(2*index)+"em"}}><span className="stl_26 stl_08 stl_29">{valores.invitadoID}</span></div>
-
-                                        </td>
-                                        <td>
-                                            <div className="stl_01 nombre" style={{top:16+(2*index)+"em"}}><span className="stl_26 stl_08 stl_29">{valores.nombre}</span></div>
-
-                                        </td>
-                                        <td>
-                                            <div className="stl_01 sector" style={{top:16+(2*index)+"em"}}><span className="stl_26 stl_08 stl_29">{valores.sector}</span></div>
-
-                                        </td>
+                                        <td >{index+1}</td>
+                                        <td>{valores.invitadoID}</td>
+                                        <td>{valores.nombre}</td>
+                                        <td>{valores.sector}</td>
+                                        <td></td>
                                     </tr>
                                     </tbody>
-                                    ))}                                
-                                
-                                
-                            
+                                    ))}
                             </table>
-
-                    <div className="stl_01" style={{left:'25.83em', top:'54em'}}><span className="stl_10 stl_08 stl_34" style={{wordspacing:'-0.0035em'}}>Firma: ______________________</span></div>
-                    <div className="stl_01" style={{left:'28.4827em', top:'56em'}}><span className="stl_10 stl_08 stl_35">______________________</span></div>
-                    <div className="stl_01" style={{left:'5.84em', top:'54em'}}><span className="stl_07 stl_08 stl_36" style={{wordspacing:'0.0031em'}}>Capacitador/es: ____________________________</span></div>
-                    <div className="stl_01" style={{left:'12.2832em', top:'56em'}}><span className="stl_10 stl_08 stl_37">________________________________</span></div>
-                    <div className="stl_01" style={{left:'5.72em', top:'62em'}}><span className="stl_10 stl_08 stl_20" style={{wordspacing:'-0.0071em'}}>Se entrega:     </span><span className="stl_10 stl_08 stl_29" style={{wordspacing:'0.4451em'}}></span><span className="stl_10 stl_08 stl_38" style={{wordspacing:'0.2201em'}}>Certificado: {datosCapacitacion.certificacion}           </span><span className="stl_10 stl_08 stl_29" style={{wordspacing:'0.6847em'}}></span><span className="stl_10 stl_08 stl_39" style={{wordspacing:'0.2186em'}}>Material: {datosCapacitacion.material}  </span><span className="stl_10 stl_08 stl_29" style={{wordspacing:'1.124em"'}}></span></div>
-                    <div className="stl_01" style={{left:'5.72em', top:'64em'}}><span className="stl_10 stl_08 stl_20" style={{wordspacing:'-0.0071em'}}>Detalle: 
-                    <p>{datosCapacitacion.observaciones}</p>
-                    </span>
-                    </div>
-
-                    </div>))}
-                </div>
-                
-            </div>
+                            <div className="footerSection">
+                                <div>Capacitador/es: </div>
+                                <div>Firma: ______________________</div>
+                            </div>
+                            <div className="footerSection">
+                                <div>Se entrega: Certificado: {datosCapacitacion.certificacion} </div>
+                                <div> Material: {datosCapacitacion.material}</div>
+                            </div>
+                            <div className="footerSection">Observaciones: {datosCapacitacion.observaciones}</div>
+                    </div>))}                
+            </section>
             <div className="buttonSection">
-            <button className="printButton" onClick={handlePrint}>Imprimir registro</button>
-
+                <button className="printButton" onClick={handlePrint}>Imprimir registro</button>
             </div>
         </Fragment>
     )
