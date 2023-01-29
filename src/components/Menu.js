@@ -32,10 +32,6 @@ class Menu extends React.Component {
                     <CgNotes className='icon'/>
                     <h1>Historial por empleado</h1>
                 </a>
-                <a className='SubMenu' href="/Search">
-                    <BsSearch  className='icon'/>
-                    <h1>Buscar</h1>
-                </a>
             </div>
         )}
     }

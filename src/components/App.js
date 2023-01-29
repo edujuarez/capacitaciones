@@ -16,6 +16,7 @@ import Certification from './Certification';
 import PuntajeEdit from './PuntajeEdit';
 import Informes from './Informes';
 import Historial from './Historial';
+import Calificaciones from './Calificaciones';
 
 function App() {
   const user = 'Usuario';
@@ -45,6 +46,7 @@ function App() {
             <Route exact path="/asistencia/:idasistencia" component={PuntajeEdit}/>
             <Route exact path="/historial" component={Historial} />
             <Route exact path="/certification/:idcapacitacion" component={Certification} />
+            <Route exact path="/calificaciones/:idcapacitacion" component={Calificaciones} />
         </Switch>
       </Layout>
     </BrowserRouter>

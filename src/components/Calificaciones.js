@@ -1,70 +1,71 @@
 import React from "react";
-import './styles/search.css'
+import './styles/calificaciones.css'
 import { useState, Fragment, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 
 
-function Search() {
+function Calificaciones() {
     //trae id de capacitacion seleccionada
     const params = useParams();
     let idcapacitacion = params.idcapacitacion;
 
-    //carga los asistentes al cuadro de busqueda
-    const [busqueda, setBusqueda] = useState([]);
-    const [nuevoPuntaje, setNuevoPuntaje] = useState("");
-    const [nuevaAsistencia, setNuevaAsistencia] = useState("");
-    const [nuevoPorcentaje, setNuevoPorcentaje] = useState("");
-    const [nuevoIndex, setNuevoIndex] = useState("");
-
-
+    //trae datos de la capacitacion seleccionada
+    const [capacitacion, setCapacitacion] = useState([]);
     useEffect(() => {
-        fetch("https://servercapacitaciones-production.up.railway.app/asistentes")
+        let url = `https://servercapacitaciones-production.up.railway.app/asistentes/${idcapacitacion}`;
+        fetch(url)
         .then(res => {
             return res.json();
         })
         .then(data => {
-            setBusqueda(data);
+            setCapacitacion(data);
+            setNombreCapacitacion(data[0].nombreCapacitacion);
         })
     }, []);
 
+    //carga los asistentes al cuadro de busqueda
+    const [nuevoPuntaje, setNuevoPuntaje] = useState("");
+    const [nuevaAsistencia, setNuevaAsistencia] = useState("");
+    const [nuevoPorcentaje, setNuevoPorcentaje] = useState("");
+    const [nuevoIndex, setNuevoIndex] = useState("");
+    const [nombreCapacitacion, setNombreCapacitacion] = useState("");
+
     //Elimina asistente de la lista
     const deleteAsistente = (id) => {
-        let deleteURL = "https://servercapacitaciones-production.up.railway.app/deleteasistente"
+        let deleteURL = `https://servercapacitaciones-production.up.railway.app/deleteasistente/${id}`
         const requestOptions = {
-            method: 'PUT',
+            method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id: id})
         };
         fetch(deleteURL, requestOptions)
         .then((res) => {
             alert("Asistente eliminado");
-            window.location.href = "/search";
+            window.location.href = `/calificaciones/`+idcapacitacion;
         })
     };
 
     //edita los valores de puntaje
-    const updateNuevoPuntaje = (id, index) => {
+    const guardarDatos = (id, index) => {
+        //url de consulta para la capacitacion especifica
         let updateURL = "https://servercapacitaciones-production.up.railway.app/updatepuntaje";
-            busqueda.filter(busqueda => busqueda.id == id)
+            capacitacion.filter(capacitacion => capacitacion.id == id)
              {
-                  { if (busqueda.asistencia == "")
+                  { if (capacitacion.asistencia == "")
                     {
                     return nuevaAsistencia= "0";
                     } 
                  }
             }
-            console.log("boton guardar index: " + index + " id: " + id)
             setNuevoIndex (index)
             const requestOptions = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id: id, puntaje: nuevoPuntaje == "" ? busqueda[index].puntaje : nuevoPuntaje, asistencia: nuevaAsistencia == "" ? busqueda[index].asistencia : nuevaAsistencia, porcentaje: nuevoPorcentaje /*== "" ? busqueda[index].porcentaje : nuevoPorcentaje*/})
+            body: JSON.stringify({ id: id, puntaje: nuevoPuntaje == "" ? capacitacion[index].puntaje : nuevoPuntaje, asistencia: nuevaAsistencia == "" ? capacitacion[index].asistencia : nuevaAsistencia, porcentaje: nuevoPorcentaje == "" ? capacitacion[index].porcentaje : nuevoPorcentaje})
         };
         fetch(updateURL, requestOptions)
         .then((res) => {
-            console.log(requestOptions)
-            alert("Asistente " + busqueda[index].nombre + " modificado");
-            //window.location.href = "/search";
+            alert("Asistente " + capacitacion[index].nombre + " modificado");
         })
     };    
     
@@ -72,37 +73,20 @@ function Search() {
         <div className="containerSearch">
             <div className="tittleSection">
                 <div className="tittle">
-                    <h1>Buscar capacitación</h1>
-                    <input className="inputSearch"
-                        type="text"
-                        placeholder="Ingrese capacitación o asistente"
-                        onChange={(e)=> {
-                            setSearchTerms(e.target.value);
-                        }}
-                    />
+                    <h1>Calificaciones</h1>
+                    <h1 className="nombreCapacitacion">{nombreCapacitacion}</h1>
                 </div>          
             </div>
             <div className='card'>
-                <h1>Capacitación</h1>
                 <h1>Asistente</h1>
                 <h1>Asistió</h1>
                 <h1>Nota</h1>
                 <h1>Operaciones</h1>
             </div>
-            {busqueda.filter((val) => {
-                if(searchTerms == "") {
-                    return val
-                } else if (val.nombre.toLowerCase().includes(searchTerms.toLowerCase()) || val.nombreCapacitacion.toLowerCase().includes(searchTerms.toLowerCase()))   
-                {
-                    return val
-                }
-            }).map((val, index) => {
+            {capacitacion.map((val, index) => {
             return (                   
                 <div key={val.id}>
                     <div className='card' >
-                        <div className='column'>
-                            <p>{val.nombreCapacitacion}</p>
-                        </div>
                         <div className='column'>
                             <p>{val.nombre}</p>
                         </div>
@@ -132,7 +116,7 @@ function Search() {
                         </div>
                         <div className='column containerButtonsOperaciones'>
                             <button 
-                                onClick={() =>{updateNuevoPuntaje(val.id, index)}} 
+                                onClick={() =>{guardarDatos(val.id, index)}} 
                                 className="buttonOperaciones"
                                 >
                                 Guardar
@@ -143,13 +127,6 @@ function Search() {
                                 >
                                 Eliminar
                             </button>
-                            <button 
-                                onClick={()=> {window.location.href = `/capacitaciones/`+(val.capacitacionID)}} 
-                                className="buttonOperaciones"
-                                >
-                                Detalles
-                            </button>
-
                         </div>
             
                     </div>
@@ -160,4 +137,4 @@ function Search() {
         );
 }
 
-export default Search;
+export default Calificaciones;

@@ -62,7 +62,7 @@ function CapacitacionView() {
         <div className='container_capacitacionView'>
             <div className='mainTittle'>
                 <h1> Detalle de capacitación</h1>
-                <h1><a type='submit' href='/capacitacion'>Volver</a></h1>
+                <h1><a type='submit' href='/capacitacion'>Volver  </a></h1>
             </div>
             {capacitacion.map((capacitacion) => (
                 <div className='bodyCapacitacionView'  key={capacitacion.idcapacitacion}>
@@ -116,8 +116,9 @@ function CapacitacionView() {
                         ))}
                     </div>
                     <div className="buttonsCapacitaciones">
-                        <a type="button" href={'/addAsistentes/'+(idcapacitacion)} className="button">Agregar invitados</a>
-                        <a type="button" href={'/certification/'+(idcapacitacion)} className="button">Registro de capacitación</a>
+                        <a type="button" href={'/addAsistentes/'+ (idcapacitacion)} className="button">Agregar invitados</a>
+                        <a type="button" href={'/certification/'+ (idcapacitacion)} className="button">Registro de capacitación</a>
+                        <a type="button" href={'/calificaciones/'+ (idcapacitacion)} className="button">Calificaciones</a>
                         <button onClick={() =>{deleteCapacitacion(idcapacitacion)}}  className="button">Eliminar</button>
 
                     </div>
