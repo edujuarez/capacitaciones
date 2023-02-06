@@ -6,8 +6,7 @@ import moment from 'moment';
 import 'moment/locale/es';
 
 import './styles/addAsistentes.css'
-import { IoCompassSharp } from "react-icons/io5";
-import NuevaCapacitacionForm from "./NuevaCapacitacionForm";
+
 
 
 function AddAsistentes(){
@@ -87,10 +86,10 @@ function AddAsistentes(){
         'fecha' : moment(capacitaciones[0].fecha).format('L')
         }))
 
-    const [selectedItems, setSelectedItems] = useState('');
+    const [selectedItems, setSelectedItems] = useState("");
     function onSelect(e) {
         setSelectedItems(e)
-        console.log("elementos agregados " + (moment(capacitaciones[0].fecha).format('L')))
+        console.log("elementos agregados ")
     }
     const [removedItems, setRemovedItems] = useState('');
     function onRemove(e) {
@@ -105,7 +104,7 @@ function AddAsistentes(){
         axios.post(addAsistentesURL, selectedItems).then (() => {
             console.log(selectedItems)
             alert([`Los asistentes fueron cargados correctamente!`]);
-            window.location.href = `/capacitaciones/${idcapacitacion}`;
+            //window.location.href = `/capacitaciones/${idcapacitacion}`;
         });
     }
 

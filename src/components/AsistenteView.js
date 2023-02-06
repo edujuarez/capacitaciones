@@ -2,7 +2,8 @@ import  axios  from 'axios';
 import React from 'react';
 import { useState, useEffect, Fragment } from "react";
 import { useParams, Link } from "react-router-dom";
-
+import moment from 'moment';
+import 'moment/locale/es';
 
 import './styles/asistentesView.css';
 
@@ -34,11 +35,6 @@ function NuevoAsistente () {
             })
         };
     
-    
-    const editAsistente = () => {
-
-    }
-    
         return (
             <React.Fragment>
                 <div className='container_asistenteView'>
@@ -61,7 +57,7 @@ function NuevoAsistente () {
                         <label>Sector:</label>
                         <p className='campo' name='sector' >{asistente.sector}</p>
                         <label>Fecha de Ingreso:</label>
-                        <p className='campo' name='fechaingreso' >{asistente.fechaingreso}</p>
+                        <p className='campo' name='fechaingreso' >{moment(asistente.fechaingreso).format('L')}</p>
                         <section className='buttonsAsistentes'>
                         <Link  className='buttonLink' to={`/asistentes/${asistente.idasistente}/edit`}>
                             <button className=''>Editar</button> </Link>

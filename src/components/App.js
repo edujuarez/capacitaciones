@@ -12,7 +12,7 @@ import AsistenteEdit from './AsistenteEdit';
 import Login from './Login';
 import AddAsistentes from './AddAsistentes';
 import Search from './Search';
-import Certification from './Certification';
+import Certification from './certification';
 import PuntajeEdit from './PuntajeEdit';
 import Informes from './Informes';
 import Historial from './Historial';
