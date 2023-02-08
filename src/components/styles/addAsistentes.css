@@ -64,6 +64,7 @@ input {
     padding: 1%;
     background-color: white;
     border-radius: 20px;
+    min-height: 30px;
     height: 100%;
     width: 97%;
     padding-left: 4%;

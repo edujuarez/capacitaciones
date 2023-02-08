@@ -121,6 +121,8 @@ function Certification() {
             <div className="buttonSection">
                 <button className="printButton" onClick={handlePrint}>Imprimir registro</button>
             </div>
+            <h1><a type='submit' href={`/capacitaciones/` + idcapacitacion}>Volver  </a></h1>
+
         </Fragment>
     )
 }

@@ -114,6 +114,7 @@ function AddAsistentes(){
             <div className='container_nuevaCapacitacion'>
                 <div className='mainTittle'>
                     <h1>Agregar asistentes</h1>
+                    <h1><a type='submit' href={`/capacitaciones/` + idcapacitacion}>Volver  </a></h1>
                 </div>
                 <form className='bodyCapacitacion' type='submit'>
                     <div>
@@ -126,7 +127,6 @@ function AddAsistentes(){
                     </div>
                     <div>
                         <p>Asistentes</p>
-
                         <Multiselect
                             options={asistentesOptions} // Options to display in the dropdown
                             onSelect={onSelect}
