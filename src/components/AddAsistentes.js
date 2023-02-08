@@ -90,6 +90,7 @@ function AddAsistentes(){
     function onSelect(e) {
         setSelectedItems(e)
         console.log("elementos agregados ")
+        console.log(selectedItems)
     }
     const [removedItems, setRemovedItems] = useState('');
     function onRemove(e) {
@@ -104,7 +105,7 @@ function AddAsistentes(){
         axios.post(addAsistentesURL, selectedItems).then (() => {
             console.log(selectedItems)
             alert([`Los asistentes fueron cargados correctamente!`]);
-            //window.location.href = `/capacitaciones/${idcapacitacion}`;
+            window.location.href = `/capacitaciones/${idcapacitacion}`;
         });
     }
 

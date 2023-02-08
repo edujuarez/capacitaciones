@@ -24,6 +24,7 @@ function Historial() {
             return res.json();
         })
         .then(data => {
+            data.sort(function (a, b) { return a.nombre - b.nombre })
             setAsistentes(data);
     })}, []);
 
@@ -35,7 +36,10 @@ function Historial() {
             return res.json();
         })
         .then(data => {
-            setHistorial(data);
+            //lo paso por un set para eliminar duplicados
+            const dataArr = new Set(data);
+            let result = [...dataArr]
+            setHistorial(result);
         })
     }, []);
     
@@ -68,8 +72,12 @@ function Historial() {
 
         */
        const formulario = (id) =>
-       {
-        setSelected(historial.filter(asistentes => asistentes.invitadoID == id))        
+       {//vacio el array de capacitaciones para que no se repitan
+        setSelected([''])
+        //busco en el array de asistencias las que coincidan con el ID del asistente seleccionado
+        setSelected(historial.filter(asistentes => asistentes.invitadoID == id))
+        
+
         }
 
 
@@ -200,9 +208,9 @@ function Historial() {
                             </thead>
                        
                         <tbody >
-                        {selected.map((val) => {
+                        {selected.map((val, index) => {
                                 return (
-                                    <tr key={val.invitadoID}>
+                                    <tr key={index}>
                                         <td>{val.capacitacionID}</td>
                                         <td>{val.fecha }</td>
                                         <td>{val.asistencia=="1" ? "Si": "No"}</td>

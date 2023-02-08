@@ -21,7 +21,7 @@ function Capacitacion() {
                     elem.fecha = (elem.fecha).toString() +'+02:00'
                   return elem.fecha
                 })*/
-                data.sort(function (a, b) { return a.fecha - b.fecha })
+                data.sort(function (a, b) { return a.nombre - b.nombre })
             setCapacitaciones(data);
         })
     }, []);
