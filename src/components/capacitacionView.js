@@ -103,6 +103,10 @@ function CapacitacionView() {
                             <label>Modalidad:</label>
                             <p className='campo'>{capacitacion.modalidad}</p>
                         </div>
+                        <div className='select'>
+                                <label>Capacitador:</label>
+                                <p className="campo" >{capacitacion.capacitador}</p>
+                        </div>
                     </div>                    
 
                     <label>Observaciones:</label>

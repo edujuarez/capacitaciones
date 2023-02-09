@@ -49,9 +49,7 @@ function capacitacionEdit() {
 
     //Guarda los cambios en la capacitacion
     const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log(capacitacion)
-        
+        event.preventDefault();        
         const requestOptions = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
@@ -134,6 +132,10 @@ function capacitacionEdit() {
                                     <option value='Virtual'>Virtual</option>
                                     <option value='Presencial'>Presencial</option>
                                 </select> 
+                            </div>
+                            <div className='select'>
+                                <label>Capacitador:</label>
+                                <input name='capacitador' forms='typeform' type="text" value={capacitacion.capacitador} onChange={handleChange} placeholder="Ingrese capacitador" />
                             </div>
 
                         </div>

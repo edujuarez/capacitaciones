@@ -35,7 +35,8 @@ function  NuevaCapacitacionForm(){
             material : "",
             observaciones : "",
             modalidad: "",
-            eliminado : 0
+            eliminado : 0,
+            capacitador: ""
         });
 
         const  [capacitaciones, setCapacitaciones ] = useState([]);
@@ -71,7 +72,8 @@ function  NuevaCapacitacionForm(){
                 observaciones : `${value.observaciones}`,
                 duracion : `${value.duracion}`,
                 modalidad: `${value.modalidad}`,
-                eliminado : 0
+                eliminado : 0,
+                capacitador: `${value.capacitador}`
                 }).then (() => {                
                 alert([`La capacitacion ${value.nombre} fue creada correctamente! Fecha ${moment(value.fecha).format('L')}`]);
                 window.location.href = "/capacitacion";
@@ -148,7 +150,11 @@ function  NuevaCapacitacionForm(){
                                     <option value="Seleccionar">Seleccionar</option>
                                     <option value='Virtual'>Virtual</option>
                                     <option value='Presencial'>Presencial</option>
-                                </select> 
+                                </select>
+                            </div>
+                            <div className='select'>
+                                <label>Capacitador:</label>
+                                <input name='capacitador' forms='typeform' type="text" onChange={handleChange} />
                             </div>
 
                         </div>
