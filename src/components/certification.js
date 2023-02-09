@@ -108,14 +108,14 @@ function Certification() {
                                     ))}
                             </table>
                             <div className="footerSection">
-                                <div>Capacitador/es: </div>
-                                <div>Firma: ______________________</div>
-                            </div>
-                            <div className="footerSection">
                                 <div>Se entrega: Certificado: {datosCapacitacion.certificacion} </div>
                                 <div> Material: {datosCapacitacion.material}</div>
                             </div>
                             <div className="footerSection">Observaciones: {datosCapacitacion.observaciones}</div>
+                            <div className="footerSection">
+                                <div>Capacitador/es: {datosCapacitacion.capacitador}</div>
+                                <div>Firma: _______________</div>
+                            </div>
                     </div>))}                
             </section>
             <div className="buttonSection">

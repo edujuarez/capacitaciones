@@ -15,14 +15,8 @@ import { secondsToMilliseconds } from 'date-fns';
 function Informes() {
     moment.locale('es')
     //Inicializo states de busqueda
-    const [busqueda, setBusqueda] = useState([]);
-    const [searchTerms, setSearchTerms] = useState("");
-    const [nombre, setNombre] = useState("");
-    const [legajo, setLegajo] = useState("");
-    const [fecha, setFecha] = useState("");
     const [selected, setSelected] = useState([]);
     const [asistentes, setAsistentes] = useState([]);
-    const [selectedValues, setSelectedValues] = useState([]);
 
 
 
@@ -50,10 +44,8 @@ function Informes() {
         })
         .then(data => {
             setCapacitaciones(data);
-            console.log(capacitaciones)
         })
     }, []);
-    console.log(capacitaciones)
 
         //fetcheamos todos las  asistencias
         useEffect(() => {
@@ -63,7 +55,6 @@ function Informes() {
             })
             .then(data => {
                 setAsistentes(data);
-                console.log(asistentes)
             })
         }, []);
 
@@ -87,28 +78,9 @@ function Informes() {
         {
             
          setSelected(asistentes.filter(asistentes => asistentes.capacitacionID == id))
-         
+         setFilteredData(capacitaciones.filter(capacitaciones => capacitaciones.idcapacitacion == id))         
          }
-         console.log(asistentes)
-
-        const handleSearch = () => {
-            /*console.log(fechaDesde)
-            if (fechaDesde !== "" && fechaHasta !== "" ){
-                console.log("if adentro " + fechaDesde)
-                busqueda.filter(
-                    function (a)
-                    {
-                        result = a.some(moment(a.fecha).format('L') == moment(fechaDesde).format('L'))
-                        return console.log(result)
-                    });
-            }
-            else{
-                console.log("if afuera")
-
-                alert("Faltan datos de busqueda")
-            }
-            console.log(busqueda)*/
-        }
+        
     return (
         <Fragment>
             <div className='containerInformes'>
@@ -159,7 +131,7 @@ function Informes() {
                                 <th>Fecha: {selected[0].fecha}</th>
                                 <th></th>
                                 <th></th>
-                                <th></th>
+                                <th>Capacitador: {filteredData[0].capacitador}</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -186,7 +158,9 @@ function Informes() {
                                 </tr>
                             ))}
                         </tbody>
-                    </table></>
+                    </table>
+
+                    </>
                     ) : (
                             <p>No se encontraron asistentes cargados</p>
                     )}              

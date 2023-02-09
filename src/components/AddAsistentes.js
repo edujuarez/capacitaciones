@@ -28,7 +28,8 @@ function AddAsistentes(){
             'observaciones' : "",
             'plan' : "",
             'temario' : "",
-            'tipo' : ""
+            'tipo' : "",
+            'capacitador' : ""
 }]);
     let url = `https://servercapacitaciones-production.up.railway.app/capacitaciones/${idcapacitacion}`;
     useEffect(() => {
@@ -53,6 +54,7 @@ function AddAsistentes(){
         })
         .then(data => {
             setSelectedValues(data);
+            console.log(selectedValues)
         })
     }, []);
 
@@ -83,7 +85,8 @@ function AddAsistentes(){
         'puntaje' : "Sin cargar",
         'eliminado' : 0,
         'nombreCapacitacion' : (JSON.stringify((capacitaciones[0].nombre))).slice(1).slice(0,-1),
-        'fecha' : moment(capacitaciones[0].fecha).format('L')
+        'fecha' : moment(capacitaciones[0].fecha).format('L'),
+        'capacitador': capacitaciones.capacitador
         }))
 
     const [selectedItems, setSelectedItems] = useState("");
