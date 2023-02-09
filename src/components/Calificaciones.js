@@ -133,6 +133,8 @@ function Calificaciones() {
                 </div>
                     
             )})}
+        <h1><a type='submit' href={`/capacitaciones/` + idcapacitacion}>Volver  </a></h1>
+
         </div>
         );
 }

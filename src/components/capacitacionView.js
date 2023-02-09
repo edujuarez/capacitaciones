@@ -119,6 +119,7 @@ function CapacitacionView() {
                         <a type="button" href={'/addAsistentes/'+ (idcapacitacion)} className="button">Agregar invitados</a>
                         <a type="button" href={'/certification/'+ (idcapacitacion)} className="button">Registro de capacitación</a>
                         <a type="button" href={'/calificaciones/'+ (idcapacitacion)} className="button">Calificaciones</a>
+                        <a type="button" href={'/capacitaciones/'+ (idcapacitacion)+ '/edit'} className="button">Editar</a>
                         <button onClick={() =>{deleteCapacitacion(idcapacitacion)}}  className="button">Eliminar</button>
 
                     </div>

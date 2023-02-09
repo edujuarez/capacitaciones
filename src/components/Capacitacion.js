@@ -25,8 +25,6 @@ function Capacitacion() {
             setCapacitaciones(data);
         })
     }, []);
-    console.log(capacitaciones)
-
         return (
         <React.Fragment>
             <div className='mainContainer'>
