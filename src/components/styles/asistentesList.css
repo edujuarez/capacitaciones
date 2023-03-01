@@ -22,6 +22,7 @@
 .title {
     display: flex;
     align-items: center;
+    width: 100%;
     
 }
 .title input {
@@ -36,7 +37,7 @@
     margin: 1%;
     justify-content: space-around;
     text-align: center;
-    min-width: 17%;
+    min-width: 10%;
     
 
 }

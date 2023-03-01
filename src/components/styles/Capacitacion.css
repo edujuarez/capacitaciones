@@ -17,6 +17,11 @@
     font-weight: lighter;
     margin-bottom: 5px;
 }
+.title {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
 
 .card{
     display: flex;

@@ -10,6 +10,9 @@ import 'moment/locale/es';
 
 function Capacitacion() {
     const  [capacitaciones, setCapacitaciones ] = useState([]);
+    //maneja busqueda de capacitacion especifica
+    const [searchTerms, setSearchTerms] = useState("");
+
     useEffect(() => {
         let url = "https://servercapacitaciones-production.up.railway.app/capacitaciones";
         fetch(url)
@@ -24,13 +27,34 @@ function Capacitacion() {
                 data.sort(function (a, b) { return a.nombre - b.nombre })
             setCapacitaciones(data);
         })
+
     }, []);
         return (
         <React.Fragment>
             <div className='mainContainer'>
-                {capacitaciones && <h1 className='mainTittle'>Proximas Capacitaciones</h1>}
-
-                     {capacitaciones.map((capacitaciones) => (
+                {capacitaciones && 
+                <h1 className='mainTittle'>Proximas Capacitaciones</h1>}
+                <div className="title">
+                    <input type="text"
+                            placeholder="Buscar capacitación"
+                            onChange={(e)=> {
+                                setSearchTerms(e.target.value);
+                            }}/>
+                    <div className='buttonContainer'>
+                        <a className='addButton' href='/nuevaCapacitacion'>
+                            <AiOutlinePlusCircle className='addIcon' />
+                            <p>Agregar capacitación</p>
+                        </a>
+                    </div>
+                </div>
+                     {capacitaciones.filter((capacitaciones) => {
+                        if(searchTerms == ""){
+                            return capacitaciones
+                        }else if (capacitaciones.nombre.toLowerCase().includes(searchTerms.toLowerCase())) {
+                            return capacitaciones
+                        }
+                    })
+                    .map((capacitaciones) => (
                           <Link to={`/capacitaciones/${capacitaciones.idcapacitacion}`} key={ capacitaciones.idcapacitacion}>
                             <div className='card'>
                                     <div className='dateContainer'>
@@ -47,13 +71,6 @@ function Capacitacion() {
                        
                      ))
                      }
-                    
-                <div className='buttonContainer'>
-                    <a className='addButton' href='/nuevaCapacitacion'>
-                        <AiOutlinePlusCircle className='addIcon' />
-                        <p>Agregar capacitación</p>
-                    </a>
-                </div>
             </div>
         </React.Fragment>
            
