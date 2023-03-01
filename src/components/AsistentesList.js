@@ -24,12 +24,12 @@ function AsistentesList() {
             setAsistentes(data);
         })
     }, []);
-console.log(asistentes)
     return (
         <React.Fragment>
             <div className='containerAsistente'>
-                <div className='title'>
-                    <h1>Asistentes</h1>
+                
+                    <h1 className='mainTittle_asistentes'>Asistentes</h1>
+                    <div className='title'>
                     <input type="text"
                         placeholder="Buscar asistente"
                         onChange={(e)=> {
