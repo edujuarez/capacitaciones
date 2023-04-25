@@ -1,4 +1,4 @@
-import  axios  from 'axios';
+import axios from 'axios';
 import React from 'react';
 import { useState, useEffect, Fragment } from "react";
 import { useParams, Link } from "react-router-dom";
@@ -8,41 +8,42 @@ import 'moment/locale/es';
 import './styles/asistentesView.css';
 
 
-function NuevoAsistente () {
+function NuevoAsistente() {
     const params = useParams();
     let idasistente = params.idasistente;
+    const { location } = window;
 
-    const  [asistente, setAsistente ] = useState([]);
+    const [asistente, setAsistente] = useState([]);
     useEffect(() => {
         let url = `https://servercapacitaciones-production.up.railway.app/asistente/${idasistente}`;
         fetch(url)
-        .then(res => {
-            return res.json();
-        })
-        .then(data => {
-            setAsistente(data);
-        })
+            .then(res => {
+                return res.json();
+            })
+            .then(data => {
+                setAsistente(data);
+            })
     }, []);
 
-        const deleteSubmit = (asistenteID) => {
-            let deleteURL = `https://servercapacitaciones-production.up.railway.app/asistente/${asistenteID}/delete`
-            axios.delete(deleteURL)
+    const deleteSubmit = (asistenteID) => {
+        let deleteURL = `https://servercapacitaciones-production.up.railway.app/asistente/${asistenteID}/delete`
+        axios.delete(deleteURL)
             .then(response => {
-                if(response.data != null) {
+                if (response.data != null) {
                     alert("El asistente fue borrado correctamente!");
                     location.href = '/asistente'
                 }
             })
-        };
-    
-        return (
-            <React.Fragment>
-                <div className='container_asistenteView'>
-                    <div className='mainTittle_asistenteView'>
-                        <h1>Ficha Asistente </h1>
-                        <h1><a type='submit' href='/asistentes'>Volver</a> </h1>
-                    </div>
-                    {asistente.map((asistente) => (
+    };
+
+    return (
+        <React.Fragment>
+            <div className='container_asistenteView'>
+                <div className='mainTittle_asistenteView'>
+                    <h1>Ficha Asistente </h1>
+                    <h1><a type='submit' href='/asistentes'>Volver</a> </h1>
+                </div>
+                {asistente.map((asistente) => (
                     <form className='bodyAsistente_asistenteView' key={asistente.idasistente}>
                         <label>Nombre:</label>
                         <p className='campo' name='nombre' >{asistente.nombre}</p>
@@ -59,15 +60,16 @@ function NuevoAsistente () {
                         <label>Fecha de Ingreso:</label>
                         <p className='campo' name='fechaingreso' >{moment(asistente.fechaingreso).format('L')}</p>
                         <section className='buttonsAsistentes'>
-                        <Link  className='buttonLink' to={`/asistentes/${asistente.idasistente}/edit`}>
-                            <button className=''>Editar</button> </Link>
-                            <button onClick={() => {deleteSubmit(asistente.idasistente)}}>Eliminar</button>
+                            <Link className='buttonLink' to={`/asistentes/${asistente.idasistente}/edit`}>
+                                <button className=''>Editar</button> </Link>
+                            <button onClick={() => { deleteSubmit(asistente.idasistente) }}>Eliminar</button>
                         </section>
                     </form>
-                ))} 
-                </div>
-                  
-            </React.Fragment>
-        )}
-    
+                ))}
+            </div>
+
+        </React.Fragment>
+    )
+}
+
 export default NuevoAsistente;

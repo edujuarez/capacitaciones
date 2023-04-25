@@ -4,43 +4,36 @@ import { Link } from 'react-router-dom'
 import './styles/asistentesList.css';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 
-
-
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;300&display=swap');
-</style> 
-
 function AsistentesList() {
     const [asistentes, setAsistentes] = useState([]);
     const [searchTerms, setSearchTerms] = useState("");
 
     useEffect(() => {
         fetch("https://servercapacitaciones-production.up.railway.app/asistente")
-        .then(res => {
-            return res.json();
-        })
-        .then(data => {
-            setAsistentes(data);
-        })
+            .then(res => {
+                return res.json();
+            })
+            .then(data => {
+                setAsistentes(data);
+            })
     }, []);
     return (
         <React.Fragment>
             <div className='containerAsistente'>
-                
-                    <h1 className='mainTittle_asistentes'>Asistentes</h1>
-                    <div className='title'>
+
+                <h1 className='mainTittle_asistentes'>Asistentes</h1>
+                <div className='title'>
                     <input type="text"
                         placeholder="Buscar asistente"
-                        onChange={(e)=> {
+                        onChange={(e) => {
                             setSearchTerms(e.target.value);
-                        }}/>
-                        <div className='buttonContainer'>
-                    <a className='addButton' href='/nuevoasistente'>
-                        <AiOutlinePlusCircle className='addIcon' />
-                        <p>Agregar nuevo</p>
-                    </a>
-                </div>
+                        }} />
+                    <div className='buttonContainer'>
+                        <a className='addButton' href='/nuevoasistente'>
+                            <AiOutlinePlusCircle className='addIcon' />
+                            <p>Agregar nuevo</p>
+                        </a>
+                    </div>
                 </div>
                 <div className='card'>
                     <h1>Legajo</h1>
@@ -51,43 +44,43 @@ function AsistentesList() {
                     <h1>Fecha Ingreso</h1>
                 </div>
                 {asistentes.filter((asistentes) => {
-                    if(searchTerms == ""){
+                    if (searchTerms == "") {
                         return asistentes
-                    }else if (asistentes.nombre.toLowerCase().includes(searchTerms.toLowerCase())) {
+                    } else if (asistentes.nombre.toLowerCase().includes(searchTerms.toLowerCase())) {
                         return asistentes
                     }
                 })
-                .map((asistentes) => (
-               
-                    <Link to={`/asistentes/${asistentes.idasistente}`} key={asistentes.idasistente}>
-                        <div className='card' >
-                            <div className='column'>
-                                <p>{asistentes.legajo}</p>
+                    .map((asistentes) => (
+
+                        <Link to={`/asistentes/${asistentes.idasistente}`} key={asistentes.idasistente}>
+                            <div className='card' >
+                                <div className='column'>
+                                    <p>{asistentes.legajo}</p>
+                                </div>
+                                <div className='column'>
+                                    <p>{asistentes.nombre}</p>
+                                </div>
+                                <div className='column'>
+                                    <p>{asistentes.dni}</p>
+                                </div>
+                                <div className='column'>
+                                    <p>{asistentes.sector}</p>
+                                </div>
+                                <div className='column'>
+                                    <p>{asistentes.cargo}</p>
+                                </div>
+                                <div className='column'>
+                                    <p>{asistentes.fechaingreso}</p>
+                                </div>
+
                             </div>
-                            <div className='column'>
-                                <p>{asistentes.nombre}</p>
-                            </div>
-                            <div className='column'>
-                                <p>{asistentes.dni}</p>                        
-                            </div>
-                            <div className='column'>
-                                <p>{asistentes.sector}</p>
-                            </div>
-                            <div className='column'>
-                                <p>{asistentes.cargo}</p>
-                            </div>
-                            <div className='column'>
-                                <p>{asistentes.fechaingreso}</p>
-                            </div>
-              
-                        </div>
-                    </Link>
-                      
-                ))}
-                
+                        </Link>
+
+                    ))}
+
             </div>
-        
-        </React.Fragment> 
-        )
-    }
+
+        </React.Fragment>
+    )
+}
 export default AsistentesList;

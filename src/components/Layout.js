@@ -5,21 +5,19 @@ import Menu from './Menu';
 
 import './styles/layout.css'
 
-import { Fragment } from 'react';
-
-function Layout (props) {
+function Layout(props) {
     return (
-            <React.Fragment>
-                    <div className='main'>
-                        <Header />
-                            <div className='body'>          
-                                <Menu user={props.user}/>
-                                <div className='mainBoard'>
-                                    {props.children}
-                                </div>
-                            </div>
-                        <Footer />
+        <React.Fragment>
+            <div className='main'>
+                <Header />
+                <div className='body'>
+                    <Menu user={props.user} />
+                    <div className='mainBoard'>
+                        {props.children}
                     </div>
+                </div>
+                <Footer />
+            </div>
         </React.Fragment>)
-    }
+}
 export default Layout;

@@ -1,18 +1,17 @@
 import React from 'react';
-import  ReactDOM from 'react-dom';
 import './styles/header.css';
 import { IoMdExit } from 'react-icons/io';
 import logo from '../images/Logo.png';
 
 class Header extends React.Component {
     render() {
-        return(
+        return (
             <div className="mainHeader">
                 <div className="imgLogo">
                     <img src={logo} alt="Logo" />
                 </div>
                 <div className='title'>
-                    <h1>Capacitaciones Iselín</h1>
+                    <h1>Mentor Iselín</h1>
                 </div>
                 <a href="#" className='exitContainer'>
                     <div>
@@ -21,7 +20,7 @@ class Header extends React.Component {
                         </h1>
                     </div>
                     <div className='iconContainer'>
-                        <IoMdExit  className='iconExit'/>
+                        <IoMdExit className='iconExit' />
                     </div>
                 </a>
 

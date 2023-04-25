@@ -1,4 +1,4 @@
-import { React } from 'react';
+import React from 'react';
 import './styles/historial.css';
 import { useState, Fragment, useEffect, useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
@@ -6,8 +6,8 @@ import { BsSearch } from 'react-icons/bs';
 import moment from 'moment';
 import 'moment/locale/es';
 import logoIselin from '../images/iselin.jpg';
-
-
+import ExportToExcel from './ExportToExcel';
+import Multiselect from 'multiselect-react-dropdown';
 
 function Historial() {
     moment.locale('es')
@@ -20,219 +20,222 @@ function Historial() {
     //fetcheamos TODOS los asistentes y capacitaciones y ordenamos por fecha
     useEffect(() => {
         fetch("https://servercapacitaciones-production.up.railway.app/asistentes")
-        .then(res => {
-            return res.json();
-        })
-        .then(data => {
-            data.sort(function (a, b) { return a.nombre - b.nombre })
-            setAsistentes(data);
-    })}, []);
+            .then(res => {
+                return res.json();
+            })
+            .then(data => {
+                data.sort(function (a, b) { return a.nombre - b.nombre })
+                setAsistentes(data);
+            })
+    }, []);
 
 
     //fetcheamos todos las  asistencias
     useEffect(() => {
         fetch(`https://servercapacitaciones-production.up.railway.app/asistencia`)
-        .then(res => {
-            return res.json();
-        })
-        .then(data => {
-            //lo paso por un set para eliminar duplicados
-            const dataArr = new Set(data);
-            let result = [...dataArr]
-            setHistorial(result);
-        })
+            .then(res => {
+                return res.json();
+            })
+            .then(data => {
+                //lo paso por un set para eliminar duplicados
+                const dataArr = new Set(data);
+                let result = [...dataArr]
+                setHistorial(result);
+            })
     }, []);
-    
-    const  [capacitaciones, setCapacitaciones ] = useState([]);
+
+    const [capacitaciones, setCapacitaciones] = useState([]);
     useEffect(() => {
         let url = "https://servercapacitaciones-production.up.railway.app/capacitaciones";
         fetch(url)
-        .then(res => {
-            return res.json();
-        })
-        .then(capacitaciones => {
-            setCapacitaciones(capacitaciones);
-        })
+            .then(res => {
+                return res.json();
+            })
+            .then(capacitaciones => {
+                setCapacitaciones(capacitaciones);
+            })
     }, []);
 
-        //configura el boton de imprimir para guardar PDF, imprime el componente referente
-        const componentRef = useRef();
-        const handlePrint = useReactToPrint({
-            content: () => componentRef.current,
-        });
+    //configura el boton de imprimir para guardar PDF, imprime el componente referente
+    const componentRef = useRef();
+    const handlePrint = useReactToPrint({
+        content: () => componentRef.current,
+    });
 
-        //filtra solo la capacitacion que tiene ID a la seleccionada en el select
-        
-        /*
-        function formulario (id){
-            setHistorial(capacitaciones.filter(capacitaciones => capacitaciones.idcapacitacion == id))
-            console.log("lo cargado en historial " + capacitaciones)
+    //filtra solo la capacitacion que tiene ID a la seleccionada en el select
 
-        }
+    /*
+    function formulario (id){
+        setHistorial(capacitaciones.filter(capacitaciones => capacitaciones.idcapacitacion == id))
+        console.log("lo cargado en historial " + capacitaciones)
 
-        */
-       const formulario = (id) =>
-       {//vacio el array de capacitaciones para que no se repitan
+    }
+
+    */
+    const formulario = (id) => {//vacio el array de capacitaciones para que no se repitan
         setSelected([''])
         //busco en el array de asistencias las que coincidan con el ID del asistente seleccionado
         setSelected(historial.filter(asistentes => asistentes.invitadoID == id))
-        
 
+
+    }
+
+
+
+    //date format
+    let [fechaHasta, setFechaHasta] = useState("");
+    function formatDateHasta(date) {
+        if (date == "") {
+            return setFechaDesde("")
         }
+        console.log("HASTA " + moment(date).format('L'))
+        let newDate = new Date(`${date}T05:00:00`)
 
+        return setFechaHasta(newDate.toLocaleDateString())
+    }
 
-
-        //date format
-        let [fechaHasta, setFechaHasta] = useState("");
-        function formatDateHasta(date) {
-                if(date == ""){
-                    return setFechaDesde("")
-                }
-                console.log("HASTA " + moment(date).format('L'))
-                let newDate = new Date(`${date}T05:00:00`)
-
-                return  setFechaHasta(newDate.toLocaleDateString())
-              }
-
-        let [fechaDesde, setFechaDesde] = useState("");
-        function formatDateDesde(date) {
-            if(date == ""){
-                return setFechaDesde("")
-            }
-            console.log("DESDE " + moment(date).format('L'))
-            let newDate2 = new Date(`${date}T05:00:00`)
-
-            return setFechaDesde (newDate2.toLocaleDateString())
-        } 
-        const handleSearch = () => {
-            console.log(fechaDesde)
-            if (fechaDesde !== "" && fechaHasta !== "" ){
-                /*console.log("if adentro " + moment(fechaDesde).format('L') + " " + moment(fechaHasta).format('L'))
-                setSelected(historial.filter(asistentes => (moment(asistentes.fecha).format('L') > fechaDesde || moment(asistentes.fecha).format('L') < fechaHasta)))
-                console.log(selected)*/
-            }
-            else{
-                console.log("if afuera")
-
-                alert("Faltan datos de busqueda")
-            }
+    let [fechaDesde, setFechaDesde] = useState("");
+    function formatDateDesde(date) {
+        if (date == "") {
+            return setFechaDesde("")
         }
-    return(
+        console.log("DESDE " + moment(date).format('L'))
+        let newDate2 = new Date(`${date}T05:00:00`)
+
+        return setFechaDesde(newDate2.toLocaleDateString())
+    }
+    const handleSearch = () => {
+        console.log(fechaDesde)
+        if (fechaDesde !== "" && fechaHasta !== "") {
+            /*console.log("if adentro " + moment(fechaDesde).format('L') + " " + moment(fechaHasta).format('L'))
+            setSelected(historial.filter(asistentes => (moment(asistentes.fecha).format('L') > fechaDesde || moment(asistentes.fecha).format('L') < fechaHasta)))
+            console.log(selected)*/
+        }
+        else {
+            console.log("if afuera")
+
+            alert("Faltan datos de busqueda")
+        }
+    }
+
+    function onSelect(e) {
+        formulario(e[0].invitadoID)
+    }
+    return (
         <Fragment>
             <div className='containerInformes'>
                 <div className='tittleSectionInformes'>
                     <div className='tittleInformes'>
                         <h1>Buscar historial de capacitaciones</h1>
-                        <select name="select"
-                            className='inputInformes'
-                            type="text"
-                            placeholder="Ingrese asistente a buscar"
-                            onChange={(e) => {formulario(e.target.value)}}
-                            >                     
-                            <option>Ingrese nombre de personal</option>
-                            {
-                                asistentes.map((asistentes, index) => (
-                                    <option key={index} value={asistentes.invitadoID}>{asistentes.nombre}</option>
-                                ))
-                            }
-                        </select>
+
+                        <Multiselect
+                            options={asistentes} // Options to display in the dropdown
+                            placeholder="Ingrese asistente a buscar. Maximo permitido 1." // Property name to display in the dropdown options
+                            isObject={true}
+                            onSelect={onSelect}
+                            displayValue="nombre"
+                            showArrow
+                        />
                     </div>
                 </div>
                 <div className='searchBox'>
                     <div className='tittleInformes'>
-                            <h2>Desde</h2>
-                            <input 
-                                className='inputInformes'
-                                type="date"
-                                onChange={(e)=> {setFechaDesde(e.target.value)}}                            
-                                />
-                        </div>                    
-                        <div className='tittleInformes'>
-                            <h2>Hasta</h2>
-                            <input
-                                className='inputInformes'
-                                type="date"
-                                onChange={(e)=> {setFechaHasta(e.target.value)}}
-                                
-                                />                               
-                        </div>
-                        <button className='buttonSearch' type="" onClick={handleSearch}>
-                            <BsSearch /> Buscar
-                        </button>
+                        <h2>Desde</h2>
+                        <input
+                            className='inputInformes'
+                            type="date"
+                            onChange={(e) => { setFechaDesde(e.target.value) }}
+                        />
+                    </div>
+                    <div className='tittleInformes'>
+                        <h2>Hasta</h2>
+                        <input
+                            className='inputInformes'
+                            type="date"
+                            onChange={(e) => { setFechaHasta(e.target.value) }}
+
+                        />
+                    </div>
+                    <button className='buttonSearch' type="" onClick={handleSearch}>
+                        <BsSearch /> Buscar
+                    </button>
                 </div>
-    
+
                 <section ref={componentRef}>
-                {selected.length > 0 ? (
-                <>
-                    <table border="1" bordercolor="white">
-                        <thead>
-                            <tr className='primerTitulo'>
-                                <th>SGI</th>
-                                <th>CÓDIGO</th>
-                                <th>TÍTULO</th>
-                                <th>PROCESO</th>
-                                <th>REV</th>
-                            </tr>
-                            <tr className='segundoTitulo'>
-                                <th><img src={logoIselin}></img></th>
-                                <th>RG-RH 06-12</th>
-                                <th>HISTORIAL DE CAPACITACIONES</th>
-                                <th>GESTIÓN DEL RECURSO HUMANO</th>
-                                <th>0</th>
-                            </tr>
-                            <tr className='segundoTitulo'>
-                                <th>Apellido y nombre:</th>
-                                <th colSpan="2">{selected[0].nombre}</th>
-                                <th>Legajo: {selected[0].invitadoID}</th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <th>Fecha desde:</th>
-                                <th>{fechaDesde ? moment(fechaDesde).format('L') : "" }</th>
-                                <th>Fecha hasta:</th>
-                                <th>{fechaHasta ? moment(fechaHasta).format('L') : ""}</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        </table>
-                        <table border="1">
-                            <thead >
-                                <tr >
-                                    <th>ID</th>
-                                    <th>Fecha</th>
-                                    <th>Asistió</th>
-                                    <th>Nombre capacitación</th>
-                                    <th>Evaluación</th>
-                                    <th>% de aprobación</th>
-                                </tr>
-                            </thead>
-                       
-                        <tbody >
-                        {selected.map((val, index) => {
-                                return (
-                                    <tr key={index}>
-                                        <td>{val.capacitacionID}</td>
-                                        <td>{val.fecha }</td>
-                                        <td>{val.asistencia=="1" ? "Si": "No"}</td>
-                                        <td>{val.nombreCapacitacion}</td>
-                                        <td>{val.puntaje}</td>
-                                        <td>{val.porcentaje ? val.porcentaje + " %" : "Sin cargar" }</td>
+                    {selected.length > 0 ? (
+                        <>
+                            <table border="1" bordercolor="white">
+                                <thead>
+                                    <tr className='primerTitulo'>
+                                        <th>SGI</th>
+                                        <th>CÓDIGO</th>
+                                        <th>TÍTULO</th>
+                                        <th>PROCESO</th>
+                                        <th>REV</th>
                                     </tr>
-                            )})}                
-                        </tbody>
-                    </table>
-                </>
-                ) : (
-                    <p>No se encontraron coincidencias</p>
+                                    <tr className='segundoTitulo'>
+                                        <th><img src={logoIselin}></img></th>
+                                        <th>RG-RH 06-12</th>
+                                        <th>HISTORIAL DE CAPACITACIONES</th>
+                                        <th>GESTIÓN DEL RECURSO HUMANO</th>
+                                        <th>0</th>
+                                    </tr>
+                                    <tr className='segundoTitulo'>
+                                        <th>Apellido y nombre:</th>
+                                        <th colSpan="2">{selected[0].nombre}</th>
+                                        <th>Legajo: {selected[0].invitadoID}</th>
+                                        <th></th>
+                                    </tr>
+                                    <tr>
+                                        <th>Fecha desde:</th>
+                                        <th>{fechaDesde ? moment(fechaDesde).format('L') : ""}</th>
+                                        <th>Fecha hasta:</th>
+                                        <th>{fechaHasta ? moment(fechaHasta).format('L') : ""}</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                            <table border="1">
+                                <thead >
+                                    <tr >
+                                        <th>ID</th>
+                                        <th>Fecha</th>
+                                        <th>Asistió</th>
+                                        <th>Nombre capacitación</th>
+                                        <th>Evaluación</th>
+                                        <th>% de aprobación</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody >
+                                    {selected.map((val, index) => {
+                                        return (
+                                            <tr key={index}>
+                                                <td>{val.capacitacionID}</td>
+                                                <td>{val.fecha}</td>
+                                                <td>{val.asistencia == "1" ? "Si" : "No"}</td>
+                                                <td>{val.nombreCapacitacion}</td>
+                                                <td>{val.puntaje}</td>
+                                                <td>{val.porcentaje ? val.porcentaje + " %" : "Sin cargar"}</td>
+                                            </tr>
+                                        )
+                                    })}
+                                </tbody>
+                            </table>
+                        </>
+                    ) : (
+                        <p>No se encontraron coincidencias</p>
                     )}</section>
-                
-                
+
+
                 <div className="buttonSection">
-                    <button 
-                        className="printButton" 
+                    <button
+                        className="printButton"
                         onClick={handlePrint}>
                         Imprimir informe
-                        </button>
+                    </button>
+                    <ExportToExcel excelData={selected} fileName={selected.length > 0 ? `Historial ` + selected[0].nombre : 'Export data'} />
+
                 </div>
             </div>
         </Fragment>

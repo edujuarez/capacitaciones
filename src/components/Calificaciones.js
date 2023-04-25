@@ -1,6 +1,6 @@
 import React from "react";
 import './styles/calificaciones.css'
-import { useState, Fragment, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 
 
@@ -14,13 +14,13 @@ function Calificaciones() {
     useEffect(() => {
         let url = `https://servercapacitaciones-production.up.railway.app/asistentes/${idcapacitacion}`;
         fetch(url)
-        .then(res => {
-            return res.json();
-        })
-        .then(data => {
-            setCapacitacion(data);
-            setNombreCapacitacion(data[0].nombreCapacitacion);
-        })
+            .then(res => {
+                return res.json();
+            })
+            .then(data => {
+                setCapacitacion(data);
+                setNombreCapacitacion(data[0].nombreCapacitacion);
+            })
     }, []);
 
     //carga los asistentes al cuadro de busqueda
@@ -36,46 +36,44 @@ function Calificaciones() {
         const requestOptions = {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id: id})
+            body: JSON.stringify({ id: id })
         };
         fetch(deleteURL, requestOptions)
-        .then((res) => {
-            alert("Asistente eliminado");
-            window.location.href = `/calificaciones/`+idcapacitacion;
-        })
+            .then((res) => {
+                alert("Asistente eliminado");
+                window.location.href = `/calificaciones/` + idcapacitacion;
+            })
     };
 
     //edita los valores de puntaje
     const guardarDatos = (id, index) => {
         //url de consulta para la capacitacion especifica
         let updateURL = "https://servercapacitaciones-production.up.railway.app/updatepuntaje";
-            capacitacion.filter(capacitacion => capacitacion.id == id)
-             {
-                  { if (capacitacion.asistencia == "")
-                    {
-                    return nuevaAsistencia= "0";
-                    } 
-                 }
+        capacitacion.filter(capacitacion => capacitacion.id == id)
+        {
+            if (capacitacion.asistencia == "") {
+                return nuevaAsistencia = "0";
             }
-            setNuevoIndex (index)
-            const requestOptions = {
+        }
+        setNuevoIndex(index)
+        const requestOptions = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id: id, puntaje: nuevoPuntaje == "" ? capacitacion[index].puntaje : nuevoPuntaje, asistencia: nuevaAsistencia == "" ? capacitacion[index].asistencia : nuevaAsistencia, porcentaje: nuevoPorcentaje == "" ? capacitacion[index].porcentaje : nuevoPorcentaje})
+            body: JSON.stringify({ id: id, puntaje: nuevoPuntaje == "" ? capacitacion[index].puntaje : nuevoPuntaje, asistencia: nuevaAsistencia == "" ? capacitacion[index].asistencia : nuevaAsistencia, porcentaje: nuevoPorcentaje == "" ? capacitacion[index].porcentaje : nuevoPorcentaje })
         };
         fetch(updateURL, requestOptions)
-        .then((res) => {
-            alert("Asistente " + capacitacion[index].nombre + " modificado");
-        })
-    };    
-    
+            .then((res) => {
+                alert("Asistente " + capacitacion[index].nombre + " modificado");
+            })
+    };
+
     return (
         <div className="containerSearch">
             <div className="tittleSection">
                 <div className="tittle">
                     <h1>Calificaciones</h1>
                     <h1 className="nombreCapacitacion">{nombreCapacitacion}</h1>
-                </div>          
+                </div>
             </div>
             <div className='card'>
                 <h1>Asistente</h1>
@@ -84,59 +82,60 @@ function Calificaciones() {
                 <h1>Operaciones</h1>
             </div>
             {capacitacion.map((val, index) => {
-            return (                   
-                <div key={val.id}>
-                    <div className='card' >
-                        <div className='column'>
-                            <p>{val.nombre}</p>
-                        </div>
-                        <div className='column'>
-                            <select defaultValue={val.asistencia}
-                                onChange={(e)=>{ setNuevaAsistencia(e.target.value)}}>
-                                <option value="">Sin Cargar</option>
-                                <option value="1">Si</option>
-                                <option value="0">No</option>
-                            </select>
-                        </div>
-                        <div className='column'>
-                            <select 
-                                defaultValue={val.puntaje} 
-                                onChange={(e) =>{ setNuevoPuntaje(e.target.value)}}>
+                return (
+                    <div key={val.id}>
+                        <div className='card' >
+                            <div className='column'>
+                                <p>{val.nombre}</p>
+                            </div>
+                            <div className='column'>
+                                <select defaultValue={val.asistencia}
+                                    onChange={(e) => { setNuevaAsistencia(e.target.value) }}>
+                                    <option value="">Sin Cargar</option>
+                                    <option value="1">Si</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            <div className='column'>
+                                <select
+                                    defaultValue={val.puntaje}
+                                    onChange={(e) => { setNuevoPuntaje(e.target.value) }}>
                                     <option value="Sin Cargar">Sin Cargar</option>
                                     <option value="No aplica">No aplica</option>
                                     <option value="Aprobado">Aprobado</option>
                                     <option value="Desaprobado">Desaprobado</option>
-                            </select>
-                            <p>Porcentaje de aprobación</p>
-                            <input 
-                                type="number" 
-                                onChange={(e) => {setNuevoPorcentaje(e.target.value)}} 
-                                defaultValue={val.porcentaje}>  
-                            </input>
-                        </div>
-                        <div className='column containerButtonsOperaciones'>
-                            <button 
-                                onClick={() =>{guardarDatos(val.id, index)}} 
-                                className="buttonOperaciones"
+                                </select>
+                                <p>Porcentaje de aprobación</p>
+                                <input
+                                    type="number"
+                                    onChange={(e) => { setNuevoPorcentaje(e.target.value) }}
+                                    defaultValue={val.porcentaje}>
+                                </input>
+                            </div>
+                            <div className='column containerButtonsOperaciones'>
+                                <button
+                                    onClick={() => { guardarDatos(val.id, index) }}
+                                    className="buttonOperaciones"
                                 >
-                                Guardar
-                            </button>             
-                            <button 
-                                onClick={() =>{deleteAsistente(val.id)}} 
-                                className="buttonOperaciones"
+                                    Guardar
+                                </button>
+                                <button
+                                    onClick={() => { deleteAsistente(val.id) }}
+                                    className="buttonOperaciones"
                                 >
-                                Eliminar
-                            </button>
+                                    Eliminar
+                                </button>
+                            </div>
+
                         </div>
-            
                     </div>
-                </div>
-                    
-            )})}
-        <h1><a type='submit' href={`/capacitaciones/` + idcapacitacion}>Volver  </a></h1>
+
+                )
+            })}
+            <h1><a type='submit' href={`/capacitaciones/` + idcapacitacion}>Volver  </a></h1>
 
         </div>
-        );
+    );
 }
 
 export default Calificaciones;
