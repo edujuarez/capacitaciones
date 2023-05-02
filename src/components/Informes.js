@@ -161,15 +161,20 @@ function Informes() {
                         <p>No se encontraron asistentes cargados</p>
                     )}
                 </section>
+                {selected.length > 0 ?
 
-                <div className="buttonSection">
-                    <button
-                        className="printButton"
-                        onClick={handlePrint}>
-                        Imprimir informe
-                    </button>
-                    <ExportToExcel excelData={selected} fileName={selected.length > 0 ? selected[0].nombreCapacitacion : 'Export data'} />
-                </div>
+                    <div className="buttonSection">
+                        <button
+                            className="printButton"
+                            onClick={handlePrint}>
+                            Imprimir informe
+                        </button>
+                        <ExportToExcel excelData={selected} fileName={selected.length > 0 ? selected[0].nombreCapacitacion : 'Export data'} />
+                    </div>
+                    :
+                    <>
+                    </>
+                }
             </div>
         </Fragment>
 

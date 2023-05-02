@@ -16,8 +16,9 @@ function Layout(props) {
                         {props.children}
                     </div>
                 </div>
-                <Footer />
+
             </div>
+            <Footer />
         </React.Fragment>)
 }
 export default Layout;

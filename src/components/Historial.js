@@ -2,7 +2,7 @@ import React from 'react';
 import './styles/historial.css';
 import { useState, Fragment, useEffect, useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
-import { BsSearch } from 'react-icons/bs';
+import { BsSearch, BsTrash } from 'react-icons/bs';
 import moment from 'moment';
 import 'moment/locale/es';
 import logoIselin from '../images/iselin.jpg';
@@ -16,7 +16,6 @@ function Historial() {
     const [historial, setHistorial] = useState([]);
     const [selected, setSelected] = useState([]);
 
-
     //fetcheamos TODOS los asistentes y capacitaciones y ordenamos por fecha
     useEffect(() => {
         fetch("https://servercapacitaciones-production.up.railway.app/asistentes")
@@ -28,7 +27,6 @@ function Historial() {
                 setAsistentes(data);
             })
     }, []);
-
 
     //fetcheamos todos las  asistencias
     useEffect(() => {
@@ -44,82 +42,56 @@ function Historial() {
             })
     }, []);
 
-    const [capacitaciones, setCapacitaciones] = useState([]);
-    useEffect(() => {
-        let url = "https://servercapacitaciones-production.up.railway.app/capacitaciones";
-        fetch(url)
-            .then(res => {
-                return res.json();
-            })
-            .then(capacitaciones => {
-                setCapacitaciones(capacitaciones);
-            })
-    }, []);
-
     //configura el boton de imprimir para guardar PDF, imprime el componente referente
     const componentRef = useRef();
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
     });
 
-    //filtra solo la capacitacion que tiene ID a la seleccionada en el select
-
-    /*
-    function formulario (id){
-        setHistorial(capacitaciones.filter(capacitaciones => capacitaciones.idcapacitacion == id))
-        console.log("lo cargado en historial " + capacitaciones)
-
-    }
-
-    */
-    const formulario = (id) => {//vacio el array de capacitaciones para que no se repitan
+    const formulario = (id) => {
+        //vacio el array de capacitaciones para que no se repitan
         setSelected([''])
         //busco en el array de asistencias las que coincidan con el ID del asistente seleccionado
         setSelected(historial.filter(asistentes => asistentes.invitadoID == id))
-
-
     }
 
-
-
-    //date format
-    let [fechaHasta, setFechaHasta] = useState("");
-    function formatDateHasta(date) {
-        if (date == "") {
-            return setFechaDesde("")
-        }
-        console.log("HASTA " + moment(date).format('L'))
-        let newDate = new Date(`${date}T05:00:00`)
-
-        return setFechaHasta(newDate.toLocaleDateString())
-    }
-
-    let [fechaDesde, setFechaDesde] = useState("");
-    function formatDateDesde(date) {
-        if (date == "") {
-            return setFechaDesde("")
-        }
-        console.log("DESDE " + moment(date).format('L'))
-        let newDate2 = new Date(`${date}T05:00:00`)
-
-        return setFechaDesde(newDate2.toLocaleDateString())
-    }
-    const handleSearch = () => {
-        console.log(fechaDesde)
-        if (fechaDesde !== "" && fechaHasta !== "") {
-            /*console.log("if adentro " + moment(fechaDesde).format('L') + " " + moment(fechaHasta).format('L'))
-            setSelected(historial.filter(asistentes => (moment(asistentes.fecha).format('L') > fechaDesde || moment(asistentes.fecha).format('L') < fechaHasta)))
-            console.log(selected)*/
-        }
-        else {
-            console.log("if afuera")
-
-            alert("Faltan datos de busqueda")
-        }
-    }
-
+    //enviamos el usuario seleccionado al formulario
     function onSelect(e) {
         formulario(e[0].invitadoID)
+    }
+
+    // Crear estados de fecha
+    const [fechaDesde, setFechaDesde] = useState("");
+    const [fechaHasta, setFechaHasta] = useState("");
+
+    // Crear manejadores de eventos para fechas
+    function handleFechaDesdeChange(e) {
+        setFechaDesde(e.target.value);
+    }
+
+    function handleFechaHastaChange(e) {
+        setFechaHasta(e.target.value);
+    }
+
+    // Crear manejador de evento para búsqueda
+    function handleSearch() {
+        if (fechaDesde && fechaHasta) {
+            const fechaDesdeTimestamp = new Date(fechaDesde).getTime();
+            const fechaHastaTimestamp = new Date(fechaHasta).getTime();
+            //convierto la fecha string del elemento a mm/dd/aaaa para comparar
+            const filtered = selected.filter((element) => {
+                const parts = element.fecha.split("/");
+                const timestamp = new Date(parts[2], parts[1] - 1, parts[0]);
+                return timestamp >= fechaDesdeTimestamp && timestamp <= fechaHastaTimestamp;
+            });
+            setSelected(filtered);
+        }
+    }
+    //button that eliminate the filters
+    function deleteFilters() {
+        formulario([""]);
+        setFechaDesde("");
+        setFechaHasta("");
     }
     return (
         <Fragment>
@@ -134,33 +106,34 @@ function Historial() {
                             isObject={true}
                             onSelect={onSelect}
                             displayValue="nombre"
+                            selectionLimit={1}
                             showArrow
                         />
                     </div>
                 </div>
-                <div className='searchBox'>
-                    <div className='tittleInformes'>
+                <div className='searchBoxHistorial'>
+                    <div className='historialBusqueda'>
                         <h2>Desde</h2>
                         <input
-                            className='inputInformes'
                             type="date"
-                            onChange={(e) => { setFechaDesde(e.target.value) }}
+                            value={fechaDesde}
+                            onChange={handleFechaDesdeChange}
                         />
                     </div>
-                    <div className='tittleInformes'>
+                    <div className='historialBusqueda'>
                         <h2>Hasta</h2>
                         <input
-                            className='inputInformes'
                             type="date"
-                            onChange={(e) => { setFechaHasta(e.target.value) }}
-
+                            value={fechaHasta}
+                            onChange={handleFechaHastaChange}
                         />
                     </div>
-                    <button className='buttonSearch' type="" onClick={handleSearch}>
-                        <BsSearch /> Buscar
-                    </button>
                 </div>
+                <div className='buttonHistorialSection'>
+                    <button classname='buttonSearchDate' onClick={handleSearch}><BsSearch /></button>
+                    <button className='buttonDeleteFilter' onClick={deleteFilters}> <BsTrash /></button>
 
+                </div>
                 <section ref={componentRef}>
                     {selected.length > 0 ? (
                         <>
@@ -224,21 +197,24 @@ function Historial() {
                             </table>
                         </>
                     ) : (
-                        <p>No se encontraron coincidencias</p>
+                        <p></p>
                     )}</section>
 
-
-                <div className="buttonSection">
-                    <button
-                        className="printButton"
-                        onClick={handlePrint}>
-                        Imprimir informe
-                    </button>
-                    <ExportToExcel excelData={selected} fileName={selected.length > 0 ? `Historial ` + selected[0].nombre : 'Export data'} />
-
-                </div>
+                {selected.length > 0 ?
+                    <div className="buttonSection">
+                        <button
+                            className="printButton"
+                            onClick={handlePrint}>
+                            Imprimir informe
+                        </button>
+                        <ExportToExcel excelData={selected} fileName={`Historial ` + selected[0].nombre} />
+                    </div>
+                    :
+                    <>
+                    </>
+                }
             </div>
-        </Fragment>
+        </Fragment >
 
     )
 }

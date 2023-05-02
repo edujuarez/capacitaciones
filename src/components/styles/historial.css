@@ -12,3 +12,26 @@ img {
 .segundoTitulo {
 text-align: center;
 }
+.searchBoxHistorial {
+    display: flex;
+    width: 100%;
+}
+.historialBusqueda {
+    width: 40%;
+    margin: 3%;
+}
+.buttonHistorialSection{
+    display: flex;
+    flex-direction: row-reverse;
+    
+}
+.buttonSearchDate button {
+    margin-left: 5%;
+    width: 50%;
+    
+}
+
+.buttonDeleteFilter {
+    background: rgb(199, 20, 20);
+    width: 9%;
+}
