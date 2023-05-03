@@ -28,6 +28,28 @@ function Historial() {
             })
     }, []);
 
+    const getUniqueIdsWithNames = (data) => {
+        // Obtener un array con los ids únicos
+        const uniqueIds = [...new Set(data.map(item => item.invitadoID))];
+        
+        // Crear un objeto para almacenar los nombres de los elementos correspondientes
+        const names = {};
+        data.forEach(item => {
+          names[item.invitadoID] = item.nombre;
+        });
+      
+        // Ordenar los ids únicos por nombre de forma ascendente
+        const sortedIds = uniqueIds.sort((id1, id2) => {
+          const name1 = names[id1];
+          const name2 = names[id2];
+          return name1.localeCompare(name2);
+        });
+      
+        // Crear un nuevo array con los ids y nombres ordenados
+        const result = sortedIds.map(id => ({id: id, nombre: names[id]}));
+        return result;
+      }
+
     //fetcheamos todos las  asistencias
     useEffect(() => {
         fetch(`https://servercapacitaciones-production.up.railway.app/asistencia`)
@@ -47,17 +69,17 @@ function Historial() {
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
     });
+    
+    //enviamos el usuario seleccionado al formulario
+    function onSelect(e) {
+        formulario(e[0].id)
+    }
 
     const formulario = (id) => {
         //vacio el array de capacitaciones para que no se repitan
         setSelected([''])
         //busco en el array de asistencias las que coincidan con el ID del asistente seleccionado
         setSelected(historial.filter(asistentes => asistentes.invitadoID == id))
-    }
-
-    //enviamos el usuario seleccionado al formulario
-    function onSelect(e) {
-        formulario(e[0].invitadoID)
     }
 
     // Crear estados de fecha
@@ -93,16 +115,19 @@ function Historial() {
         setFechaDesde("");
         setFechaHasta("");
     }
+
+
+    const optionSelect = getUniqueIdsWithNames(asistentes);
     return (
         <Fragment>
             <div className='containerInformes'>
                 <div className='tittleSectionInformes'>
                     <div className='tittleInformes'>
                         <h1>Buscar historial de capacitaciones</h1>
-
                         <Multiselect
-                            options={asistentes} // Options to display in the dropdown
-                            placeholder="Ingrese asistente a buscar. Maximo permitido 1." // Property name to display in the dropdown options
+                            options={optionSelect} // Options to display in the dropdown
+                            placeholder="Ingrese asistente a buscar.." // Property name to display in the dropdown options
+                            emptyRecordMsg="No se encuentran coincidencias"
                             isObject={true}
                             onSelect={onSelect}
                             displayValue="nombre"
@@ -130,7 +155,7 @@ function Historial() {
                     </div>
                 </div>
                 <div className='buttonHistorialSection'>
-                    <button classname='buttonSearchDate' onClick={handleSearch}><BsSearch /></button>
+                    <button className='buttonSearchDate' onClick={handleSearch}><BsSearch /></button>
                     <button className='buttonDeleteFilter' onClick={deleteFilters}> <BsTrash /></button>
 
                 </div>
@@ -197,7 +222,7 @@ function Historial() {
                             </table>
                         </>
                     ) : (
-                        <p></p>
+                        <p>No se encuentran resultados</p>
                     )}</section>
 
                 {selected.length > 0 ?
