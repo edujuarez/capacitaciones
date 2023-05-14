@@ -102,6 +102,10 @@ function CapacitacionView() {
                                 <label>Capacitador:</label>
                                 <p className="campo" >{capacitacion.capacitador}</p>
                             </div>
+                            <div className='select'>
+                                <label>QR credenciales:</label>
+                                <p className="campo" >{capacitacion.linkQR}</p>
+                            </div>
                         </div>
 
                         <label>Observaciones:</label>

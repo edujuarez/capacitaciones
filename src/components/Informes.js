@@ -9,6 +9,8 @@ import logoIselin from '../images/iselin.jpg';
 import Multiselect from 'multiselect-react-dropdown';
 import { secondsToMilliseconds } from 'date-fns';
 import ExportToExcel from './ExportToExcel';
+import { QRCodeCanvas } from 'qrcode.react';
+
 
 function Informes() {
     moment.locale('es')
@@ -61,16 +63,6 @@ function Informes() {
         content: () => componentRef.current,
     });
 
-
-    function handleFilterClick() {/*
-            console.log('desde ' + startDate + ' hasta ' + endDate )
-            const filteredData = selected.filter(item => {
-                return moment(item.fecha).format('L') >= startDate && moment(item.fecha).format('L') <= endDate;
-
-            })
-            setSelected(filteredData);*/
-    }
-
     //llenamos el array select con los asistentes segun capacitacionID
     const formulario = (id) => {
 
@@ -121,14 +113,20 @@ function Informes() {
                                     <tr className=''>
                                         <th>Nombre de la capacitación:</th>
                                         <th colSpan="2">{selected[0].nombreCapacitacion}</th>
-                                        <th colSpan="2">ID: {selected[0].capacitacionID}</th>
+                                        <th colSpan="1">ID: {selected[0].capacitacionID}</th>
+                                        <th colSpan="1">QR credenciales:</th>
                                     </tr>
                                     <tr>
                                         <th>Fecha: {selected[0].fecha}</th>
                                         <th></th>
                                         <th></th>
                                         <th>Capacitador: {filteredData[0].capacitador}</th>
-                                        <th></th>
+                                        <th>
+                                            {filteredData[0].linkQR == null ? <></> :
+                                            <div className='qrCanvas'>
+                                                <QRCodeCanvas value={filteredData[0].linkQR} />
+                                            </div>}
+                                        </th>
                                     </tr>
                                 </thead>
                             </table>
@@ -162,7 +160,6 @@ function Informes() {
                     )}
                 </section>
                 {selected.length > 0 ?
-
                     <div className="buttonSection">
                         <button
                             className="printButton"

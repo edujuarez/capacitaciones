@@ -46,8 +46,6 @@ function Certification() {
         content: () => componentRef.current,
     });
 
-    //credenciales qr temporales
-    const [credencialesQr, setCredencialesQr] = useState([]);
     return (
         <Fragment>
             <section ref={componentRef}>
@@ -121,9 +119,9 @@ function Certification() {
                             <div>Capacitador/es: {datosCapacitacion.capacitador}</div>
                             <div>Firma: _______________</div>
                         </div>
-                        {credencialesQr ? <></> :
+                        {datosCapacitacion.linkQR == null ? <></> :
                             <div className='qrCanvas'>
-                                <QRCodeCanvas value={credencialesQr} />
+                                <QRCodeCanvas value={datosCapacitacion.linkQR} />
                             </div>}
                     </div>))}
             </section>

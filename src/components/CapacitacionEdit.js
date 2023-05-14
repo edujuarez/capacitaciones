@@ -133,7 +133,10 @@ function capacitacionEdit() {
                             <label>Capacitador:</label>
                             <input name='capacitador' forms='typeform' type="text" value={capacitacion.capacitador} onChange={handleChange} placeholder="Ingrese capacitador" />
                         </div>
-
+                        <div className='select'>
+                            <label>Link para QR de credenciales:</label>
+                            <input name='linkQR' forms='typeform' type="text" value={capacitacion.linkQR} onChange={handleChange} placeholder="Ingrese link para QR" />
+                        </div>
                     </div>
                     <label>Observaciones:</label>
                     <textarea name='observaciones' cols="40" rows="5" value={capacitacion.observaciones} onChange={handleChange} />

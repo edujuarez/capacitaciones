@@ -6,6 +6,7 @@ import moment from 'moment';
 import 'moment/locale/es';
 
 import './styles/addAsistentes.css'
+import { ca } from "date-fns/locale";
 
 
 
@@ -29,7 +30,8 @@ function AddAsistentes(){
             'plan' : "",
             'temario' : "",
             'tipo' : "",
-            'capacitador' : ""
+            'capacitador' : "",
+            'linkQR' : ""
 }]);
     let url = `https://servercapacitaciones-production.up.railway.app/capacitaciones/${idcapacitacion}`;
     useEffect(() => {
@@ -86,7 +88,9 @@ function AddAsistentes(){
         'eliminado' : 0,
         'nombreCapacitacion' : (JSON.stringify((capacitaciones[0].nombre))).slice(1).slice(0,-1),
         'fecha' : moment(capacitaciones[0].fecha).format('L'),
-        'capacitador': capacitaciones.capacitador
+        'capacitador': capacitaciones.capacitador,
+        'linkQR': capacitaciones.linkQR
+
         }))
 
     const [selectedItems, setSelectedItems] = useState("");

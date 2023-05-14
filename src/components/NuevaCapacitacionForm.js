@@ -32,7 +32,8 @@ function NuevaCapacitacionForm() {
         observaciones: "",
         modalidad: "",
         eliminado: 0,
-        capacitador: ""
+        capacitador: "",
+        linkQR: ""
     });
 
     const [capacitaciones, setCapacitaciones] = useState([]);
@@ -69,7 +70,8 @@ function NuevaCapacitacionForm() {
             duracion: `${value.duracion}`,
             modalidad: `${value.modalidad}`,
             eliminado: 0,
-            capacitador: `${value.capacitador}`
+            capacitador: `${value.capacitador}`,
+            linkQR: `${value.linkQR}`
         }).then(() => {
             alert([`La capacitacion ${value.nombre} fue creada correctamente! Fecha ${moment(value.fecha).format('L')}`]);
             window.location.href = "/capacitacion";
@@ -150,7 +152,11 @@ function NuevaCapacitacionForm() {
                         </div>
                         <div className='select'>
                             <label>Capacitador:</label>
-                            <input name='capacitador' forms='typeform' type="text" onChange={handleChange} />
+                            <input name='capacitador' forms='typeform' type="text" onChange={handleChange} placeholder="Ingrese nombre capacitador"/>
+                        </div>
+                        <div className='select'>
+                            <label>Link QR credenciales:</label>
+                            <input name='linkQR' forms='typeform' type="text" onChange={handleChange} placeholder="Ingrese link de credenciales para QR"/>
                         </div>
 
                     </div>
