@@ -16,7 +16,6 @@ function Layout(props) {
                         {props.children}
                     </div>
                 </div>
-
             </div>
             <Footer />
         </React.Fragment>)

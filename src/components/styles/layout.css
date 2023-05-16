@@ -40,3 +40,52 @@ html {
     align-self: left;
 
 }
+@media (max-width:770px){
+    body {
+        font-size: 16px;
+    }
+    .buttonContainer {
+        width: 30%;
+    }
+    .addButton {
+        min-width: auto;
+    }
+    .Menu {
+        display: none;
+    }
+    .card {
+        flex-wrap: nowrap;
+        flex: auto;
+    }
+    .column p {
+        font-size: 0.4em;
+    }
+    .mainBoard {
+        width: 90%;
+    }
+    .mainHeader h1 {
+        justify-content: space-around;
+        font-size: 1.2em;
+    }
+    .mainHeader h1 {
+        display: auto;
+    }
+ }
+
+@media (min-width:771px){
+    .buttonContainer {
+        width: 100%;
+    }
+    .addButton {
+        min-width: auto;
+    }
+    .column p {
+        font-size: 0.4em;
+    }
+    .mainHeader a {
+        display: none;
+    }
+    .mainBoard {
+        width: 70%;
+    }
+  }
