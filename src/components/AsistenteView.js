@@ -60,8 +60,10 @@ function NuevoAsistente() {
                         <label>Fecha de Ingreso:</label>
                         <p className='campo' name='fechaingreso' >{moment(asistente.fechaingreso).format('L')}</p>
                         <section className='buttonsAsistentes'>
-                            <Link className='buttonLink' to={`/asistentes/${asistente.idasistente}/edit`}>
-                                <button className=''>Editar</button> </Link>
+                            <button className=''>
+                                <Link className='buttonLink' to={`/asistentes/${asistente.idasistente}/edit`}>
+                                    Editar</Link>
+                            </button>
                             <button onClick={() => { deleteSubmit(asistente.idasistente) }}>Eliminar</button>
                         </section>
                     </form>

@@ -3,6 +3,8 @@ import { useState, Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import './styles/asistentesList.css';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
+import { IoEyeOutline } from 'react-icons/io5';
+
 
 function AsistentesList() {
     const [asistentes, setAsistentes] = useState([]);
@@ -38,10 +40,8 @@ function AsistentesList() {
                 <div className='card'>
                     <h1>Legajo</h1>
                     <h1>Nombre</h1>
-                    <h1>DNI</h1>
                     <h1>Sector</h1>
-                    <h1>Cargo</h1>
-                    <h1>Fecha Ingreso</h1>
+                    <h1>Detalles</h1>
                 </div>
                 {asistentes.filter((asistentes) => {
                     if (searchTerms == "") {
@@ -61,18 +61,11 @@ function AsistentesList() {
                                     <p>{asistentes.nombre}</p>
                                 </div>
                                 <div className='column'>
-                                    <p>{asistentes.dni}</p>
-                                </div>
-                                <div className='column'>
                                     <p>{asistentes.sector}</p>
                                 </div>
                                 <div className='column'>
-                                    <p>{asistentes.cargo}</p>
+                                    <IoEyeOutline />
                                 </div>
-                                <div className='column'>
-                                    <p>{asistentes.fechaingreso}</p>
-                                </div>
-
                             </div>
                         </Link>
 
@@ -80,7 +73,7 @@ function AsistentesList() {
 
             </div>
 
-        </React.Fragment>
+        </React.Fragment >
     )
 }
 export default AsistentesList;

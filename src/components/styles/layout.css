@@ -69,6 +69,7 @@ html {
     }
     .mainHeader h1 {
         display: auto;
+        margin-bottom: 1%;
     }
  }
 
