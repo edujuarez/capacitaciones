@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { Image } from 'react';
 
 import './styles/Menu.css';
-import { BsSearch } from 'react-icons/bs';
 import { BsBook } from 'react-icons/bs';
 import { AiOutlineUser } from 'react-icons/ai';
 import { CgNotes } from 'react-icons/cg';
 import { IoPersonCircleOutline } from 'react-icons/io5';
-import { Fragment } from 'react';
+
 
 class Menu extends React.Component {
     render() {
@@ -14,7 +13,7 @@ class Menu extends React.Component {
         return (
             <div className='Menu'>
                 <div className='profileMenu'>
-                    <IoPersonCircleOutline className='profileIcon' />
+                    {this.props.photo ? <Image src={this.props.photo} /> : <IoPersonCircleOutline className='profileIcon' />}
                     <h1>Hola, {this.props.user}!</h1>
                 </div>
                 <a className="SubMenu" href="/capacitacion">

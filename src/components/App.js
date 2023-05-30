@@ -1,10 +1,11 @@
-import { BrowserRouter, Switch, Route, Redirect, withRouter } from 'react-router-dom';
-import React, { useState } from 'react';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-
+import { auth } from './googleSignIn/config'
+import { onAuthStateChanged } from 'firebase/auth';
 import Layout from './Layout';
 
+//Vistas y componentes
 import NuevaCapacitacionForm from './NuevaCapacitacionForm';
 import NuevoAsistente from './NuevoAsistente';
 import AsistentesList from './AsistentesList';
@@ -23,14 +24,20 @@ import CapacitacionEdit from './CapacitacionEdit';
 import Login from './googleSignIn/Login';
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  useEffect(() => {
+    // Verificar el estado de autenticación al cargar la página
+    onAuthStateChanged(auth, user => {
+      setIsAuthenticated(!!user);
+    });
+  }, []);
 
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path='/login' component={Login} />
-
-        <Layout user={"Usuario"}>
+        <Route exact path="/login" component={Login} />
+        <Layout>
           <Route exact path="/" component={Capacitacion} />
           <Route exact path="/home" component={Capacitacion} />
           <Route exact path="/nuevacapacitacion" component={NuevaCapacitacionForm} />
@@ -48,8 +55,15 @@ function App() {
           <Route exact path="/certification/:idcapacitacion" component={Certification} />
           <Route exact path="/calificaciones/:idcapacitacion" component={Calificaciones} />
           <Route exact path="/capacitaciones/:idcapacitacion/edit" component={CapacitacionEdit} />
-          <Route exact path="/login" component={Login} />
         </Layout>
+        <Route render={() => (
+          isAuthenticated ? (
+            <Redirect to="/" component={Capacitacion} />
+          ) : (
+            <Redirect exact path='/login' component={Login} />
+          )
+        )}
+        />
       </Switch>
     </BrowserRouter>
   );

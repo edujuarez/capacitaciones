@@ -26,7 +26,6 @@ function AsistenteEdit() {
             .then((res) => res.json())
             .then((data) => setAsistente(data[0]))
     }, []);
-    console.log(asistente)
 
     //maneja los cambios en los inputs
     const handleChange = (event) => {

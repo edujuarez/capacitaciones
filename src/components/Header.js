@@ -1,14 +1,11 @@
 import React from 'react';
 import './styles/header.css';
-import { IoMdExit } from 'react-icons/io';
 import logo from '../images/Logo.png';
-import { Redirect } from 'react-router-dom';
-
+import LogOut from './googleSignIn/LogOut';
 class Header extends React.Component {
     render() {
         const logout = () => {
             localStorage.clear()
-
         }
         return (
             <>
@@ -19,16 +16,7 @@ class Header extends React.Component {
                     <div className='title'>
                         <h1>Mentor Iselín</h1>
                     </div>
-                    <button className='exitContainer' onClick={logout}>
-                        <div>
-                            <h1>
-                                Salir
-                            </h1>
-                        </div>
-                        <div className='iconContainer'>
-                            <IoMdExit className='iconExit' />
-                        </div>
-                    </button>
+                    <LogOut />
                 </div>
                 <div className="mainHeader2">
                     <a href="/capacitacion"><h1>Capacitaciones</h1></a>
