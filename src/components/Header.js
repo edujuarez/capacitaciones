@@ -18,7 +18,7 @@ class Header extends React.Component {
                     </div>
                     <LogOut />
                 </div>
-                <div className="mainHeader2">
+                <div className="mainHeader">
                     <a href="/capacitacion"><h1>Capacitaciones</h1></a>
                     <a href="/asistentes"><h1>Asistentes</h1></a>
                     <a href="/informes"><h1>Informe de capacitación</h1></a>

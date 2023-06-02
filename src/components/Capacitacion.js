@@ -63,7 +63,7 @@ function Capacitacion() {
                                 <div className='nameContainer'>
                                     <p> {capacitaciones.nombre} </p>
                                 </div>
-                                <div className='' href='/capacitacionview'>
+                                <div className='viewContainer' href='/capacitacionview'>
                                     <IoEyeOutline className='editButton' />
                                 </div>
                             </div>
