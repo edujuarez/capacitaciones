@@ -1,3 +1,33 @@
 .loginBackground {
-    background-image: "../images/background.png";
+    background-image: url('../../images/background.png');
+    background-color: red;
+    height: 100vh;
+    display: flex;
+    
+}
+
+.mainTittle {
+    color: wheat;
+    justify-content: center;
+    
+}
+.loginSection {
+    background-color: red;
+    width: 40%;
+    align-self: center;
+    border-radius: 2rem;
+    height: 80%;
+    box-shadow: 10px 15px 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+
+}
+.title {
+    align-self: center;
+}
+
+.buttonLogin {
+    justify-content: center;
+    width: 80%;
+    align-self: center;
 }
