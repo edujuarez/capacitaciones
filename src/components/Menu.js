@@ -13,7 +13,7 @@ class Menu extends React.Component {
         return (
             <div className='Menu'>
                 <div className='profileMenu'>
-                    {this.props.photo ? <Image src={this.props.photo} /> : <IoPersonCircleOutline className='profileIcon' />}
+                    {this.props.photo ? <img src={this.props.photo} className='profileIcon' /> : <IoPersonCircleOutline className='profileIcon' />}
                     <h1>Hola, {this.props.user}!</h1>
                 </div>
                 <a className="SubMenu" href="/capacitacion">
