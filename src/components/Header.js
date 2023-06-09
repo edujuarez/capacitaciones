@@ -4,9 +4,7 @@ import logo from '../images/Logo.png';
 import LogOut from './googleSignIn/LogOut';
 class Header extends React.Component {
     render() {
-        const logout = () => {
-            localStorage.clear()
-        }
+
         return (
             <>
                 <div className="mainHeader">

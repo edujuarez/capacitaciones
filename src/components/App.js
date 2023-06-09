@@ -32,15 +32,14 @@ function App() {
       setUser(currentUser)
     })
   }, [])
-  console.log(user)
-  const navigate = 
 
+  console.log(user)
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/login" component={Login} />
 
-        {user != null ?
+        {
           (
             <>
               <Layout>
@@ -63,16 +62,13 @@ function App() {
                 <Route exact path="/capacitaciones/:idcapacitacion/edit" component={CapacitacionEdit} />
               </Layout>
             </>
-          ) : (
-            {
-              window.location.href = `/login`;
-            }
+
 
           )
         }
 
       </Switch>
-    </BrowserRouter>
+    </BrowserRouter >
   );
 }
 

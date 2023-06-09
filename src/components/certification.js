@@ -1,8 +1,8 @@
-import React, { Component, Fragment, useRef } from "react";
+import React, { Fragment, useRef } from "react";
 import './styles/certification.css'
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { ReactToPrint, useReactToPrint } from 'react-to-print';
+import { useReactToPrint } from 'react-to-print';
 import moment from 'moment';
 import 'moment/locale/es';
 import logoIselin from '../images/iselin.jpg';
@@ -61,7 +61,7 @@ function Certification() {
                                     <th>REV</th>
                                 </tr>
                                 <tr className='segundoTitulo'>
-                                    <th><img src={logoIselin}></img></th>
+                                    <th><img src={logoIselin} alt="logo empresarial Iselin"></img></th>
                                     <th>R-GRH 06-1</th>
                                     <th>REGISTRO DE CAPACITACIONES</th>
                                     <th>GESTIÓN DEL RECURSO HUMANO</th>
