@@ -1,23 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { auth, googleProvider } from './config'
+import { UserAuth, AuthContextProvide } from '../context/AuthContext'
 import { signInWithPopup } from 'firebase/auth';
 import '../styles/login.css';
 import { useHistory } from 'react-router-dom';
 
 
 
+
 function Login() {
 
-    //seteamos history para redireccionamiento
-    const history = useHistory();
-
     const handleClick = () => {
-        signInWithPopup(auth, googleProvider).then((data) => {
-            localStorage.setItem("name", data.user.displayName)
-            localStorage.setItem("photoUrl", data.user.photoURL)
 
-            history.push('/capacitacion');
-        })
     }
 
     return (
@@ -30,7 +24,7 @@ function Login() {
                 <div className='title'>
                     <h1 className='mainTittleLogin'>Iniciar Sesión</h1>
                     <div className='buttonLogin'>
-                        <button onClick={handleClick}>Ingresar con Google</button>
+                        <button onClick={handleClick()}>Ingresar con Google</button>
                     </div>
                 </div>
             </section>
