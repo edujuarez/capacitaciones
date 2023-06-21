@@ -6,9 +6,10 @@ import { AiOutlineUser } from 'react-icons/ai';
 import { CgNotes } from 'react-icons/cg';
 import { IoPersonCircleOutline } from 'react-icons/io5';
 
-
 class Menu extends React.Component {
+
     render() {
+
 
         return (
             <div className='Menu'>

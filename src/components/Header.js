@@ -1,7 +1,6 @@
 import React from 'react';
 import './styles/header.css';
 import logo from '../images/Logo.png';
-import LogOut from './googleSignIn/LogOut';
 class Header extends React.Component {
     render() {
 
@@ -14,7 +13,6 @@ class Header extends React.Component {
                     <div className='title'>
                         <h1>Mentor Iselín</h1>
                     </div>
-                    <LogOut />
                 </div>
                 <div className="mainHeader">
                     <a href="/capacitacion"><h1>Capacitaciones</h1></a>
