@@ -1,5 +1,6 @@
-import { Route, Routes, Router, Switch } from 'react-router-dom';
-import React from 'react';
+import { Route, Routes, Router, Switch, useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 
 
@@ -25,10 +26,27 @@ import Login from './googleSignIn/Login';
 import Signup from './googleSignIn/Signup';
 
 function App() {
+  //inicio auth para comprobar si el usuario ha iniciado sesion
+  const auth = getAuth();
+  const [user, setUser] = useState('');
+
+  const history = useHistory();
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/auth.user
+      setUser(user.email);
+    } else {
+      history.push('/home');
+    }
+  })
+
 
   return (
     <Switch>
-      <Layout>
+      <Route exact path="/login" component={Login}></Route>
+      <Layout user={user}>
         <Route exact path="/home" component={Capacitacion} />
         <Route exact path="/nuevacapacitacion" component={NuevaCapacitacionForm} />
         <Route exact path="/nuevoasistente" component={NuevoAsistente} />

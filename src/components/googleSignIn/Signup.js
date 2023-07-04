@@ -17,7 +17,7 @@ const Signup = () => {
                 // Signed in
                 const user = userCredential.user;
                 console.log(user);
-                history.push('/home');
+                //history.push('/home');
                 // ...
             })
             .catch((error) => {

@@ -63,7 +63,6 @@ function capacitacionEdit() {
             <div className='container_capacitacionEdit'>
                 <div className='mainTittle'>
                     <h1> Editar capacitación</h1>
-                    <h1>{capacitacion.nombre}</h1>
                 </div>
                 <form className='bodyCapacitacion' onSubmit={handleSubmit} key={capacitacion.idcapacitacion}>
                     <label>Nombre:</label>

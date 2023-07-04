@@ -1,0 +1,44 @@
+
+.loginSection {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10%;
+    height: 100vh;
+}
+.loginPage {
+    width: 80vh;
+    margin: 10%;
+    border: 5%;
+}
+form {
+    width: 90%;
+}
+.inputLogin {
+    display: flex;
+    flex-direction: row;
+    margin: 1%;
+    width: 100%;
+}
+
+.inputLogin label {
+    width: 50%;
+    display: flex;
+    align-items: flex-end;
+    font-size: large;
+}
+.inputLogin input {
+    width: 100%;
+    margin: 1%;
+}
+.loginSection .card {
+    display: block;
+}
+.buttonLogin {
+    display: flex;
+    justify-content: end;
+    width: 100%;
+}
+.buttonLogin button {
+    width: 40%;
+}
