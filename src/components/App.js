@@ -29,24 +29,29 @@ function App() {
   //inicio auth para comprobar si el usuario ha iniciado sesion
   const auth = getAuth();
   const [user, setUser] = useState('');
+  const [photo, setPhoto] = useState('');
+
 
   const history = useHistory();
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/auth.user
-      setUser(user.email);
+
+      setUser(user.displayName);
+      setPhoto(user.photoURL)
+
     } else {
-      history.push('/home');
+      history.push('/login');
     }
+
   })
+  console.log(photo)
 
 
   return (
     <Switch>
       <Route exact path="/login" component={Login}></Route>
-      <Layout user={user}>
+      <Layout user={user} photo={photo}>
         <Route exact path="/home" component={Capacitacion} />
         <Route exact path="/nuevacapacitacion" component={NuevaCapacitacionForm} />
         <Route exact path="/nuevoasistente" component={NuevoAsistente} />

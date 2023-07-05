@@ -19,7 +19,6 @@ function capacitacionEdit() {
                 return res.json();
             })
             .then(data => {
-                console.log(data)
                 //cambio el formato de fecha
                 data.forEach(element => {
                     element.fecha = moment(element.fecha).format('YYYY-MM-DD');

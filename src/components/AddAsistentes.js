@@ -40,7 +40,6 @@ function AddAsistentes() {
             })
             .then(data => {
                 setCapacitaciones(data);
-                console.log(capacitaciones)
             })
     }, []);
 
@@ -55,7 +54,6 @@ function AddAsistentes() {
             })
             .then(data => {
                 setSelectedValues(data);
-                console.log(selectedValues)
             })
     }, []);
 
@@ -95,21 +93,16 @@ function AddAsistentes() {
     const [selectedItems, setSelectedItems] = useState("");
     function onSelect(e) {
         setSelectedItems(e)
-        console.log("elementos agregados ")
-        console.log(selectedItems)
     }
     const [removedItems, setRemovedItems] = useState('');
     function onRemove(e) {
         setRemovedItems(e)
-        console.log(removedItems)
     }
 
     const addAsistentesURL = "https://servercapacitaciones-production.up.railway.app/addasistentes"
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(selectedItems)
         axios.post(addAsistentesURL, selectedItems).then(() => {
-            console.log(selectedItems)
             alert([`Los asistentes fueron cargados correctamente!`]);
             window.location.href = `/capacitaciones/${idcapacitacion}`;
         });

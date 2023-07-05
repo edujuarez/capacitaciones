@@ -7,7 +7,6 @@ const Signup = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('');
-    const history = useHistory();
 
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -16,14 +15,11 @@ const Signup = () => {
             .then((userCredential) => {
                 // Signed in
                 const user = userCredential.user;
-                console.log(user);
-                //history.push('/home');
                 // ...
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
                 // ..
             });
 

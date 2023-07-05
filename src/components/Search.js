@@ -54,7 +54,6 @@ function Search() {
                 }
             }
         }
-        console.log("boton guardar index: " + index + " id: " + id)
         setNuevoIndex(index)
         const requestOptions = {
             method: 'PUT',
@@ -63,7 +62,6 @@ function Search() {
         };
         fetch(updateURL, requestOptions)
             .then((res) => {
-                console.log(requestOptions)
                 alert("Asistente " + busqueda[index].nombre + " modificado");
                 //window.location.href = "/search";
             })

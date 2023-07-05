@@ -30,7 +30,6 @@ function CapacitacionView() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id: idcapacitacion })
         };
-        console.log(requestOptions.body)
         fetch(deleteURL, requestOptions)
             .then((res) => {
                 alert("Capacitacion eliminada");
