@@ -5,6 +5,9 @@
     align-items: center;
     padding: 10%;
     height: 100vh;
+    background-image: url("../../../src/images/background.png");
+    justify-content: right;
+    margin: 0%;
 }
 .loginPage {
     width: 80vh;
@@ -33,6 +36,7 @@ form {
 }
 .loginSection .card {
     display: block;
+    width: 30%;
 }
 .buttonLogin {
     display: flex;

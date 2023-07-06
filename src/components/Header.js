@@ -27,13 +27,13 @@ class Header extends React.Component {
                     <div className='title'>
                         <h1>Mentor Iselín</h1>
                     </div>
+                    <button className="exitContainer" onClick={(e) => LogOut()}>Salir</button>
                 </div>
                 <div className="mainHeader">
                     <a href="/capacitacion"><h1>Capacitaciones</h1></a>
                     <a href="/asistentes"><h1>Asistentes</h1></a>
                     <a href="/informes"><h1>Informe de capacitación</h1></a>
                     <a href="/historial"><h1>Historial por empleado</h1></a>
-                    <button onClick={(e) => LogOut()}>LogOut</button>
                 </div>
 
             </>

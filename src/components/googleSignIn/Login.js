@@ -4,6 +4,8 @@ import { auth } from './config';
 import { useHistory } from 'react-router-dom'
 import './login.css'
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import Footer from '../Footer';
+import Mentor from "../../../src/images/mentor_white_bg.jpeg"
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -71,8 +73,7 @@ const Login = () => {
     return (
         <section className='loginSection'>
             <div className='card'>
-                <h1> Mentor </h1>
-                <h1> Sistema de capacitaciones </h1>
+                <img src={Mentor} />
                 <form>
                     <div className='inputLogin'>
                         <label htmlFor="email-address">
@@ -113,9 +114,9 @@ const Login = () => {
                         </button>
                     </div>
                 </form>
-                {<div>
-                    <button onClick={signInWithGoogle}>Entrar con Google</button>
-                </div>}
+                {/*<div>
+                    <button onClick={signInWithGoogle}>Continuar con Google</button>
+    </div>*/}
             </div>
         </section>
     )
