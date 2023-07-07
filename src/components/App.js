@@ -1,4 +1,4 @@
-import { Route, Routes, Router, Switch, useHistory } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import React, { useState } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
@@ -23,7 +23,6 @@ import Historial from './Historial';
 import Calificaciones from './Calificaciones';
 import CapacitacionEdit from './CapacitacionEdit';
 import Login from './googleSignIn/Login';
-import Signup from './googleSignIn/Signup';
 
 function App() {
   //inicio auth para comprobar si el usuario ha iniciado sesion
@@ -45,8 +44,6 @@ function App() {
     }
 
   })
-  console.log(photo)
-
 
   return (
     <Switch>

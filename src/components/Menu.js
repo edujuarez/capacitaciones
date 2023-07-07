@@ -1,4 +1,4 @@
-import React, { Image } from 'react';
+import React from 'react';
 
 import './styles/Menu.css';
 import { BsBook } from 'react-icons/bs';
@@ -14,7 +14,7 @@ class Menu extends React.Component {
         return (
             <div className='Menu'>
                 <div className='profileMenu'>
-                    {this.props.photo ? <img src={this.props.photo} className='profileIcon' /> : <IoPersonCircleOutline className='profileIcon' />}
+                    {this.props.photo ? <img src={this.props.photo} className='profileIcon' alt="Foto de perfil" /> : <IoPersonCircleOutline className='profileIcon' />}
                     <h1>Hola, {this.props.user}!</h1>
                 </div>
                 <a className="SubMenu" href="/capacitacion">

@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from 'react';
-
+import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import Menu from './Menu';
-import { auth } from './googleSignIn/config';
-
-import './styles/layout.css'
 import { getAuth } from 'firebase/auth';
 
+import './styles/layout.css'
+
 function Layout(props) {
-    const auth = getAuth();
     return (
         <React.Fragment>
             <div className='main'>

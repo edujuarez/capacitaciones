@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, Fragment, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import './styles/asistentesList.css';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
@@ -44,7 +44,7 @@ function AsistentesList() {
                     <h1>Detalles</h1>
                 </div>
                 {asistentes.filter((asistentes) => {
-                    if (searchTerms == "") {
+                    if (searchTerms === "") {
                         return asistentes
                     } else if (asistentes.nombre.toLowerCase().includes(searchTerms.toLowerCase())) {
                         return asistentes

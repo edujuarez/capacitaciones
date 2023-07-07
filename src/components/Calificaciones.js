@@ -71,7 +71,7 @@ function Calificaciones() {
         <div className="containerSearch">
             <div className="tittleSection">
                 <div className="tittle">
-                    <h1>Calificaciones</h1>
+                    <h1 className="nombreCapacitacion">Calificaciones</h1>
                     <h1 className="nombreCapacitacion">{nombreCapacitacion}</h1>
                 </div>
             </div>

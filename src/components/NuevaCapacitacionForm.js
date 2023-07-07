@@ -148,15 +148,17 @@ function NuevaCapacitacionForm() {
                                 <option value="Seleccionar">Seleccionar</option>
                                 <option value='Virtual'>Virtual</option>
                                 <option value='Presencial'>Presencial</option>
+                                <option value='Mixta'>Mixta</option>
+
                             </select>
                         </div>
                         <div className='select'>
                             <label>Capacitador:</label>
-                            <input name='capacitador' forms='typeform' type="text" onChange={handleChange} placeholder="Ingrese nombre capacitador"/>
+                            <input name='capacitador' forms='typeform' type="text" onChange={handleChange} placeholder="Ingrese nombre capacitador" />
                         </div>
                         <div className='select'>
                             <label>Link QR credenciales:</label>
-                            <input name='linkQR' forms='typeform' type="text" onChange={handleChange} placeholder="Ingrese link de credenciales para QR"/>
+                            <input name='linkQR' forms='typeform' type="text" onChange={handleChange} placeholder="Ingrese link de credenciales para QR" />
                         </div>
 
                     </div>
