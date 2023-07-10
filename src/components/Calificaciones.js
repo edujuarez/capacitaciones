@@ -71,9 +71,13 @@ function Calificaciones() {
         <div className="containerSearch">
             <div className="tittleSection">
                 <div className="tittle">
+                    <br></br>
+
                     <h1 className="nombreCapacitacion">Calificaciones</h1>
+                    <br></br>
                     <h1 className="nombreCapacitacion">{nombreCapacitacion}</h1>
                 </div>
+                <h1><a type='submit' href={`/capacitaciones/` + idcapacitacion}>Volver</a></h1>
             </div>
             <div className='card'>
                 <h1>Asistente</h1>
@@ -126,14 +130,10 @@ function Calificaciones() {
                                     Eliminar
                                 </button>
                             </div>
-
                         </div>
                     </div>
-
                 )
             })}
-            <h1><a type='submit' href={`/capacitaciones/` + idcapacitacion}>Volver  </a></h1>
-
         </div>
     );
 }
