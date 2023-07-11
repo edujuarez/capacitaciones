@@ -4,8 +4,7 @@ import { auth } from './config';
 import { useHistory } from 'react-router-dom'
 import './login.css'
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import Footer from '../Footer';
-import Mentor from "../../../src/images/mentor_white_bg.jpeg"
+import Mentor from "../../../src/images/Mentor 01.png"
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -72,9 +71,10 @@ const Login = () => {
 
     return (
         <section className='loginSection'>
+            <img src={Mentor} alt="Logo mentor" />
             <div className='card'>
-                <img src={Mentor} />
                 <form>
+                    <h1>Iniciar Sesión</h1>
                     <div className='inputLogin'>
                         <label htmlFor="email-address">
                             Email:

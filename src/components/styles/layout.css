@@ -83,7 +83,7 @@ html {
     .column p {
         font-size: 0.4em;
     }
-    .mainHeader a {
+    .secondHeader {
         display: none;
     }
     .mainBoard {

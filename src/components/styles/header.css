@@ -1,4 +1,15 @@
+
 .mainHeader {
+    background: #DEDCDC;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 5px;
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 768px;
+}
+.secondHeader {
     background: #DEDCDC;
     display: flex;
     flex-direction: row;
@@ -13,7 +24,17 @@
     height: 100px;
     display: flex;
     justify-content: center;
-
+    align-self: center;
+}
+.imgMentor {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    
+}
+.imgMentor img {
+    width: 30%;
+    height: 100%;
 }
 
 .title h1{
