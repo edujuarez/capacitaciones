@@ -22,11 +22,36 @@ function Calificaciones() {
                 setNombreCapacitacion(data[0].nombreCapacitacion);
             })
     }, []);
+    //Crea objeto que contenga los valores (puntaje, asistencia, porcentaje) asignados por id
+    const [objeto, setObjeto] = useState({
+        id: 0,
+        asistencia: "",
+        puntaje: "",
+        porcentaje: 0,
+    })
+    //se crea array dejaremos los valores default y luego cambiaremos
+    const edicionPuntaje = capacitacion.map((capacitacion) => (
+        {
+            'id': capacitacion.id,
+            'asistencia': capacitacion.asistencia,
+            'porcentaje': capacitacion.porcentaje,
+            'puntaje': capacitacion.puntaje
+        }))
+    //maneja los cambios en el array del input que se cambio
+    const cambioAsistencia = (index, valor) => {
+        edicionPuntaje[index].asistencia = valor
+    }
+    const cambioPuntaje = (index, valor) => {
+        edicionPuntaje[index].puntaje = valor
+    }
+    const cambioPorcentaje = (index, valor) => {
+        edicionPuntaje[index].porcentaje = valor
+    }
+
 
     //carga los asistentes al cuadro de busqueda
     const [nuevoPuntaje, setNuevoPuntaje] = useState("");
     const [nuevaAsistencia, setNuevaAsistencia] = useState("");
-    const [nuevoPorcentaje, setNuevoPorcentaje] = useState("");
     const [nuevoIndex, setNuevoIndex] = useState("");
     const [nombreCapacitacion, setNombreCapacitacion] = useState("");
 
@@ -59,7 +84,12 @@ function Calificaciones() {
         const requestOptions = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id: id, puntaje: nuevoPuntaje == "" ? capacitacion[index].puntaje : nuevoPuntaje, asistencia: nuevaAsistencia == "" ? capacitacion[index].asistencia : nuevaAsistencia, porcentaje: nuevoPorcentaje == "" ? capacitacion[index].porcentaje : nuevoPorcentaje })
+            body: JSON.stringify({
+                id: id,
+                asistencia: edicionPuntaje[index].asistencia,
+                puntaje: edicionPuntaje[index].puntaje,
+                porcentaje: edicionPuntaje[index].porcentaje,
+            })
         };
         fetch(updateURL, requestOptions)
             .then((res) => {
@@ -94,7 +124,7 @@ function Calificaciones() {
                             </div>
                             <div className='column'>
                                 <select defaultValue={val.asistencia}
-                                    onChange={(e) => { setNuevaAsistencia(e.target.value) }}>
+                                    onChange={(e) => { cambioAsistencia(index, e.target.value) }}>
                                     <option value="">Sin Cargar</option>
                                     <option value="1">Si</option>
                                     <option value="0">No</option>
@@ -103,7 +133,7 @@ function Calificaciones() {
                             <div className='column'>
                                 <select
                                     defaultValue={val.puntaje}
-                                    onChange={(e) => { setNuevoPuntaje(e.target.value) }}>
+                                    onChange={(e) => { cambioPuntaje(index, e.target.value) }}>
                                     <option value="Sin Cargar">Sin Cargar</option>
                                     <option value="No aplica">No aplica</option>
                                     <option value="Aprobado">Aprobado</option>
@@ -112,7 +142,7 @@ function Calificaciones() {
                                 <p>Porcentaje de aprobación</p>
                                 <input
                                     type="number"
-                                    onChange={(e) => { setNuevoPorcentaje(e.target.value) }}
+                                    onChange={(e) => { cambioPorcentaje(index, e.target.value) }}
                                     defaultValue={val.porcentaje}>
                                 </input>
                             </div>
