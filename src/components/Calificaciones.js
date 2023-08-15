@@ -18,17 +18,12 @@ function Calificaciones() {
                 return res.json();
             })
             .then(data => {
-                setCapacitacion(data);
+                const ordenado = data.sort(function (a, b) { return a.nombre - b.nombre })
+                setCapacitacion(ordenado);
                 setNombreCapacitacion(data[0].nombreCapacitacion);
             })
     }, []);
-    //Crea objeto que contenga los valores (puntaje, asistencia, porcentaje) asignados por id
-    const [objeto, setObjeto] = useState({
-        id: 0,
-        asistencia: "",
-        puntaje: "",
-        porcentaje: 0,
-    })
+console.log(capacitacion)
     //se crea array dejaremos los valores default y luego cambiaremos
     const edicionPuntaje = capacitacion.map((capacitacion) => (
         {
@@ -40,19 +35,21 @@ function Calificaciones() {
     //maneja los cambios en el array del input que se cambio
     const cambioAsistencia = (index, valor) => {
         edicionPuntaje[index].asistencia = valor
+        console.log(edicionPuntaje[index], valor)
     }
     const cambioPuntaje = (index, valor) => {
         edicionPuntaje[index].puntaje = valor
+        console.log(edicionPuntaje[index], valor)
     }
     const cambioPorcentaje = (index, valor) => {
         edicionPuntaje[index].porcentaje = valor
+        console.log(edicionPuntaje[index], valor)
+        console.log(capacitacion[index])
     }
 
 
     //carga los asistentes al cuadro de busqueda
-    const [nuevoPuntaje, setNuevoPuntaje] = useState("");
     const [nuevaAsistencia, setNuevaAsistencia] = useState("");
-    const [nuevoIndex, setNuevoIndex] = useState("");
     const [nombreCapacitacion, setNombreCapacitacion] = useState("");
 
     //Elimina asistente de la lista
@@ -77,10 +74,9 @@ function Calificaciones() {
         capacitacion.filter(capacitacion => capacitacion.id == id)
         {
             if (capacitacion.asistencia == "") {
-                return nuevaAsistencia = "0";
+                return nuevaAsistencia = "1";
             }
         }
-        setNuevoIndex(index)
         const requestOptions = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
@@ -96,7 +92,6 @@ function Calificaciones() {
                 alert("Asistente " + capacitacion[index].nombre + " modificado");
             })
     };
-
     return (
         <div className="containerSearch">
             <div className="tittleSection">
