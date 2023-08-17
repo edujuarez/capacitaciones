@@ -42,11 +42,7 @@ const Login = () => {
                 // The signed-in user info.
                 const user = result.user;
                 /*
-                console.log(user); // Provides user data as Object.
-                console.log(user.displayName); // User's display name.
-                console.log(user.email); // User's. Email ID.
-                console.log(user.phoneNumber); // User's phone number
-                console.log(user.photoURL); // User's photo URL
+
                 // ...
                 */
                 // This gives you a Google Access Token. You can use it to access the Google API.

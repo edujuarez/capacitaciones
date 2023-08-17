@@ -23,7 +23,6 @@ function Calificaciones() {
                 setNombreCapacitacion(data[0].nombreCapacitacion);
             })
     }, []);
-console.log(capacitacion)
 
     //se crea array dejaremos los valores default y luego cambiaremos
     const edicionPuntaje = capacitacion.map((capacitacion) => (
