@@ -24,6 +24,7 @@ function Calificaciones() {
             })
     }, []);
 console.log(capacitacion)
+
     //se crea array dejaremos los valores default y luego cambiaremos
     const edicionPuntaje = capacitacion.map((capacitacion) => (
         {
@@ -32,19 +33,16 @@ console.log(capacitacion)
             'porcentaje': capacitacion.porcentaje,
             'puntaje': capacitacion.puntaje
         }))
+
     //maneja los cambios en el array del input que se cambio
     const cambioAsistencia = (index, valor) => {
         edicionPuntaje[index].asistencia = valor
-        console.log(edicionPuntaje[index], valor)
     }
     const cambioPuntaje = (index, valor) => {
         edicionPuntaje[index].puntaje = valor
-        console.log(edicionPuntaje[index], valor)
     }
     const cambioPorcentaje = (index, valor) => {
         edicionPuntaje[index].porcentaje = valor
-        console.log(edicionPuntaje[index], valor)
-        console.log(capacitacion[index])
     }
 
 
@@ -71,18 +69,14 @@ console.log(capacitacion)
     const guardarDatos = (id, index) => {
         //url de consulta para la capacitacion especifica
         let updateURL = "https://servercapacitaciones-production.up.railway.app/updatepuntaje";
-        capacitacion.filter(capacitacion => capacitacion.id == id)
-        {
-            if (capacitacion.asistencia == "") {
-                return nuevaAsistencia = "1";
-            }
-        }
+
+        //se envia con el metodo put los valores finales de edicionPuntaje, si no hay cambios se envia el default
         const requestOptions = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 id: id,
-                asistencia: edicionPuntaje[index].asistencia,
+                asistencia: edicionPuntaje[index].asistencia, 
                 puntaje: edicionPuntaje[index].puntaje,
                 porcentaje: edicionPuntaje[index].porcentaje,
             })
