@@ -27,7 +27,6 @@ function Historial() {
                 setAsistentes(data);
             })
     }, []);
-    console.log('asistentes: ', asistentes)
 
     const getUniqueIdsWithNames = (data) => {
         // Obtener un array con los ids únicos
@@ -117,9 +116,7 @@ function Historial() {
         setFechaHasta("");
     }
 
-    console.log(selected)
     const optionSelect = getUniqueIdsWithNames(asistentes);
-    console.log(optionSelect)
 
     return (
         <Fragment>
