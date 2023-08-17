@@ -18,17 +18,13 @@ function Calificaciones() {
                 return res.json();
             })
             .then(data => {
-                setCapacitacion(data);
+                const ordenado = data.sort(function (a, b) { return a.nombre - b.nombre })
+                setCapacitacion(ordenado);
                 setNombreCapacitacion(data[0].nombreCapacitacion);
             })
     }, []);
-    //Crea objeto que contenga los valores (puntaje, asistencia, porcentaje) asignados por id
-    const [objeto, setObjeto] = useState({
-        id: 0,
-        asistencia: "",
-        puntaje: "",
-        porcentaje: 0,
-    })
+console.log(capacitacion)
+
     //se crea array dejaremos los valores default y luego cambiaremos
     const edicionPuntaje = capacitacion.map((capacitacion) => (
         {
@@ -37,6 +33,7 @@ function Calificaciones() {
             'porcentaje': capacitacion.porcentaje,
             'puntaje': capacitacion.puntaje
         }))
+
     //maneja los cambios en el array del input que se cambio
     const cambioAsistencia = (index, valor) => {
         edicionPuntaje[index].asistencia = valor
@@ -50,9 +47,7 @@ function Calificaciones() {
 
 
     //carga los asistentes al cuadro de busqueda
-    const [nuevoPuntaje, setNuevoPuntaje] = useState("");
     const [nuevaAsistencia, setNuevaAsistencia] = useState("");
-    const [nuevoIndex, setNuevoIndex] = useState("");
     const [nombreCapacitacion, setNombreCapacitacion] = useState("");
 
     //Elimina asistente de la lista
@@ -74,19 +69,14 @@ function Calificaciones() {
     const guardarDatos = (id, index) => {
         //url de consulta para la capacitacion especifica
         let updateURL = "https://servercapacitaciones-production.up.railway.app/updatepuntaje";
-        capacitacion.filter(capacitacion => capacitacion.id == id)
-        {
-            if (capacitacion.asistencia == "") {
-                return nuevaAsistencia = "0";
-            }
-        }
-        setNuevoIndex(index)
+
+        //se envia con el metodo put los valores finales de edicionPuntaje, si no hay cambios se envia el default
         const requestOptions = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 id: id,
-                asistencia: edicionPuntaje[index].asistencia,
+                asistencia: edicionPuntaje[index].asistencia, 
                 puntaje: edicionPuntaje[index].puntaje,
                 porcentaje: edicionPuntaje[index].porcentaje,
             })
@@ -96,7 +86,6 @@ function Calificaciones() {
                 alert("Asistente " + capacitacion[index].nombre + " modificado");
             })
     };
-
     return (
         <div className="containerSearch">
             <div className="tittleSection">

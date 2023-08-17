@@ -86,6 +86,7 @@ function Informes() {
                             isObject={true}
                             onSelect={onSelect}
                             displayValue="nombre"
+                            selectionLimit={1}
                             showArrow
                         />
                     </div>
@@ -123,9 +124,9 @@ function Informes() {
                                         <th>Capacitador: {filteredData[0].capacitador}</th>
                                         <th>
                                             {filteredData[0].linkQR == null ? <></> :
-                                            <div className='qrCanvas'>
-                                                <QRCodeCanvas value={filteredData[0].linkQR} />
-                                            </div>}
+                                                <div className='qrCanvas'>
+                                                    <QRCodeCanvas value={filteredData[0].linkQR} />
+                                                </div>}
                                         </th>
                                     </tr>
                                 </thead>

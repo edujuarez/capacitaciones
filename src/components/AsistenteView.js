@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React from 'react';
-import { useState, useEffect, Fragment } from "react";
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import moment from 'moment';
 import 'moment/locale/es';

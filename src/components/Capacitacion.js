@@ -24,7 +24,6 @@ function Capacitacion() {
                     elem.fecha = (elem.fecha).toString() +'+02:00'
                   return elem.fecha
                 })*/
-                console.log(data)
                 data.sort(function (a, b) { return a.nombre + b.nombre })
                 setCapacitaciones(data.reverse());
             })
@@ -49,10 +48,10 @@ function Capacitacion() {
                     </div>
                 </div>
                 {capacitaciones.filter((capacitaciones) => {
-                    if (searchTerms == "") {
-                        return capacitaciones
+                    if (searchTerms === "") {
+                        return capacitaciones;
                     } else if (capacitaciones.nombre.toLowerCase().includes(searchTerms.toLowerCase())) {
-                        return capacitaciones
+                        return capacitaciones;
                     }
                 })
                     .map((capacitaciones) => (

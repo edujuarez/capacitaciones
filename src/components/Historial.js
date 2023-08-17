@@ -27,28 +27,29 @@ function Historial() {
                 setAsistentes(data);
             })
     }, []);
+    console.log('asistentes: ', asistentes)
 
     const getUniqueIdsWithNames = (data) => {
         // Obtener un array con los ids únicos
-        const uniqueIds = [...new Set(data.map(item => item.invitadoID))];
-        
+        const uniqueIds = [...new Set(asistentes.map(item => item.invitadoID))];
+
         // Crear un objeto para almacenar los nombres de los elementos correspondientes
         const names = {};
         data.forEach(item => {
-          names[item.invitadoID] = item.nombre;
+            names[item.invitadoID] = item.nombre;
         });
-      
+
         // Ordenar los ids únicos por nombre de forma ascendente
         const sortedIds = uniqueIds.sort((id1, id2) => {
-          const name1 = names[id1];
-          const name2 = names[id2];
-          return name1.localeCompare(name2);
+            const name1 = names[id1];
+            const name2 = names[id2];
+            return name1.localeCompare(name2);
         });
-      
+
         // Crear un nuevo array con los ids y nombres ordenados
-        const result = sortedIds.map(id => ({id: id, nombre: names[id]}));
+        const result = sortedIds.map(id => ({ id: id, nombre: names[id] }));
         return result;
-      }
+    }
 
     //fetcheamos todos las  asistencias
     useEffect(() => {
@@ -69,7 +70,7 @@ function Historial() {
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
     });
-    
+
     //enviamos el usuario seleccionado al formulario
     function onSelect(e) {
         formulario(e[0].id)
@@ -116,8 +117,10 @@ function Historial() {
         setFechaHasta("");
     }
 
-
+    console.log(selected)
     const optionSelect = getUniqueIdsWithNames(asistentes);
+    console.log(optionSelect)
+
     return (
         <Fragment>
             <div className='containerInformes'>

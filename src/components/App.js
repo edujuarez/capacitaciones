@@ -15,9 +15,7 @@ import Capacitacion from './Capacitacion';
 import AsistenteView from './AsistenteView';
 import AsistenteEdit from './AsistenteEdit';
 import AddAsistentes from './AddAsistentes';
-import Search from './Search';
 import Certification from './certification';
-import PuntajeEdit from './PuntajeEdit';
 import Informes from './Informes';
 import Historial from './Historial';
 import Calificaciones from './Calificaciones';
@@ -47,7 +45,7 @@ function App() {
 
   return (
     <Switch>
-      <Route exact path="/login" component={Login}></Route>
+      <Route exact path="/login" component={Login} />
       <Layout user={user} photo={photo}>
         <Route exact path="/home" component={Capacitacion} />
         <Route exact path="/nuevacapacitacion" component={NuevaCapacitacionForm} />
@@ -58,9 +56,7 @@ function App() {
         <Route exact path='/asistentes/:idasistente' component={AsistenteView} />
         <Route exact path='/asistentes/:idasistente/edit' component={AsistenteEdit} />
         <Route exact path="/addasistentes/:idcapacitacion" component={AddAsistentes} />
-        <Route exact path="/search" component={Search} />
         <Route exact path="/informes" component={Informes} />
-        <Route exact path="/asistencia/:idasistencia" component={PuntajeEdit} />
         <Route exact path="/historial" component={Historial} />
         <Route exact path="/certification/:idcapacitacion" component={Certification} />
         <Route exact path="/calificaciones/:idcapacitacion" component={Calificaciones} />
